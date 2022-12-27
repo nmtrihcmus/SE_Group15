@@ -12,7 +12,7 @@ module.exports = app => {
 
     passport.deserializeUser(async function (un, done) {
         try {
-            const user = await userM.byName(un);
+            const user = await userM.findByName(un);
             done(null, user);
             
         } catch (err) {
@@ -25,7 +25,7 @@ module.exports = app => {
         async (username, password, done) => {
             
             try {
-                const user = await userM.byName(username);
+                const user = await userM.findByName(username);
                 if (!user) { return done(null, false); }
                 const match = await bcrypt.compare(password, user.password);
                 if (!match) { return done(null, false); }

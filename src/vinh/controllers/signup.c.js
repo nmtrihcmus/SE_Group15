@@ -17,7 +17,7 @@ exports.signupUser = async (req, res, next)=>{
             fullname: req.body.fullname
         }
         console.log(objsave);
-        var obj = await accM.adduser(objsave);
+        var obj = await accM.addUser(objsave);
 
         res.render('signin',{
             login: false

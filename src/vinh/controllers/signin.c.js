@@ -6,7 +6,7 @@ const saltRounds = 10;
 
 exports.signinUser = async (req, res, next)=>{
     try{
-        var  uDb  = await userM.byName(req.body.username);
+        var  uDb  = await userM.findByName(req.body.username);
         var pwDb = uDb.password;
 
         const match = await bcrypt.compare(req.body.password, pwDb);
