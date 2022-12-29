@@ -84,7 +84,7 @@
 
 body{
     background-color: #2148C0;
-    background-image: url('img/BG.svg');
+    background-image: url('../img/BG.svg');
     background-size: cover;
 }
 
