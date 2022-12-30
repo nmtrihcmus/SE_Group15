@@ -1,0 +1,100 @@
+<style>
+    body {
+        background-color: #9FA5D9;
+    }
+
+    .container {
+        margin-top: 48px;
+    }
+
+    .title {
+        text-align: center;
+        font-size: 36px;
+        font-weight: 700;
+    }
+
+    .center {
+        margin: auto;
+    }
+
+    .end {
+        margin-right: 64px;
+        align-self: center;
+    }
+
+    .search-btn {
+        border-radius: 20px;
+        width: 280px;
+        height: 40px;
+        padding: 4px 20px;
+        background-image: url(./img/magnifying-glass-solid\ 2.svg);
+        background-position: 240px center;
+        background-repeat: no-repeat;
+        background-position-x: ;
+    }
+
+    hr {
+        margin: 28px 0;
+
+    }
+
+    .btn-update {}
+
+    .btn-del {
+        margin-left: 24px;
+    }
+
+    tbody {
+        overflow-y: scroll;
+        height: 40px;
+    }
+</style>
+<div class="d-flex flex-row container">
+    <div class="center">
+        <h3 class="title">Danh sách tài khoản</h3>
+    </div>
+    <div class="end">
+        <form action="" method="post">
+            <input type="text" class="search-btn align-items-center" placeholder="Nhập tên đăng nhập">
+        </form>
+    </div>
+
+</div>
+<hr>
+<div class="col-10 offset-1">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Tên đăng nhập</th>
+                <th scope="col">Họ và tên</th>
+                <th scope="col">Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each user}}
+            <tr>
+                <th>{{username}}</th>
+                <td>{{fullname}}</td>
+                <td>{{email}}</td>
+                <td width="20%">
+                    <div class="d-flex d-row">
+                        <form action="/listAccount/update" method="post">
+                        <input type="hidden" name="username" value="{{username}}">
+                        <button class="btn btn-light btn-update" type="submit">Cập nhật</button>
+                    </form>
+                    <form action="/listAccount/del" method="post">
+                        <input type="hidden" name="username" value="{{username}}">
+                        <button class="btn btn-light btn-del" type="submit">Xoá</button>
+                        <small style="color: red">{{notification}}</small>
+                    </form>
+                    </div>
+                </td>
+            </tr>
+            {{else}}
+            {{/each}}
+
+
+        </tbody>
+    </table>
+</div>
