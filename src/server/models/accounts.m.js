@@ -32,5 +32,11 @@ module.exports = {
     getNumberOfAccounts: async () => {
         const count = await db.one('SELECT count(*) FROM public."Accounts"');
         return count;
+    },
+
+    filterByName: async (username) => { 
+        let user = await query.all(tb);
+        let us = user.filter((user) => user.username.includes(username))
+        return us;
     }
 };

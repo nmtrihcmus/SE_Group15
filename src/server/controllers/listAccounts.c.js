@@ -6,7 +6,7 @@ class listAccounts {
             if (req.session.username) {
                 let us = await userM.all();
                 return res.render('listAccount', {
-                    title: "list account",
+                    title: "List account",
                     user: us
                 });
             }
@@ -29,12 +29,30 @@ class listAccounts {
                 catch {
                     let us = await userM.all();
                     return res.render('listAccount', {
-                        title: "list account",
+                        title: "List account",
                         user: us,
                         notification: "Có lỗi xảy ra, vui lòng thử lại",
                     });
                 }
 
+            }
+            res.redirect('/login');
+        }
+        catch (error) {
+            next(error);
+        }
+    }
+
+    async filterAccount(req, res, next) {
+        const username = req.body.username;
+        try {
+            if (req.session.username) {
+                let us = await userM.filterByName(username)
+                return res.render('listAccount',
+                {
+                    title: "List account",
+                    user: us
+                })
             }
             res.redirect('/login');
         }

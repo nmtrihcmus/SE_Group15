@@ -43,7 +43,11 @@
     .btn-del {
         margin-left: 24px;
     }
-
+    thead {
+        background-color: #5675E2;
+        height: 2em;
+        line-height: 2em;
+    }
     tbody {
         overflow-y: scroll;
         height: 40px;
@@ -54,8 +58,8 @@
         <h3 class="title">Danh sách tài khoản</h3>
     </div>
     <div class="end">
-        <form action="" method="post">
-            <input type="text" class="search-btn align-items-center" placeholder="Nhập tên đăng nhập">
+        <form action="/listAccount/filter" method="post">
+            <input type="text" name="username" class="search-btn align-items-center" placeholder="Nhập tên đăng nhập">
         </form>
     </div>
 
@@ -73,7 +77,7 @@
         </thead>
         <tbody>
             {{#each user}}
-            <tr>
+            <tr style="vertical-align: middle;">
                 <th>{{username}}</th>
                 <td>{{fullname}}</td>
                 <td>{{email}}</td>
