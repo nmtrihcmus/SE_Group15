@@ -1,17 +1,12 @@
 class homeC {
     async interface(req, res, next) {
         try {
-            if (req.isAuthenticated()) {
-                if (req.session.username) {
-                    return res.render('home', {
-                        title: "Home"
-                    });
-                }
-                res.redirect('/login');
+            if (req.session.username) {
+                return res.render('home', {
+                    title: "Home"
+                });
             }
-            res.render('login', {
-                title: "Login"
-            });
+            res.redirect('/login');
         }
         catch (error) {
             next(error);

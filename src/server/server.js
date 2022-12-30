@@ -11,7 +11,6 @@ app.use(express.static(__dirname + '/public'));
 
 require('./configs/hbs')(app);
 require('./configs/session')(app);
-require('./configs/passport')(app);
 
 route(app);
 

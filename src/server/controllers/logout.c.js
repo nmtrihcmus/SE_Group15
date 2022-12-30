@@ -1,17 +1,10 @@
 class logoutC {
     async logout(req, res, next) {
         try {
-            if (req.isAuthenticated()) {
-                if (req.session.username) {
-                    delete req.session.username;
-                }
-                req.logout(err => { });
-                return res.redirect('/login');
+            if (req.session.username) {
+                delete req.session.username;
             }
-            res.render('home', {
-                title: "Home"
-            });
-
+            return res.redirect('/login');
         }
         catch (error) {
             next(error);
