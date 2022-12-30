@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="css/style.css">
+
+<div class="wrapper">
+    <div class="logo">
+        <img src="img/maki_cinema.svg" alt="">
+    </div>
+    <form action="/register" method="POST" class="p-3 mt-3">
+        <div class="form-field d-flex align-items-center">
+            <img src="img/user.svg" alt="">
+            <input type="text" name="username" id="username" placeholder="tên đăng nhập">
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <img src="img/lock.svg" alt="">
+            <input type="password" name="password" id="password" placeholder="mật khẩu">
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <img src="img/lock.svg" alt="">
+            <input type="password" name="repassword" id="repassword" placeholder="xác nhận mật khẩu">
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <img src="img/user.svg" alt="">
+            <input type="text" name="fullname" id="fullname" placeholder="họ và tên">
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <img src="img/mail.svg" alt="">
+            <input type="text" name="email" id="email" placeholder="email">
+        </div>
+        <small>{{notification}}</small>
+        <!-- <small>{{notification}}</small> -->
+        <button class="btn mt-3" type="submit">Đăng ký</button>
+    </form>
+    <div class="text-center text-light fs-6">
+        Bạn đã có tài khoản?
+        <a href="/login">Đăng nhập</a>
+    </div>
+</div>
