@@ -5,12 +5,14 @@ class homeC {
                 return res.render('home', {
                     title: "Home",
                     loggedIn: true,
+                    homePage: true,
                     isAdmin: req.session.isAdmin
                 });
             }
             return res.render('home', {
                 title: "Home",
-                loggedIn: false
+                loggedIn: false,
+                homePage: true,
             });
         }
         catch (error) {

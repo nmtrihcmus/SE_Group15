@@ -32,5 +32,9 @@ module.exports = {
     getNumberOfAccounts: async () => {
         const count = await db.one('SELECT count(*) FROM public."Accounts"');
         return count;
+    },
+    
+    update: async (user) => {
+        
     }
 };
