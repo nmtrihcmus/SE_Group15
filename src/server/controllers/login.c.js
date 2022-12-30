@@ -31,6 +31,7 @@ class loginC {
             
             if (cmp) {
                 req.session.username = uDb.username;
+                req.session.isAdmin = uDb.isAdmin;
                 res.redirect('/home');
             }
             else {

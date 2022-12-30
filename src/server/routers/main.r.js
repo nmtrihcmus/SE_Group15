@@ -7,7 +7,7 @@ function route(app) {
     app.use('/home', homeR);
     app.use('/register', registerR);
     app.use('/login', loginR);
-    app.use('/', loginR);
+    app.use('/', homeR);
     app.use('/logout',logoutR)
 }
 
