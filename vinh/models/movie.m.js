@@ -1,7 +1,7 @@
 const initOptions = {};
 const pgp = require('pg-promise')(initOptions);
 
-const cn = require('../config/cnStr');
+const cn = require('../configs/cnStr');
 const query = require('./query.m');
 const db = pgp(cn);
 const tb = 'Movies'
@@ -9,6 +9,7 @@ const tb = 'Movies'
 module.exports = {
     all: async ()=>{
         const rs = await query.all(tb);
+        
         return rs;
     },
 
@@ -50,7 +51,7 @@ module.exports = {
     ,
     updateMovie:  async (NewMovie, id)=>{
         const rs = await query.update(tb, [
-            
+            "insertDate",
             "img",
             "source",
             "title",
@@ -68,6 +69,10 @@ module.exports = {
     },
     maxID: async ()=>{
         const rs = await query.max(tb, 'id');
+        return rs;
+    },
+    maxDate: async ()=>{
+        const rs = await query.max(tb, 'insertDate');
         return rs;
     }
 };

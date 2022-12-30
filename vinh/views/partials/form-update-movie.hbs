@@ -1,0 +1,52 @@
+<div class=" col-3  " id="update-movie-info">
+
+    <div class="card position-relative col-3" style="width: 18rem">
+        <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" class="card-img-top" alt="poster">
+
+        <div class="episode">
+            Tập 1
+        </div>
+
+    </div>
+    <button class="btn btn-danger">Xem phim</button>
+    <div class="rating ">Đánh giá</div>
+    <div class="viewCount">Lượt xem</div>
+</div>
+<div class="update-movie-form col-9">
+    <div class="title">Tên phim : Phim Mắt Biếc </div>
+    <div class="form-update">
+        <form action="/movie/update" method="post">
+            <div class="mb-3">
+                <label for="title" class="form-label">Tên phim: </label>
+                <input type="text" class="form-control" id="title" name="title" required>
+                <label for="genres" class="form-label">Thể loại: </label>
+                <input type="text" class="form-control" id="genres" name="genres" required>
+                <label for="country" class="form-label">Quốc gia: </label>
+                <input type="text" class="form-control" id="country" name="country" required>
+                <label for="cast" class="form-label">Diễn viên: </label>
+                <input type="text" class="form-control" id="cast" name="cast" required>
+                <label for="director" class="form-label">Đạo diễn: </label>
+                <input type="text" class="form-control" id="director" name="director" required>
+                <label for="year" class="form-label">Năm sản xuất: </label>
+                <input type="number" max="2024" min="1900" class="form-control" id="year" name="year" required>
+                <label for="synopsis" class="form-label">Nội dung: </label>
+                <input type="text" class="form-control" id="synopsis" name="synopsis" required>
+
+                <label for="img" class="form-label">Hình ảnh:</label>
+                <input type="text" class="form-control" id="img" name="img" required>
+                <label for="source" class="form-label">Video: </label>
+                <input type="text" class="form-control" id="source" name="source" required>
+            </div>
+            <button type="submit">Lưu</button>
+
+        </form>
+    </div>
+
+</div>
+<script>
+    var info = {{notification}};
+    if(info){
+        alert(info);
+    }
+    
+</script>
