@@ -1,0 +1,247 @@
+.container {
+    width: 1200px;
+}
+
+.header {
+    background-color: #3C4BD1;
+}
+.footer {
+    background-color: #3C4BD1;
+    height: 60px;
+    color: #fff;
+    font-size: 2em;
+    text-align: center;
+}
+.search-box {
+    display: inline-block;
+    width: 60%;
+    height: 40px;
+    margin: auto;
+    border-radius: 30px;
+    padding: 4px 55px 4px 15px;
+    position: relative;
+    background: #fff;
+    border: 1px solid #ddd;
+    -webkit-transition: all 200ms ease-in-out;
+    -moz-transition: all 200ms ease-in-out;
+    transition: all 200ms ease-in-out;
+}
+
+.search-box.hovered,
+.search-box:hover,
+.search-box:active {
+    border: 1px solid #aaa;
+}
+
+.search-box input[type=text] {
+    border: none;
+    box-shadow: none;
+    display: inline-block;
+    padding: 0;
+    background: transparent;
+}
+
+.search-box input[type=text]:hover,
+.search-box input[type=text]:focus,
+.search-box input[type=text]:active {
+    box-shadow: none;
+}
+
+.search-box .search-btn {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    color: #aaa;
+    border-radius: 30px;
+    font-size: 18px;
+    padding: 5px 10px 1px;
+    -webkit-transition: all 200ms ease-in-out;
+    -moz-transition: all 200ms ease-in-out;
+    transition: all 200ms ease-in-out;
+}
+
+.search-box .search-btn:hover {
+    color: #fff;
+    background-color: #3C4BD1;
+}
+
+.dropdown {
+    color: #fff;
+}
+.nav-link {
+    padding: 0px 20px ;
+
+    color: #fff;
+}
+.navbar {
+    width: 40%;
+    background-color: #3E63E8;
+}
+.episode {
+    background-color:#D12D2D;
+    color: #fff;
+    position: absolute;
+    width: 60px;
+    border-radius: 3px;
+    padding: 2px 0px 2px 4px;
+    top: 5px;
+    left: 10px;
+}
+.card {
+    margin: 10px ;
+}
+.list-name{
+    color: #3E63E8;
+    font-size: 2em;
+    margin: 3px;
+
+}
+
+/* =================  Forgot Password * =================   */
+
+.forgot-pass-box {
+    background-color: #D9D9D9;
+    border-radius: 30px;
+    width: 50%;
+    height: 30%;
+    margin: 30px;
+    padding: 50px;
+
+}
+#forgot-pass-btn {
+    background-color: #9671FF;
+    border: none;
+    border-radius: 20px;
+    width: 70%;
+    color: #fff;
+    margin:  10px 50px 10px 50px;
+    padding: 10px;
+
+}
+
+#forgot-pass-email {
+    
+    border-radius: 20px;
+    border: none;
+    width: 90%;
+    margin: 10px 30px 10px 30px;
+    padding: 10px ;
+
+}
+
+/*  =============== update movie =================== */
+
+#update-movie-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#update-movie-info > .card  {
+    border-radius: 10px;
+}
+#update-movie-info > .card > img {
+    border-radius: 10px;
+}
+
+#update-movie-info > .btn {
+    margin: 20px ;
+    padding: 10px 20px 10px 20px;
+   
+}
+#update-movie-info > .rating {
+    margin: 30px;
+    padding: 10px 20px;
+    max-width: 50%;
+    border-radius: 3px;
+    background-color: #F39035;
+    text-align: center;
+}
+#update-movie-info > .viewCount {
+    margin: 30px;
+    padding: 10px 20px;
+    max-width: 50%;
+    border-radius: 3px;
+    background-color: #f274b7;
+    text-align: center;
+}
+
+
+.update-movie-form > .title{
+    font-size: 2em;
+    padding-top: 10px;
+    background-color: rgba(184, 102, 223, 0.55);
+    width: 80%;
+    height: 2em;
+    border-radius: 3px; 
+    text-align: center;
+    margin: auto;
+}
+
+.update-movie-form > .form-update {
+   
+   background-color: #D9D9D9;
+   border-radius: 3px;
+   padding: 4em;
+}
+
+.form-update > form{
+    margin: auto;
+    width: 80%;
+}
+
+
+.form-update >form> .mb-3>label{
+    margin-top: 20px;
+}
+
+.form-update >form> button{
+    margin: 10px 40% 0px 40%;
+    padding: 10px 40px;
+    max-width: 50%;
+    border: none;
+    border-radius: 3px;
+    background-color: #E4E846;
+    text-align: center;
+    color: black;
+}
+
+
+/* ======================add Movie ==================== */
+
+
+
+.add-movie-form > .form-add {
+    width: 70%;
+    margin: auto;
+    background-color: #68C6EF;
+    border-radius: 3px;
+    padding: 4em;
+}
+
+.form-add > form{
+    margin: auto;
+    width: 80%;
+}
+
+
+.form-add > h2{
+    margin: auto;
+    text-align: center;
+}
+
+.form-add >form> .mb-3>label{
+    margin-top: 20px;
+}
+
+.form-add >form> button{
+    margin: 10px 40% 0px 40%;
+    padding: 10px 40px;
+    max-width: 50%;
+    border: none;
+    border-radius: 3px;
+    background-color: #E4E846;
+    text-align: center;
+    color: black;
+}
