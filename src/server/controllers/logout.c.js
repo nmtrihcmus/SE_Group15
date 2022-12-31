@@ -5,7 +5,7 @@ class logoutC {
                 delete req.session.isAdmin;
                 delete req.session.username;
             }
-            return res.redirect('/home');
+            return res.redirect('home');
         }
         catch (error) {
             next(error);
