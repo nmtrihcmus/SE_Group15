@@ -1,3 +1,15 @@
+/*  ===================   Poster Movie   ===================    */
+.episode {
+    background-color:#D12D2D;
+    color: #fff;
+    position: absolute;
+    width: 60px;
+    border-radius: 3px;
+    padding: 2px 0px 2px 4px;
+    top: 5px;
+    left: 10px;
+}
+
 /* =================  Forgot Password * =================   */
 
 .forgot-pass-box {
