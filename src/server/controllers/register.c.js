@@ -10,7 +10,7 @@ class registerC {
                 title: "Register",
             });
         }
-        res.redirect('home');
+        res.redirect('/home');
     }
 
     async register(req, res, next) {
