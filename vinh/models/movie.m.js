@@ -56,14 +56,14 @@ module.exports = {
             "source",
             "title",
             "director",
-            "cast ",
-            "genres ",
+            "cast",
+            "genres",
             "country",   
-            "year  ",
+            "year",
             "synopsis", 
-            "rating  ",
+            "rating",
             "ratingCount",
-            "favCount   "], NewMovie, "id", id);
+            "favCount" ], NewMovie, "id", id);
         return rs;
         
     },

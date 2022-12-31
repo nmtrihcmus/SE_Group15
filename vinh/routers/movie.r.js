@@ -6,6 +6,6 @@ const movieC = require('../controllers/movie.c');
 
 route.get('/add', movieC.addMoviePage);
 route.post('/add', movieC.addMovie);
-route.get('/update', movieC.updateMoviePage);
-route.post('/update', movieC.updateMovie);
+route.get('/form-update/:id', movieC.updateMoviePage);
+route.post('/update/:id', movieC.updateMovie);
 module.exports = route;

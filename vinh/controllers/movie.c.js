@@ -93,50 +93,38 @@ class movieC {
     };
     async updateMovie(req, res, next){
         try{
+            const id = req.params.id;
+            console.log(id);
             const allMovies = await movieM.all();
             const nMovie = allMovies.length;
             console.log(nMovie);
             
-            
-            if(nMovie !=0){
-                var max = -1;
-                for (let i = 0; i < nMovie; i++) {
-                    const idNum = parseInt(allMovies[i].id.splice(0));
-                    if(idNum > max ){
-                        max = idNum
-                    }
-                    
-                }
-                var str ='';
-                var id = '';
-                if(max!= -1){
-                    str = max + 1;
-                    id = 'p' + str;
-                }
-            }else{
-                id = 'p1';
-            }
-            
-            console.log("id: ", id);
-            
             var m = {
                 insertDate: new Date(),
                 id :  id ,
-                img: "https://congthanh.vn/uploads/images/in-poster-phim-anh-dep-.jpg",
-                source: "https://www.youtube.com/watch?v=ndSaCjKLmck",
-                title: `Mắt biếc`,
-                director: `Đạo diễn`,
-                cast : " Diễn viên",
-                genres : " thể loại",
-                country : " Japan",
-                year : 2023,
-                synopsis : " obj.synopsis asdasidh aisdu aisduh asdihu asidha sduiasd ia",
-                rating : 9,
-                ratingCount : 8,
-                favCount : 821
+                img: req.body.img,
+                source: req.body.source,
+                title: req.body.title,
+                director: req.body.director,
+                cast : req.body.cast,
+                genres : req.body.genres,
+                country : req.body.country,
+                year : req.body.year,
+                synopsis : req.body.synopsis,
+                rating : 0,
+                ratingCount : 0,
+                favCount : 0
             }
             console.log(m);
-            //const add = await movieM.addMovie(m);
+            try {
+                const curMovie = await movieM.updateMovie(m, id)
+                console.log(curMovie);
+            } catch (error) {
+                console.log(error);
+            }
+            
+            
+            
                 
             
            
@@ -159,7 +147,7 @@ class movieC {
     };
 
 
-    async addMoviePage(req, res, next) {
+    addMoviePage(req, res, next) {
         
         return res.render('addMovie', {
             title: "Form add movie"
@@ -168,9 +156,10 @@ class movieC {
         
     };
     updateMoviePage(req, res, next) {
-        
+        console.log(req.params.id);
         return res.render('updateMovie', {
-            title: "Form update movie"
+            title: "Form update movie",
+            id: req.params.id
         });
         
         

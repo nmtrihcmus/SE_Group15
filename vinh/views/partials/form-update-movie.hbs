@@ -1,6 +1,6 @@
 <div class=" col-3  " id="update-movie-info">
 
-    <div class="card position-relative col-3" style="width: 18rem">
+    <div class="card position-relative" style="width: 18rem">
         <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" class="card-img-top" alt="poster">
 
         <div class="episode">
@@ -15,7 +15,7 @@
 <div class="update-movie-form col-9">
     <div class="title">Tên phim : Phim Mắt Biếc </div>
     <div class="form-update">
-        <form action="/movie/update" method="post">
+        <form action="/movie/update/{{id}}" method="post">
             <div class="mb-3">
                 <label for="title" class="form-label">Tên phim: </label>
                 <input type="text" class="form-control" id="title" name="title" required>
