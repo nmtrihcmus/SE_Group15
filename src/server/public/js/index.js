@@ -6,14 +6,12 @@ function loadCard() {
     var title = "Tên phim";
     var detail = "Thông tin chi tiết";
     var card = `<div class="card position-relative col-3" style="width: 18rem">
-    <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" class="card-img-top" alt="poster">
-    
-    <div class="episode">
-                99+
-    </div>
-    
-    </div>
-    <h5 class="">${title}</h5>
+                    <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" class="card-img-top" alt="poster">
+                    <div class="episode">
+                        99+ 
+                    </div>
+                </div>
+                <h5 class="">${title}</h5>
     
     
     `;
