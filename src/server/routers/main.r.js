@@ -10,9 +10,9 @@ function route(app) {
     app.use('/register', registerR);
     app.use('/login', loginR);
     app.use('/', homeR);
-    app.use('/logout', logoutR)
-    app.use('/', movieR)
-    app.use('/', accountR)
+    app.use('/logout', logoutR);
+    app.use('/', movieR);
+    app.use('/', accountR);
 }
 
 module.exports = route;
