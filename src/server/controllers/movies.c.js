@@ -138,7 +138,7 @@ class movieC {
                     isAdmin: req.session.isAdmin
                 });
             }
-            return res.redirect('home');
+            return res.redirect('/home');
         }
         catch (error) {
             next(error);
@@ -155,7 +155,7 @@ class movieC {
                     isAdmin: req.session.isAdmin
                 });
             }
-            return res.redirect('home');
+            return res.redirect('/home');
         }
         catch (error) {
             next(error);

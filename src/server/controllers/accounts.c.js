@@ -10,7 +10,7 @@ class accountC {
                     isAdmin: req.session.isAdmin
                 });
             }
-            return res.redirect('home');
+            return res.redirect('/home');
         }
         catch (error) {
             next(error);

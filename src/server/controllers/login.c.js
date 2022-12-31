@@ -9,14 +9,14 @@ class loginC {
                 title: "Login",
             });
         }
-        res.redirect('home');
+        res.redirect('/home');
     }
 
     async login(req, res, next) {
         const username = req.body.username;
         const password = req.body.password;
         if (password == "" || username == "") {
-            res.redirect("login", {
+            res.render("login", {
                 title: "Login",
                 notification: "Vui lòng nhập đầy đủ thông tin!",
             })
@@ -31,7 +31,7 @@ class loginC {
             if (cmp) {
                 req.session.username = uDb.username;
                 req.session.isAdmin = uDb.isAdmin;
-                res.redirect('home');
+                res.redirect('/home');
             }
             else {
                 return res.render("login", {
