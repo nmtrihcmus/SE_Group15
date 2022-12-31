@@ -3,7 +3,7 @@ const route = express.Router();
 
 const registerC = require('../controllers/register.c');
 
-route.get('/', registerC.interface);
+route.get('/', registerC.registerPage);
 route.post('/', registerC.register);
 
 module.exports = route;

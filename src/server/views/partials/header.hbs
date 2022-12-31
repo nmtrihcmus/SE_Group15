@@ -1,5 +1,5 @@
 <div class="header d-flex justify-content-between rounded ">
-    <a class="navbar-brand text-white" href="/home"><img src="img\Home_fill.svg" alt=""></a>
+    <a class="navbar-brand text-white" href="/home"><img src="/img/Home_fill.svg" alt=""></a>
 
     <div class='search-box'>
         <form class='search-form'>
@@ -16,9 +16,9 @@
         <div class="dropdown">
             <h5 class="dropdown-toggle" data-bs-toggle="dropdown"> Quản lý phim</h5>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="insertMovies">Thêm phim</a></li>
-                <li><a class="dropdown-item" href="deleteMovies">Xóa phim</a></li>
-                <li><a class="dropdown-item" href="updateMovies">Cập nhật phim</a></li>
+                <li><a class="dropdown-item" href="/addMovie">Thêm phim</a></li>
+                <li><a class="dropdown-item" href="/deleteMovie">Xóa phim</a></li>
+                <li><a class="dropdown-item" href="/updateMovie/p1">Cập nhật phim</a></li>
             </ul>
         </div>
         <div class="dropdown">
@@ -26,16 +26,16 @@
                 Quản lý tài khoản
             </h5>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="insertAccounts">Thêm tài khoản</a></li>
-                <li><a class="dropdown-item" href="deleteAccounts">Xóa tài khoản</a></li>
-                <li><a class="dropdown-item" href="/updateAccounts">Cập nhật tài khoản</a></li>
+                <li><a class="dropdown-item" href="/addAccount">Thêm tài khoản</a></li>
+                <li><a class="dropdown-item" href="/deleteAccount">Xóa tài khoản</a></li>
+                <li><a class="dropdown-item" href="/updateAccount">Cập nhật tài khoản</a></li>
             </ul>
         </div>
     </div>
     {{/if}}
     <div class="dropdown">
         <a class="navbar-brand text-white dropdown-toggle" data-bs-toggle="dropdown" href="/home"><img
-                src="img\User_cicrle_duotone.svg" alt=""></a>
+                src="/img/User_cicrle_duotone.svg" alt=""></a>
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/profile">Thông tin cá nhân</a></li>
             <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>

@@ -1,15 +1,13 @@
-const userM = require('../models/accounts.m');
+const accountM = require('../models/accounts.m');
 
 class accountC {
-    async interface(req, res, next){
+    async updateAccountPage(req, res, next){
         try {
             if (req.session.username && req.session.isAdmin) {
-                return res.render('home', {
-                    title: "Home",
+                return res.render('updateAccounts', {
+                    title: "Update Accounts",
                     loggedIn: true,
-                    isAdmin: req.session.isAdmin,
-                    homePage: false,
-                    updateAccounts: true
+                    isAdmin: req.session.isAdmin
                 });
             }
             return res.redirect('home');
@@ -19,7 +17,7 @@ class accountC {
         }
     }
     
-    async updateAccounts(req, res, next) {
+    async updateAccount(req, res, next) {
         
     }
 
