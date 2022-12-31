@@ -5,8 +5,8 @@ const movieM = require('../models/movie.m');
 class movieC {
     async addMovie(req, res, next){
         try{
-            for (let j = 0; j < 20; j++) {
-                console.log("addmovie Page");
+            
+            console.log("addmovie Page");
 
             const allMovies = await movieM.all();
             const nMovie = allMovies.length;
@@ -68,14 +68,6 @@ class movieC {
             }
             
             const add = await movieM.addMovie(saveObj);
-                
-            }
-                
-            
-           
-            
-            
-            
             
             return res.render('addMovie', {
                 title: "Form add movie",
