@@ -4,7 +4,9 @@ class listAccounts {
     async interface(req, res, next) {
         try {
             if (req.session.username) {
-                let us = await userM.all();
+                let user = await userM.all();
+                //chỉ hiển thị user
+                let us = user.filter(user => user.isAdmin === false);
                 return res.render('listAccount', {
                     title: "List account",
                     user: us
@@ -47,7 +49,9 @@ class listAccounts {
         const username = req.body.username;
         try {
             if (req.session.username) {
-                let us = await userM.filterByName(username)
+                let user = await userM.filterByName(username)
+                //chỉ hiển thị user
+                let us = user.filter((user) => user.isAdmin === false)
                 return res.render('listAccount',
                 {
                     title: "List account",
