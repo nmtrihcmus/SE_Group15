@@ -1,10 +1,9 @@
-const userM = require('../models/accounts.m');
+const accountM = require('../models/accounts.m');
 
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
 
 class loginC {
-    async interface(req, res, next) {
+    async loginPage(req, res, next) {
         if (!req.session.username) {
             return res.render('login', {
                 title: "Login",
@@ -17,7 +16,7 @@ class loginC {
         const username = req.body.username;
         const password = req.body.password;
         if (password == "" || username == "") {
-            res.redirect("login", {
+            res.render("login", {
                 title: "Login",
                 notification: "Vui lòng nhập đầy đủ thông tin!",
             })
@@ -25,12 +24,13 @@ class loginC {
         }
         
         try {
-            const uDb = await userM.byName(username);
+            const uDb = await accountM.byName(username);
             const pwDb = uDb.password;
             const cmp = await bcrypt.compare(password, pwDb);
             
             if (cmp) {
                 req.session.username = uDb.username;
+                req.session.isAdmin = uDb.isAdmin;
                 res.redirect('/home');
             }
             else {
