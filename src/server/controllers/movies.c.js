@@ -79,14 +79,14 @@ class movieC {
     };
     
     async updateMovie(req, res, next) {
+        const id = req.params.id;
         try {
-            const id = req.params.id;
-            const allMovies = await movieM.all();
-            const nMovie = allMovies.length;
+            // const allMovies = await movieM.all();
+            // const nMovie = allMovies.length;
             // console.log(nMovie);
-
+            const movie0 = await movieM.findByID(id);
             var m = {
-                insertDate: new Date(),
+                insertDate: movie0.insertDate,
                 id: id,
                 img: req.body.img,
                 source: req.body.source,
@@ -108,20 +108,22 @@ class movieC {
             } catch (error) {
                 console.log(error);
             }
+            const movie = await movieM.findByID(id);
             return res.render('updateMovie', {
                 title: "Form update movie",
                 notification: "Đã cập nhật phim thành công!",
-                id: req.params.id,
+                movie: movie,
                 loggedIn: true,
                 isAdmin: req.session.isAdmin
             });
         }
         catch (error) {
             console.log(error);
+            const movie = await movieM.findByID(id);
             return res.render('updateMovie', {
                 title: "Form update movie",
                 notification: "Đã cập nhật phim thất bại!",
-                id: req.params.id,
+                movie: movie,
                 loggedIn: true,
                 isAdmin: req.session.isAdmin
             });
@@ -148,11 +150,30 @@ class movieC {
     async updateMoviePage(req, res, next) {
         try {
             if (req.session.username && req.session.isAdmin) {
+                const movie = await movieM.findByID(req.params.id);
                 return res.render('updateMovie', {
                     title: "Form update movie",
-                    id: req.params.id,
+                    movie: movie,
                     loggedIn: true,
                     isAdmin: req.session.isAdmin
+                });
+            }
+            return res.redirect('/home');
+        }
+        catch (error) {
+            next(error);
+        }
+    };
+    
+    async updateMovie_listPage(req, res, next) {
+        try {
+            if (req.session.username && req.session.isAdmin) {
+                const allMovies = await movieM.all();
+                return res.render('updateMovie_list', {
+                    title: "Movie list",
+                    loggedIn: true,
+                    isAdmin: req.session.isAdmin,
+                    data: allMovies
                 });
             }
             return res.redirect('/home');

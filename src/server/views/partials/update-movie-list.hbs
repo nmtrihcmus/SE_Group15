@@ -1,0 +1,59 @@
+<div class="list-movies-update">
+    {{#each data}}
+    {{!-- <div class="movie">
+        <a href="#">
+            <div class="card position-relative">
+                <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" class="card-img-top" alt="poster">
+                <div class="episode">
+                    99+
+                </div>
+            </div>
+        </a>
+        <h5 class="">Title</h5>
+    </div> --}}
+    <div class="movie">
+        <a href="/updateMovie/{{id}}">
+            <div class="card position-relative">
+                <img src={{img}} class="card-img-top" alt="poster">
+                <div class="episode">
+                    99+
+                </div>
+            </div>
+        </a>
+        <h5 class="">{{title}}</h5>
+    </div>
+    {{/each}}
+</div>
+
+<style>       
+    .episode {
+        background-color: #D12D2D;
+        color: #fff;
+        position: absolute;
+        width: 25%;
+        border-radius: 3px;
+        padding: 2px 0px 2px 4px;
+        top: 5px;
+        left: 10px;
+    }
+    
+    .list-movies-update{
+        display: flex;
+        flex-wrap: wrap;   
+    }
+
+    .movie {
+        flex-basis: 20%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    
+    .movie img{
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+
+<script>
+    
+</script>
