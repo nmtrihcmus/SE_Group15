@@ -155,7 +155,8 @@ class movieC {
                     title: "Form update movie",
                     movie: movie,
                     loggedIn: true,
-                    isAdmin: req.session.isAdmin
+                    isAdmin: req.session.isAdmin,
+                    page: req.params.page
                 });
             }
             return res.redirect('/home');
@@ -169,11 +170,19 @@ class movieC {
         try {
             if (req.session.username && req.session.isAdmin) {
                 const allMovies = await movieM.all();
+                const itemsPerPage = 10;
+                const curPage = parseInt(req.params.page);
+                const start = (curPage - 1) * itemsPerPage;
+                const end = curPage * itemsPerPage;
+                const nMovies = allMovies.length;
+                const maxPage = parseInt(nMovies / itemsPerPage);
                 return res.render('updateMovie_list', {
                     title: "Movie list",
                     loggedIn: true,
                     isAdmin: req.session.isAdmin,
-                    data: allMovies
+                    data: allMovies.slice(start, end),
+                    page: curPage,
+                    maxPage: maxPage
                 });
             }
             return res.redirect('/home');

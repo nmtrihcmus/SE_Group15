@@ -3,7 +3,8 @@
     {{!-- <div class="movie">
         <a href="#">
             <div class="card position-relative">
-                <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" class="card-img-top" alt="poster">
+                <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" class="card-img-top"
+                    alt="poster">
                 <div class="episode">
                     99+
                 </div>
@@ -12,7 +13,7 @@
         <h5 class="">Title</h5>
     </div> --}}
     <div class="movie">
-        <a href="/updateMovie/{{id}}">
+        <a href="/updateMovie/{{../page}}/{{id}}">
             <div class="card position-relative">
                 <img src={{img}} class="card-img-top" alt="poster">
                 <div class="episode">
@@ -25,7 +26,23 @@
     {{/each}}
 </div>
 
-<style>       
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link prevBtn" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="page-item"><a class="page-link curPage">{{page}}</a></li>
+        <li class="page-item">
+            <a class="page-link nextBtn" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<style>
     .episode {
         background-color: #D12D2D;
         color: #fff;
@@ -36,10 +53,10 @@
         top: 5px;
         left: 10px;
     }
-    
-    .list-movies-update{
+
+    .list-movies-update {
         display: flex;
-        flex-wrap: wrap;   
+        flex-wrap: wrap;
     }
 
     .movie {
@@ -47,13 +64,25 @@
         padding: 20px;
         box-sizing: border-box;
     }
-    
-    .movie img{
+
+    .movie img {
         max-width: 100%;
         height: auto;
     }
 </style>
 
 <script>
-    
+    $('.prevBtn').on('click', () => {
+        const curPage = parseInt($('.curPage').text());
+        if (curPage > 1) {
+            window.location.href = `/updateMovie/${curPage - 1}`;
+        }
+    })
+    $('.nextBtn').on('click', () => {
+        const maxPage = parseInt(`{{ maxPage }}`);
+        const curPage = parseInt($('.curPage').text());
+        if (curPage < maxPage) {
+            window.location.href = `/updateMovie/${curPage + 1}`;
+        }
+    })
 </script>
