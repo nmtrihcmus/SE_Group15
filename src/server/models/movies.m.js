@@ -80,6 +80,13 @@ module.exports = {
     },
     distinct: async (col) => {
         const rs = await query.distinct(tb, col)
+    },
+    maxID: async () => {
+        const rs = await query.max(tb, 'id');
+        return rs;
+    },
+    maxDate: async () => {
+        const rs = await query.max(tb, 'insertDate');
         return rs;
     }
 };
