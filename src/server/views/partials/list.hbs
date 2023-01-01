@@ -19,21 +19,35 @@
             
 
             <div class="page-list-movie">
-                    {{#each firstRow}}
+                    <div class="cur-page">
+                        {{#each listMovie}}
                     <div class="d-flex flex-row justify-content-around">
                         
-                        <div>
-                            <div class="card position-relative " style="width: 18rem" id="{{this.id}}" onclick="select({{this.id}})">
-                                <img src="{{this.img}}" class="card-img-top" alt="{{this.id}}">
+                       {{#each this}}
+                         <div>
+                            <div class="card position-relative " style="width: 18rem" id="{{id}}" onclick="select({{id}})">
+                                <img src="{{img}}" class="card-img-top" alt="{{id}}">
                                 <div class="episode">
                                     1
                                 </div>
                             </div>
-                            <h5 class="">{{this.title}}</h5>
+                            <h5 class="">{{title}}</h5>
                         </div>
+
+                       {{/each}}
                         
                     </div>
                     {{/each}}
+                    </div>
+                    <nav aria-label="...">
+            <ul class="pagination pagination-sm" >
+            <li class="page-item active" ><a class="page-link"  onclick="loadPage(1)">1</a></li>
+            {{#each nPage}}
+                <li class="page-item" ><a class="page-link" onclick="loadPage({{this}})">{{this}}</a></li>
+            {{/each}}
+          
+            </ul>
+        </nav>
                     
                 
             </div>
