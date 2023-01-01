@@ -1,0 +1,89 @@
+<div class="list-movies-update">
+    {{#each data}}
+    <div class="movie">
+        <form action="/deleteMovie/{{../page}}/{{id}}" method="POST">
+            <a href="#" onclick="this.parentNode.submit()">
+                <h5 class="text-center">Nhấn để xóa</h5>
+                <div class="card position-relative">
+                    <img src={{img}} class="card-img-top" alt="poster">
+                    <div class="episode">
+                        99+
+                    </div>
+                </div>
+                <h5 class="">{{title}}</h5>    
+            </a>
+        </form>
+    </div>
+    {{/each}}
+</div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link prevBtn" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="page-item"><a class="page-link curPage">{{page}}</a></li>
+        <li class="page-item">
+            <a class="page-link nextBtn" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<style>
+    .episode {
+        background-color: #D12D2D;
+        color: #fff;
+        position: absolute;
+        width: 25%;
+        border-radius: 3px;
+        padding: 2px 0px 2px 4px;
+        top: 5px;
+        left: 10px;
+    }
+
+    .list-movies-update {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .movie {
+        flex-basis: 20%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .movie img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    a:link {
+        text-decoration: none;
+    }
+</style>
+
+<script>
+    var info = `{{ notification }}`;
+        console.log("info: ", info);
+        if (info) {
+            alert(info);
+        }
+    
+    $('.prevBtn').on('click', () => {
+        const curPage = parseInt($('.curPage').text());
+        if (curPage > 1) {
+            window.location.href = `/deleteMovie/${curPage - 1}`;
+        }
+    })
+    $('.nextBtn').on('click', () => {
+        const maxPage = parseInt(`{{ maxPage }}`);
+        const curPage = parseInt($('.curPage').text());
+        if (curPage < maxPage) {
+            window.location.href = `/deleteMovie/${curPage + 1}`;
+        }
+    })
+</script>

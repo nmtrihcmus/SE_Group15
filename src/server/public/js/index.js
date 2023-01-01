@@ -1,22 +1,15 @@
 function loadCard() {
     //var listMovies = document.getElementById('list');
     var listMovies = document.getElementsByClassName('list-movies')[0];
-    console.log("list movie");
-    console.log(listMovies);
     var title = "Tên phim";
     var detail = "Thông tin chi tiết";
     var card = `<div class="card position-relative col-3" style="width: 18rem">
-    <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" class="card-img-top" alt="poster">
-    
-    <div class="episode">
-                99+
-    </div>
-    
-    </div>
-    <h5 class="">${title}</h5>
-    
-    
-    `;
+                    <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" class="card-img-top" alt="poster">
+                    <div class="episode">
+                        99+ 
+                    </div>
+                </div>
+                <h5 class="">${title}</h5>`;
 
 
     //     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
