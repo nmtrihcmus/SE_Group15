@@ -175,7 +175,7 @@ class movieC {
                 const start = (curPage - 1) * itemsPerPage;
                 const end = curPage * itemsPerPage;
                 const nMovies = allMovies.length;
-                const maxPage = parseInt(nMovies / itemsPerPage);
+                const maxPage = Math.ceil(nMovies / itemsPerPage);
                 return res.render('updateMovie_list', {
                     title: "Movie list",
                     loggedIn: true,
