@@ -5,9 +5,9 @@ class listC {
     
     async listMoviePage(req, res, next) {        
         try {
-            console.log("list Movie");
+            
             const listMovie = await movieM.all();
-            console.log(listMovie);
+            
             res.send({
                 total: listMovie.length,
                 category: "all",
@@ -22,6 +22,7 @@ class listC {
             next(error);
         }
     };
+    //API trả về danh sách phim top rating theo trang
     async topRatingPageQuery(req, res, next) {        
         try {
             
@@ -44,26 +45,28 @@ class listC {
             next(error);
         }
     };
+    //Render top rating Page
     async topRatingPage(req, res, next) {        
         try {
             const country = await movieM.distinct('country');
             const genres = await movieM.distinct('genres');
-            console.log("list Movie");
+            
             const listAll = await movieM.all();
             var topRating = listAll.sort((a, b)=>{return b.rating-a.rating});
-            const PER_PAGE = 9;
+            const PER_PAGE = 9; //Số phim mỗi trang
             
             var page = topRating.slice(0, 9);
 
             var list = [];
+            //Chia phim theo từng row một
             for (let i = 0; i < page.length; i+=3) {
                 var row = [];
                 row = page.slice(i, i+3);
                 list.push(row);
             }
-            
+            //Số lượng trang 
             var nPage =  Math.ceil(topRating.length/PER_PAGE);
-            console.log("============================================= nPage = ", nPage);
+            
             var count = [];
             for (let i = 1; i < nPage; i++) {
                 count.push(i+1);
@@ -102,11 +105,12 @@ class listC {
             next(error);
         }
     };
+    //API trả về danh sách phim mới theo trang
     async newMoviePageQuery(req, res, next) {        
         try {
             
             var curPage = req.query.page;
-            console.log("curPage: ", curPage);
+            
             const listAll = await movieM.all();
             var newMovie = listAll.sort((a, b)=>{return b.insertDate.getTime()-a.insertDate.getTime()});
             const PER_PAGE = 9;
@@ -124,12 +128,14 @@ class listC {
             next(error);
         }
     };
+    //Render New Movie Page
     async newMoviePage(req, res, next) {        
         try {
             const country = await movieM.distinct('country');
             const genres = await movieM.distinct('genres');
-            console.log("list new Movie");
+            
             const listAll = await movieM.all();
+            //Sắp xếp theo thời gian gần nhất
             var newMovie = listAll.sort((a, b)=>{return b.insertDate.getTime()-a.insertDate.getTime()});
             const PER_PAGE = 9;
             
@@ -141,9 +147,9 @@ class listC {
                 row = page.slice(i, i+3);
                 list.push(row);
             }
-            
+            //Số lượng trang 
             var nPage =  Math.ceil(newMovie.length/PER_PAGE);
-            console.log("============================================= new Movie nPage = ", nPage);
+           
             var count = [];
             for (let i = 1; i < nPage; i++) {
                 

@@ -1,6 +1,7 @@
 const movieM = require('../models/movies.m');
 
 class movieC {
+    
     async addMovie(req, res, next) {
         try {
             const allMovies = await movieM.all();
@@ -22,24 +23,6 @@ class movieC {
                     id = 'p' + str;
                 }
             }
-
-            // var m = {
-            //     insertDate: new Date(),
-            //     id: id,
-            //     img: "https://congthanh.vn/uploads/images/in-poster-phim-anh-dep-.jpg",
-            //     source: "https://www.youtube.com/watch?v=ndSaCjKLmck",
-            //     title: `Mắt biếc`,
-            //     director: `Đạo diễn`,
-            //     cast: " Diễn viên",
-            //     genres: " thể loại",
-            //     country: " Japan",
-            //     year: 2023,
-            //     synopsis: " obj.synopsis asdasidh aisdu aisduh asdihu asidha sduiasd ia",
-            //     rating: 9,
-            //     ratingCount: 8,
-            //     favCount: 821
-            // }
-            
             var saveObj = {
                 insertDate: new Date(),
                 id: id,
@@ -81,9 +64,7 @@ class movieC {
     async updateMovie(req, res, next) {
         const id = req.params.id;
         try {
-            // const allMovies = await movieM.all();
-            // const nMovie = allMovies.length;
-            // console.log(nMovie);
+            
             const movie0 = await movieM.findByID(id);
             var m = {
                 insertDate: movie0.insertDate,
@@ -101,10 +82,10 @@ class movieC {
                 ratingCount: 0,
                 favCount: 0
             }
-            // console.log(m);
+            
             try {
                 const curMovie = await movieM.updateMovie(m, id)
-                // console.log(curMovie);
+                
             } catch (error) {
                 console.log(error);
             }
@@ -225,21 +206,23 @@ class movieC {
             next(error);
         }
     };
+    //Render kết quả tìm kiếm phim
     async search(req, res, next) {
         try {
-            var input = req.body.input;
+            var input = req.body.input;//Từ khóa tìm kiếm
             var rsYear = [];
+            //Tìm kiếm theo năm
             if(parseInt(input)>1900 && parseInt(input)<2024){
                 rsYear = await movieM.findByYear(parseInt(input));
                 
             }
+            //Tìm kiếm theo chuỗi
             var rsStr = await movieM.searchMovie(input);
-            
+            //Danh sách phim theo kết quả tìm kiếm
             var rs = [...rsYear, ...rsStr];
-            console.log("rs ==================================", rs);
+            
             var info ='';
             if(rs.length==0){
-                
                 info = "Không tìm thấy thông tin phim trùng khớp";
                 
             }
@@ -248,27 +231,26 @@ class movieC {
             const PER_PAGE = 9;
             
             var page = rs.slice(0, 9);
-            console.log("========================= page = ", page );
+            
             var list = [];
             for (let i = 0; i < page.length; i+=3) {
                 var row = [];
                 row = page.slice(i, i+3);
                 list.push(row);
             }
-            
+            //Số lượng trang 
             var nPage =  Math.ceil(rs.length/PER_PAGE);
         
-            var count = [];
+            var count = []; //Danh sách phân trang (mặc định có trang = 1, nên bắt đầu thêm từ 2)
             for (let i = 1; i < nPage; i++) {
                 count.push(i+1);
                 
             }
             if (req.session.username) {
                 return res.render('listMovie', {
-                    input: input,
+                    input: input, //Từ khóa tìm kiếm
                     info: info,
                     total: rs.length,
-
                     nPage: count,
                     category: "result search",
                     listMovie: list,
@@ -278,10 +260,9 @@ class movieC {
                 })
             }
             return res.render('listMovie', {
-                input: input,
+                input: input,//Từ khóa tìm kiếm
                 info: info,
                 total: rs.length,
-
                 nPage: count,
                 category: "result search",
                 listMovie: list,
@@ -295,32 +276,25 @@ class movieC {
             next(error);
         }
     };
+    //API danh sách phim tìm kiếm theo trang
     async searchPage(req, res, next) {
         try {
             console.log("searchPage");
-            var curPage = req.query.page;
-            var input = req.body.input;
-            console.log(req.body);
+            var curPage = req.query.page; //Số trang hiện tại
+            var input = req.body.input;//Từ khóa tìm kiếm
+            
             var rsYear = [];
+            //Tìm kiếm theo năm
             if(parseInt(input)>1900 && parseInt(input)<2024){
                 rsYear = await movieM.findByYear(parseInt(input));
                 
             }
+            //Tìm kiếm theo chuỗi
             var rsStr = await movieM.searchMovie(input);
-            
+            //Kết quả sau khi tìm kiếm
             var rs = [...rsYear, ...rsStr];
-            console.log("rs ==================================", rs);
-            
-            
-            
             const PER_PAGE = 9;
-            
-            var page = rs.slice(0, 9);
-            console.log("========================= page = ", page );
-            
-            
-        
-           
+            //Danh sách phim theo trang
             var listMovie = rs.slice((curPage-1)*PER_PAGE, curPage*PER_PAGE);
             res.send({
                 total: rs.length,

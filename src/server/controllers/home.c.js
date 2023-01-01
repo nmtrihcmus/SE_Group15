@@ -2,14 +2,17 @@ const movieM = require('../models/movies.m');
 class homeC {
     async homePage(req, res, next) {
         try {
-            const country = await movieM.distinct('country');
-            const genres = await movieM.distinct('genres');
-            console.log(country);
+            const country = await movieM.distinct('country');//Danh sách quốc gia trong thẻ navbar
+            const genres = await movieM.distinct('genres');//Danh sách thể loại trong thẻ navbar
+            //Danh sách toàn bộ movie
             const listAll = await movieM.all();
+            //Danh sách top rating
             var topRating = listAll.sort((a, b)=>{return b.rating-a.rating});
             
             var firstRow = topRating.slice(0,3);
             var secondRow = topRating.slice(3,6);
+
+            //Danh sách phim mới 
             var newMovie = listAll.sort((a, b)=>{return b.insertDate.getTime()-a.insertDate.getTime()});
            
             var firstNew = newMovie.slice(0,3);
