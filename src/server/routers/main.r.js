@@ -15,6 +15,7 @@ function route(app) {
     app.use('/', movieR);
     app.use('/', accountR);
     app.use('/list', listR);
+    
 }
 
 module.exports = route;
