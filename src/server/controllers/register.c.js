@@ -1,16 +1,16 @@
-const userM = require('../models/accounts.m');
+const accountM = require('../models/accounts.m');
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 class registerC {
-    async interface(req, res, next) {
+    async registerPage(req, res, next) {
         if (!req.session.username) {
             return res.render('register', {
                 title: "Register",
             });
         }
-        res.redirect('/home');
+        res.redirect('home');
     }
 
     async register(req, res, next) {
@@ -21,7 +21,7 @@ class registerC {
         const repwd = req.body.repassword;
         const fullname = req.body.fullname;
         const email = req.body.email;
-        
+
         if (password !== repwd) {
             res.render("register", {
                 title: "Register",
@@ -37,7 +37,7 @@ class registerC {
             return false;
         }
         try {
-            const uDb = await userM.byName(username);
+            const uDb = await accountM.byName(username);
             res.render("register", {
                 title: "Register",
                 notification: "Tài khoản này đã tồn tại!",
@@ -53,7 +53,7 @@ class registerC {
                     fullname: fullname,
                     email: email,
                 }
-                const create = await userM.addUser(u);
+                const create = await accountM.addAccount(u);
                 res.render("register", {
                     title: "Register",
                     notification: "Đăng ký thành công!",
