@@ -11,6 +11,7 @@ class updateAccountC {
             return res.render('updateAccounts', {
                 title: "Update account",
                 username: us[0]['username'],
+                password: us[0]['password'],
                 fullname: us[0]['fullname'],
                 email: us[0]['email'],
                 loggedIn: true,
@@ -35,6 +36,7 @@ class updateAccountC {
                 title: "Update account",
                 notification: "Vui lòng nhập đầy đủ thông tin!",
                 username: us[0]['username'],
+                password: us[0]['password'],
                 fullname: us[0]['fullname'],
                 email: us[0]['email'],
                 loggedIn: true,
@@ -43,12 +45,17 @@ class updateAccountC {
             return false;
         }
         try {
-            const uDb = await userM.byName(username);
+            if (username !== oldUsername)
+                var uDb = await userM.byName(username);
+            else {
+                await userM.byName("");
+            }
             let us = await userM.filterByName(oldUsername);
             res.render("updateAccounts", {
                 title: "Update account",
                 notification: "Tài khoản này đã tồn tại!",
                 username: us[0]['username'],
+                password: us[0]['password'],
                 fullname: us[0]['fullname'],
                 email: us[0]['email'],
                 loggedIn: true,
@@ -57,7 +64,13 @@ class updateAccountC {
         }
         catch (err) {
             try {
-                const pwHashed = await bcrypt.hash(password, saltRounds);
+                const uDb = await userM.byName(oldUsername);
+                const pwDb = uDb.password;
+                const cmp = pwDb === password;
+                if (!cmp) {
+                    var pwHashed = await bcrypt.hash(password, saltRounds);
+                }
+                else pwHashed = password
                 const u = {
                     isAdmin: isAdmin,
                     username: username,
@@ -71,6 +84,7 @@ class updateAccountC {
                     title: "Update account",
                     notification: "Cập nhật khoản thành công!",
                     username: us[0]['username'],
+                    password: us[0]['password'],
                     fullname: us[0]['fullname'],
                     email: us[0]['email'],
                     loggedIn: true,
