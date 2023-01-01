@@ -1,0 +1,128 @@
+<div class="homepage">
+    <nav class="navbar mx-auto ">
+
+        <div class="navbar-nav d-flex flex-row  justify-content-center">
+            <a class="nav-link" href="#" >Phim lẻ</a>
+            <a class="nav-link" href="#">Phim bộ</a>
+            <a class="nav-link" href="#">Thể loại</a>
+            <a class="nav-link">Quốc gia</a>
+            <a class="nav-link" href="#">Năm</a>
+        </div>
+
+
+    </nav>
+
+    <div class="d-flex">
+
+        <div class="list-movies col-9  " id="list">
+            
+            
+
+            <div class="page-list-movie">
+                    <div class="cur-page">
+                        {{#each listMovie}}
+                    <div class="d-flex flex-row justify-content-around">
+                        
+                       {{#each this}}
+                         <div>
+                            <div class="card position-relative " style="width: 18rem" id="{{id}}" onclick="select({{id}})">
+                                <img src="{{img}}" class="card-img-top" alt="{{id}}">
+                                <div class="episode">
+                                    {{id}}
+                                </div>
+                            </div>
+                            <h5 class="">{{title}}</h5>
+                        </div>
+
+                       {{/each}}
+                        
+                    </div>
+                    {{/each}}
+                    </div>
+                    <nav aria-label="...">
+            <ul class="pagination pagination-sm" >
+            <li class="page-item active" ><a class="page-link"  onclick="loadPage(1)">1</a></li>
+            {{#each nPage}}
+                <li class="page-item" ><a class="page-link" onclick="loadPage({{this}})">{{this}}</a></li>
+            {{/each}}
+          
+            </ul>
+        </nav>
+                    
+                
+            </div>
+        </div>
+        <div class="bxh col-3" style="background-color:#D9D9D9;">
+            <div class="fs-1 m-3" style="color: red;">Bảng xếp hạng</div>
+            <div class="bxh-list m-3 d-flex">
+                <h4 class="m-3" style="padding-top: 50px ">123</h4>
+                <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" alt="poster"
+                    style="width: 10rem">
+                <h5 class="m-3">Tên phim</h5>
+                <div class="m-3" style="padding-top: 90px ">❤Tim </div>
+            </div>
+            <div class="bxh-list m-3 d-flex">
+                <h4 class="m-3" style="padding-top: 50px ">123</h4>
+                <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" alt="poster"
+                    style="width: 10rem">
+                <h5 class="m-3">Tên phim</h5>
+                <div class="m-3" style="padding-top: 90px ">❤Tim </div>
+            </div>
+            <div class="bxh-list m-3 d-flex">
+                <h4 class="m-3" style="padding-top: 50px ">123</h4>
+                <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" alt="poster"
+                    style="width: 10rem">
+                <h5 class="m-3">Tên phim</h5>
+                <div class="m-3" style="padding-top: 90px ">❤Tim </div>
+            </div>
+            <div class="bxh-list m-3 d-flex">
+                <h4 class="m-3" style="padding-top: 50px ">123</h4>
+                <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" alt="poster"
+                    style="width: 10rem">
+                <h5 class="m-3">Tên phim</h5>
+                <div class="m-3" style="padding-top: 90px ">❤Tim </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .homepage {
+        padding: 0px 20px;
+    }
+
+    .nav-link {
+        padding: 0px 20px;
+
+        color: #fff;
+    }
+
+    .navbar {
+        width: 40%;
+        background-color: #3E63E8;
+    }
+
+    .episode {
+        background-color: #D12D2D;
+        color: #fff;
+        position: absolute;
+        width: 60px;
+        border-radius: 3px;
+        padding: 2px 0px 2px 4px;
+        top: 5px;
+        left: 10px;
+    }
+
+    .card {
+        margin: 10px;
+    }
+
+    .list-name {
+        color: #3E63E8;
+        font-size: 2em;
+        margin: 3px;
+
+    }
+</style>
+

@@ -2,7 +2,7 @@
     <nav class="navbar mx-auto ">
 
         <div class="navbar-nav d-flex flex-row  justify-content-center">
-            <a class="nav-link" href="#">Phim lẻ</a>
+            <a class="nav-link" href="#" >Phim lẻ</a>
             <a class="nav-link" href="#">Phim bộ</a>
             <a class="nav-link" href="#">Thể loại</a>
             <a class="nav-link">Quốc gia</a>
@@ -15,16 +15,69 @@
     <div class="d-flex">
 
         <div class="list-movies col-9  " id="list">
-            <div class="list-name"><a href="/phimMoi" style="text-decoration: none; text-transform: uppercase;">Phim
+            <div class="list-name"><a href="/newMovie" style="text-decoration: none; text-transform: uppercase;">Phim
                     mới</a>
             </div>
-            <div class="list-phimMoi">
-
+            <div class="list-newMovie">
+                <div class="d-flex flex-row justify-content-around">
+                        {{#each firstNew}}
+                        <div>
+                            <div class="card position-relative " style="width: 18rem" id="{{this.id}}" onclick="select({{this.id}})">
+                                <img src="{{this.img}}" class="card-img-top" alt="{{this.id}}">
+                                <div class="episode">
+                                    {{this.id}}
+                                </div>
+                            </div>
+                            <h5 class="">{{this.title}}</h5>
+                        </div>
+                        {{/each}}
+                    </div>
+                    <div class="d-flex flex-row justify-content-around">
+                        {{#each secondNew}}
+                        <div>
+                            <div class="card position-relative " style="width: 18rem" id="{{this.id}}" onclick="select({{this.id}})">
+                                <img src="{{this.img}}" class="card-img-top" alt="{{this.id}}">
+                                <div class="episode">
+                                    1
+                                </div>
+                            </div>
+                            <h5 class="">{{this.title}}</h5>
+                        </div>
+                        {{/each}}
+                    </div>
             </div>
             <div class="list-name"><a href="/topRating" style="text-decoration: none; text-transform: uppercase;">Top
                     rating</a></div>
-            <div class="list-topRating">
 
+            <div class="list-topRating">
+                
+                    <div class="d-flex flex-row justify-content-around">
+                        {{#each firstRow}}
+                        <div>
+                            <div class="card position-relative " style="width: 18rem" id="{{this.id}}" onclick="select({{this.id}})">
+                                <img src="{{this.img}}" class="card-img-top" alt="{{this.id}}">
+                                <div class="episode">
+                                    1
+                                </div>
+                            </div>
+                            <h5 class="">{{this.title}}</h5>
+                        </div>
+                        {{/each}}
+                    </div>
+                    <div class="d-flex flex-row justify-content-around">
+                        {{#each secondRow}}
+                        <div>
+                            <div class="card position-relative " style="width: 18rem" id="{{this.id}}" onclick="select({{this.id}})">
+                                <img src="{{this.img}}" class="card-img-top" alt="{{this.id}}">
+                                <div class="episode">
+                                    1
+                                </div>
+                            </div>
+                            <h5 class="">{{this.title}}</h5>
+                        </div>
+                        {{/each}}
+                    </div>
+                
             </div>
         </div>
         <div class="bxh col-3" style="background-color:#D9D9D9;">
