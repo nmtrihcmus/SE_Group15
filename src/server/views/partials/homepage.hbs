@@ -4,9 +4,31 @@
         <div class="navbar-nav d-flex flex-row  justify-content-center">
             <a class="nav-link" href="#" >Phim lẻ</a>
             <a class="nav-link" href="#">Phim bộ</a>
-            <a class="nav-link" href="#">Thể loại</a>
-            <a class="nav-link">Quốc gia</a>
-            <a class="nav-link" href="#">Năm</a>
+            <div class="dropdown nav-link ">
+                <h5 class="dropdown-toggle" data-bs-toggle="dropdown">
+                    Thể loại
+                </h5>
+                <ul class="dropdown-menu" style="position: absolute; z-index: 2;">
+                    
+                    {{#each genres}}
+                    <li><a class="dropdown-item" href="/genres/?genres= {{this.genres}}">{{this.genres}}</a></li>
+
+                    {{/each}}
+                </ul>
+            </div>
+            
+            <div class=" dropdown nav-link ">
+                <h5 class="dropdown-toggle" data-bs-toggle="dropdown" >
+                    Quốc gia
+                </h5>
+                <ul class="dropdown-menu" style="position: absolute; z-index: 2;">
+                    
+                    {{#each country}}
+                    <li><a class="dropdown-item" href="/country/?country= {{this.country}}">{{this.country}}</a></li>
+
+                    {{/each}}
+                </ul>
+            </div>
         </div>
 
 

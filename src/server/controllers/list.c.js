@@ -46,6 +46,8 @@ class listC {
     };
     async topRatingPage(req, res, next) {        
         try {
+            const country = await movieM.distinct('country');
+            const genres = await movieM.distinct('genres');
             console.log("list Movie");
             const listAll = await movieM.all();
             var topRating = listAll.sort((a, b)=>{return b.rating-a.rating});
@@ -74,7 +76,9 @@ class listC {
                     category: "topRating",
                     listMovie: list,
                     loggedIn: true,
-                    isAdmin: req.session.isAdmin
+                    isAdmin: req.session.isAdmin,
+                    country: country,
+                    genres: genres
 
                 })
             }
@@ -83,7 +87,9 @@ class listC {
                 nPage: count,
                 category: "topRating",
                 listMovie: list,
-                loggedIn: false
+                loggedIn: false,
+                country: country,
+                genres: genres
                
 
             })
@@ -120,7 +126,8 @@ class listC {
     };
     async newMoviePage(req, res, next) {        
         try {
-            
+            const country = await movieM.distinct('country');
+            const genres = await movieM.distinct('genres');
             console.log("list new Movie");
             const listAll = await movieM.all();
             var newMovie = listAll.sort((a, b)=>{return b.insertDate.getTime()-a.insertDate.getTime()});
@@ -150,7 +157,9 @@ class listC {
                     category: "newMovie",
                     listMovie: list,
                     loggedIn: true,
-                    isAdmin: req.session.isAdmin
+                    isAdmin: req.session.isAdmin,
+                    country: country,
+                    genres: genres
 
                 })
             }
@@ -159,7 +168,9 @@ class listC {
                 nPage: count,
                 category: "newMovie",
                 listMovie: list,
-                loggedIn: false
+                loggedIn: false,
+                country: country,
+                genres: genres
                
 
             })

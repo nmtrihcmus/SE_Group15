@@ -78,4 +78,8 @@ module.exports = {
         var rs = [...setArr];
         return rs;
     },
+    distinct: async (col) => {
+        const rs = await query.distinct(tb, col)
+        return rs;
+    }
 };

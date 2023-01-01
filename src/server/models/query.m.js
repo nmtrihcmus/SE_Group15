@@ -68,5 +68,12 @@ module.exports = {
         return rs;
         
     },
+    distinct: async (tableName, fieldName)=>{
+        const table = new pgp.helpers.TableName({table: tableName, schema: schema});
+        const query = pgp.as.format('SELECT DISTINCT "$2:alias" FROM $1  ',[ table, fieldName]);
+        const rs = await db.any(query);
+        return rs;
+        
+    },
 
 };

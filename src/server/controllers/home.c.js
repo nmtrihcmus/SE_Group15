@@ -2,6 +2,9 @@ const movieM = require('../models/movies.m');
 class homeC {
     async homePage(req, res, next) {
         try {
+            const country = await movieM.distinct('country');
+            const genres = await movieM.distinct('genres');
+            console.log(country);
             const listAll = await movieM.all();
             var topRating = listAll.sort((a, b)=>{return b.rating-a.rating});
             
@@ -19,7 +22,9 @@ class homeC {
                     firstNew: firstNew,
                     secondNew: secondNew,
                     loggedIn: true,
-                    isAdmin: req.session.isAdmin
+                    isAdmin: req.session.isAdmin,
+                    country: country,
+                    genres: genres
                 });
             }
             return res.render('home', {
@@ -29,6 +34,8 @@ class homeC {
                 firstNew: firstNew,
                 secondNew: secondNew,
                 loggedIn: false,
+                country: country,
+                genres: genres
             });
         }
         catch (error) {
