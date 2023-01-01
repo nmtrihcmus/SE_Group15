@@ -36,7 +36,7 @@ module.exports = {
 
     filterByName: async (username) => {
         let user = await query.all(tb);
-        let us = user.filter((user) => user.username.includes(username))
+        let us = user.filter((user) => user.username.includes(username) && user.isAdmin === false)
         return us;
     },
 
