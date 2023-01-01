@@ -6,13 +6,15 @@ const saltRounds = 10;
 class updateAccountC {
     async interface(req, res, next) {
         const username = req.body.username;
-        if (req.session.username) {
+        if (req.session.username && req.session.isAdmin) {
             let us = await userM.filterByName(username);
-            return res.render('updateAccount', {
+            return res.render('updateAccounts', {
                 title: "Update account",
                 username: us[0]['username'],
                 fullname: us[0]['fullname'],
                 email: us[0]['email'],
+                loggedIn: true,
+                isAdmin: req.session.isAdmin
             });
         }
         res.redirect('/home');
@@ -29,24 +31,28 @@ class updateAccountC {
 
         if (password == "" || username == "" || fullname == "" || email == "") {
             let us = await userM.filterByName(oldUsername);
-            res.render("updateAccount", {
+            res.render("updateAccounts", {
                 title: "Update account",
                 notification: "Vui lòng nhập đầy đủ thông tin!",
                 username: us[0]['username'],
                 fullname: us[0]['fullname'],
                 email: us[0]['email'],
+                loggedIn: true,
+                isAdmin: req.session.isAdmin
             })
             return false;
         }
         try {
             const uDb = await userM.byName(username);
             let us = await userM.filterByName(oldUsername);
-            res.render("updateAccount", {
+            res.render("updateAccounts", {
                 title: "Update account",
                 notification: "Tài khoản này đã tồn tại!",
                 username: us[0]['username'],
                 fullname: us[0]['fullname'],
                 email: us[0]['email'],
+                loggedIn: true,
+                isAdmin: req.session.isAdmin
             })
         }
         catch (err) {
@@ -61,12 +67,14 @@ class updateAccountC {
                 }
                 const update = await userM.update(oldUsername, u);
                 let us = await userM.filterByName(username);
-                res.render("updateAccount", {
+                res.render("updateAccounts", {
                     title: "Update account",
                     notification: "Cập nhật khoản thành công!",
                     username: us[0]['username'],
                     fullname: us[0]['fullname'],
                     email: us[0]['email'],
+                    loggedIn: true,
+                    isAdmin: req.session.isAdmin
 
                 })
             }

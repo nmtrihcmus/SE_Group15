@@ -1,0 +1,86 @@
+<style>
+    .form-account {
+        max-width: 900px;
+        height: 600px;
+        margin: auto;
+        background-color: #B6B0B0;
+        border-radius: 10px;
+    }
+    .title-addAcc {
+        text-align: center;
+        padding-top: 48px;
+        font-size: 32px;
+        margin: 0;
+    }
+    hr {
+        margin: 0;
+        border: solid 1px #000;
+    }
+    .input-section {
+        margin-top: 40px;
+        text-align: center;
+        
+    }
+    .input-field {
+        width: 520px;
+        height: 52px;
+        padding: 24px;
+        border-radius: 5px;
+        font-size: 24px;
+        margin-left: 24px;
+    }
+    .btn-add {
+        text-align: center !important;
+        margin-top: 28px;
+    }
+    .btn-add .btn {
+        width: 300px;
+        height: 56px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 1.5em;
+        background-color: #3C4BD1;
+        opacity: 90%;
+        color: #000;
+    }
+    ::placeholder {
+        font-size: 24px;
+    }
+    img {
+        margin-bottom: 8px ;
+    }
+    small {
+        text-align: center;
+        color: red;
+    }
+</style>
+
+<form action="/addAccounts" method="post">
+<div class="form-account">
+    <h3 class="title-addAcc">Thêm tài khoản</h3>
+    <hr/>
+    <div class="input-section">
+        <img src="img/User_cicrle_duotone.svg" alt="">
+        <input class="input-field" name="username" type="text" placeholder="Tên đăng nhập">
+    </div>
+    <div class="input-section">
+        <img src="img/Lock_fill.svg" alt="">
+        <input class="input-field" name="password" type="password" placeholder="Mật khẩu">
+    </div>
+    <div class="input-section">
+        <img src="img/User_cicrle_duotone.svg" alt="">
+        <input class="input-field" name="fullname" type="text" placeholder="Họ tên">
+    </div>
+    <div class="input-section">
+        <img src="img/Message_alt_fill.svg" alt="">
+        <input class="input-field" name="email" type="text" placeholder="Email">
+    </div>
+    <div class="text-center">
+    <small>{{notification}}</small>
+    </div>
+    <div class="btn-add">
+    <button class="btn btn-primary" >Thêm tài khoản</button>
+    </div>
+</div>
+</form>
+

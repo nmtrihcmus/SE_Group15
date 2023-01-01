@@ -5,26 +5,30 @@ const saltRounds = 10;
 
 class addAccountC {
     async interface(req, res, next) {
-        if (req.session.username) {
+        if (req.session.username && req.session.isAdmin) {
             return res.render('addAccount', {
                 title: "Add account",
+                loggedIn: true,
+                isAdmin: req.session.isAdmin
             });
         }
         res.redirect('/home');
     }
 
-    async addAccount(req, res, next) {
+    async addAccounts(req, res, next) {
         // let n = await userM.getNumberOfAccounts();
         const isAdmin = false;
         const username = req.body.username;
         const password = req.body.password;
         const fullname = req.body.fullname;
         const email = req.body.email;
-        
+
         if (password == "" || username == "" || fullname == "" || email == "") {
             res.render("addAccount", {
                 title: "Add account",
                 notification: "Vui lòng nhập đầy đủ thông tin!",
+                loggedIn: true,
+                isAdmin: req.session.isAdmin
             })
             return false;
         }
@@ -33,6 +37,8 @@ class addAccountC {
             res.render("addAccount", {
                 title: "Add account",
                 notification: "Tài khoản này đã tồn tại!",
+                loggedIn: true,
+                isAdmin: req.session.isAdmin
             })
         }
         catch (err) {
@@ -45,10 +51,12 @@ class addAccountC {
                     fullname: fullname,
                     email: email,
                 }
-                const create = await userM.addUser(u);
+                const create = await userM.addAccount(u);
                 res.render("addAccount", {
                     title: "Add account",
                     notification: "Thêm tài khoản thành công!",
+                    loggedIn: true,
+                    isAdmin: req.session.isAdmin
                 })
             }
             catch (err) {
