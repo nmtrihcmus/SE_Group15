@@ -111,6 +111,9 @@ async function list(){
 var curPage = 1;
 
 async function loadPage(page = 1){
+    var input = document.getElementById('detail-input-search');
+    console.log("input.textContent: = ", input.textContent);
+    
     var url = location.href;
     console.log(url);
     var pag = document.getElementsByClassName('page-item')[curPage-1];
@@ -119,9 +122,26 @@ async function loadPage(page = 1){
     curPage = page;
     var newPage = document.getElementsByClassName('page-item')[curPage-1];
     newPage.classList.add('active');
+
+    var options = '';
+    var data = '';
+    if(input.textContent){
+        options = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({input: input.textContent, page: page})
+        };
+        
+        const res = await fetch(`${url}/page/?page=${page}`, options);
+        data = await res.json();
+    }else{
+        const res = await fetch(`${url}/page/?page=${page}`);
+        data = await res.json();
+    }
     
-    const res = await fetch(`${url}/page/?page=${page}`);
-    const data = await res.json();
+    
+    
+    
     console.log(data.total);
    
     data.listMovie.forEach(e => {

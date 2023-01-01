@@ -67,12 +67,15 @@ module.exports = {
         return rs;
 
     },
-    maxID: async () => {
-        const rs = await query.max(tb, 'id');
+    searchMovie: async (input) => {
+        const rs1 = await query.search(tb, 'title', input);
+        const rs2 = await query.search(tb, 'country', input);
+        const rs3 = await query.search(tb, 'director', input);
+        const rs5 = await query.search(tb, 'genres', input);
+        const rs4 = await query.search(tb, 'cast', input);
+        var result = [...rs1,...rs2,...rs3,...rs4,...rs5 ];
+        var setArr = new Set(result);
+        var rs = [...setArr];
         return rs;
     },
-    maxDate: async () => {
-        const rs = await query.max(tb, 'insertDate');
-        return rs;
-    }
 };

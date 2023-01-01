@@ -2,9 +2,9 @@
     <a class="navbar-brand text-white" href="/home"><img src="/img/Home_fill.svg" alt=""></a>
 
     <div class='search-box'>
-        <form class='search-form'>
-            <input class='form-control' placeholder='Tên phim, diễn viên,...' type='text'>
-            <button class='btn btn-link search-btn'>
+        <form class='search-form' action="/search" method="post">
+            <input class='form-control' placeholder='Tên phim, diễn viên,...' type='text' name="input">
+            <button class='btn btn-link search-btn' type="submit">
                 <i class='glyphicon glyphicon-search'></i>
             </button>
         </form>
