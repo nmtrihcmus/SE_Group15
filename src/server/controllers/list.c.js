@@ -2,23 +2,86 @@ const movieM = require('../models/movies.m');
 
 
 class listC {
-    
-    async listMoviePage(req, res, next) {        
+    //Hiển thị toàn bộ phim
+    async listAllMovie(req, res, next) {
         try {
+            const country = await movieM.distinct('country');
+            const genres = await movieM.distinct('genres');
             
-            const listMovie = await movieM.all();
+            const listAll = await movieM.all();
             
-            res.send({
-                total: listMovie.length,
-                category: "all",
-                listMovie: listMovie
+            const PER_PAGE = 9; //Số phim mỗi trang
+            
+            var page = listAll.slice(0, 9);
+
+            var list = [];
+            //Chia phim theo từng row một
+            for (let i = 0; i < page.length; i+=3) {
+                var row = [];
+                row = page.slice(i, i+3);
+                list.push(row);
+            }
+            //Số lượng trang 
+            var nPage =  Math.ceil(listAll.length/PER_PAGE);
+            
+            var count = [];
+            for (let i = 1; i < nPage; i++) {
+                count.push(i+1);
+                
+            }
+            if (req.session.username) {
+                return res.render('listMovie', {
+                    total: listAll.length,
+                    nPage: count,
+                    category: "allMovie",
+                    listMovie: list,
+                    loggedIn: true,
+                    isAdmin: req.session.isAdmin,
+                    country: country,
+                    genres: genres
+
+                })
+            }
+            return res.render('listMovie', {
+                total: listAll.length,
+                nPage: count,
+                category: "allMovie",
+                listMovie: list,
+                loggedIn: false,
+                country: country,
+                genres: genres
+               
+
             })
-            
+
             
             
         }
         catch (error) {
             console.log(error);
+            next(error);
+        }
+    };
+    //API danh sách toàn bộ phim  theo trang
+    async listAllMoviePage(req, res, next) {
+        try {
+          
+            var curPage = req.query.page;
+            console.log(curPage);
+            const listAll = await movieM.all();
+            
+            const PER_PAGE = 9;
+            var listMovie = listAll.slice((curPage-1)*PER_PAGE, curPage*PER_PAGE);
+            res.send({
+                total: listAll.length,
+                curPage: curPage,
+                category: "allMovie",
+                listMovie: listMovie
+            })
+
+            
+        }
+        catch (error) {
             next(error);
         }
     };

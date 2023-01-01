@@ -133,7 +133,7 @@ async function loadPage( page = 1){
         const res = await fetch(`${url}/page/?page=${page}`);
         data = await res.json();
     }
-    
+    console.log(data);
     
     
     
@@ -145,10 +145,6 @@ async function loadPage( page = 1){
     var listMovies = document.getElementsByClassName('cur-page')[0];
     listMovies.innerHTML='';
    
-
-    var card = `<div class="card position-relative" style="width: 18rem">
-    <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" class="card-img-top" alt="poster">
-    <div class="episode">  99+</div></div> <h5 class=""> Mặc dịnh tên phim</h5>`;
    
     
     for (let i = 0; i < data.listMovie.length ; i+=3) {
@@ -175,83 +171,3 @@ async function loadPage( page = 1){
     }
 }
 
-async function loadPageNav( page = 1){
-    window.location.href = '/home';
-    // var input = document.getElementById('detail-input-search');
-    // console.log("input.textContent: = ", input.textContent);
-    
-    // var url = location.href;
-    // console.log("path = ", location.pathname);
-    // console.log("url = ", url);
-    // var pag = document.getElementsByClassName('page-item')[curPage-1];
-    // console.log(pag);
-    // pag.classList.remove('active');
-    // curPage = page;
-    // var newPage = document.getElementsByClassName('page-item')[curPage-1];
-    // newPage.classList.add('active');
-
-    // var options = '';
-    // var data = '';
-    // if(input.textContent){
-    //     options = {
-    //         method: 'POST',
-    //         headers: {'Content-Type': 'application/json'},
-    //         body: JSON.stringify({input: input.textContent, page: page})
-    //     };
-        
-    //     const res = await fetch(`${url}/page/?page=${page}`, options);
-    //     data = await res.json();
-    // }else{
-    //     const res = await fetch(`${url}/page/?page=${page}`);
-    //     data = await res.json();
-    // }
-    
-    
-    
-    
-    // console.log(data.total);
-   
-    // data.listMovie.forEach(e => {
-    //     console.log("id = ", e.id);
-    // });
-    // var listMovies = document.getElementsByClassName('cur-page')[0];
-    // listMovies.innerHTML='';
-   
-
-    // var card = `<div class="card position-relative" style="width: 18rem">
-    // <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" class="card-img-top" alt="poster">
-    // <div class="episode">  99+</div></div> <h5 class=""> Mặc dịnh tên phim</h5>`;
-   
-    
-    // for (let i = 0; i < data.listMovie.length ; i+=3) {
-    //     var row = document.createElement('div');
-    //     row.classList.add('d-flex');
-    //     row.classList.add('flex-row');
-    //     row.classList.add('justify-content-around');
-    //     listMovies.appendChild(row);
-    //     var r = listMovies.childNodes[1];
-       
-    //     for (let index = 0; index < 3; index++) {
-    //         var j = i + index;
-    //         if( j >= data.listMovie.length){
-    //             break;
-    //         }
-    //         var newcard = `<div class="card position-relative" style="width: 18rem">
-    //         <img src="${data.listMovie[j].img}" class="card-img-top" alt="${data.listMovie[j].id}"> <div class="episode"> ${data.listMovie[j].id}</div> </div>
-    //         <h5 class=""> ${data.listMovie[j].title}</h5>`;
-    //         var item = document.createElement('div');
-    //         item.innerHTML = newcard;
-    //         row.appendChild(item);
-
-    //     }
-    // }
-}
-
-function redirect(event){
-    event.preventDefault();
-    console.log(event.target.textContent);
-
-    
-    return ;
-    
-}

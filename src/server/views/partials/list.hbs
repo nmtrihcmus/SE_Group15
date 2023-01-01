@@ -2,8 +2,8 @@
     <nav class="navbar mx-auto ">
 
         <div class="navbar-nav d-flex flex-row  justify-content-center">
-            <a class="nav-link" href="#" >Phim lẻ</a>
-            <a class="nav-link" href="#">Phim bộ</a>
+            <a class="nav-link" href="/list" >Phim lẻ</a>
+            
             
             <div class="dropdown nav-link ">
                 <h5 class="dropdown-toggle" data-bs-toggle="dropdown">
@@ -66,9 +66,9 @@
                     </div>
                     <nav aria-label="...">
             <ul class="pagination pagination-sm" >
-            <li class="page-item active" ><a class="page-link"  onclick="loadPage(1)">1</a></li>
+            <li class="page-item active" > <a class="page-link"  onclick="loadPage(1)">1</a></li>
             {{#each nPage}}
-                <li class="page-item" ><a class="page-link" onclick="loadPage({{this}})">{{this}}</a></li>
+                <li class="page-item" > <a class="page-link" onclick="loadPage({{this}})" > {{this}}</a></li>
             {{/each}}
           
             </ul>
