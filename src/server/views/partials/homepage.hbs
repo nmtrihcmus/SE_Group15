@@ -15,17 +15,17 @@
     <div class="d-flex">
 
         <div class="list-movies col-9  " id="list">
-            <div class="list-name"><a href="/phimMoi" style="text-decoration: none; text-transform: uppercase;">Phim
+            <div class="list-name"><a href="/newMovie" style="text-decoration: none; text-transform: uppercase;">Phim
                     mới</a>
             </div>
-            <div class="list-phimMoi">
+            <div class="list-newMovie">
                 <div class="d-flex flex-row justify-content-around">
                         {{#each firstNew}}
                         <div>
                             <div class="card position-relative " style="width: 18rem" id="{{this.id}}" onclick="select({{this.id}})">
                                 <img src="{{this.img}}" class="card-img-top" alt="{{this.id}}">
                                 <div class="episode">
-                                    1
+                                    {{this.id}}
                                 </div>
                             </div>
                             <h5 class="">{{this.title}}</h5>
