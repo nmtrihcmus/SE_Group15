@@ -1,27 +1,18 @@
 <div class="list-movies-update">
     {{#each data}}
-    {{!-- <div class="movie">
-        <a href="#">
-            <div class="card position-relative">
-                <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" class="card-img-top"
-                    alt="poster">
-                <div class="episode">
-                    99+
-                </div>
-            </div>
-        </a>
-        <h5 class="">Title</h5>
-    </div> --}}
     <div class="movie">
-        <a href="/updateMovie/{{../page}}/{{id}}">
-            <div class="card position-relative">
-                <img src={{img}} class="card-img-top" alt="poster">
-                <div class="episode">
-                    99+
+        <form action="/deleteMovie/{{../page}}/{{id}}" method="POST">
+            <a href="#" onclick="this.parentNode.submit()">
+                <h5 class="text-center">Nhấn để xóa</h5>
+                <div class="card position-relative">
+                    <img src={{img}} class="card-img-top" alt="poster">
+                    <div class="episode">
+                        99+
+                    </div>
                 </div>
-            </div>
-            <h5 class="">{{title}}</h5>
-        </a> 
+                <h5 class="">{{title}}</h5>    
+            </a>
+        </form>
     </div>
     {{/each}}
 </div>
@@ -69,25 +60,30 @@
         max-width: 100%;
         height: auto;
     }
-    
-    a:link{
+
+    a:link {
         text-decoration: none;
     }
-    
 </style>
 
 <script>
+    var info = `{{ notification }}`;
+        console.log("info: ", info);
+        if (info) {
+            alert(info);
+        }
+    
     $('.prevBtn').on('click', () => {
         const curPage = parseInt($('.curPage').text());
         if (curPage > 1) {
-            window.location.href = `/updateMovie/${curPage - 1}`;
+            window.location.href = `/deleteMovie/${curPage - 1}`;
         }
     })
     $('.nextBtn').on('click', () => {
         const maxPage = parseInt(`{{ maxPage }}`);
         const curPage = parseInt($('.curPage').text());
         if (curPage < maxPage) {
-            window.location.href = `/updateMovie/${curPage + 1}`;
+            window.location.href = `/deleteMovie/${curPage + 1}`;
         }
     })
 </script>

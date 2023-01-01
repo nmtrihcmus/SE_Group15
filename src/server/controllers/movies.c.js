@@ -171,11 +171,15 @@ class movieC {
             if (req.session.username && req.session.isAdmin) {
                 const allMovies = await movieM.all();
                 const itemsPerPage = 10;
-                const curPage = parseInt(req.params.page);
-                const start = (curPage - 1) * itemsPerPage;
-                const end = curPage * itemsPerPage;
                 const nMovies = allMovies.length;
                 const maxPage = Math.ceil(nMovies / itemsPerPage);
+                var curPage = parseInt(req.params.page);
+                if (curPage < 1)
+                    curPage = 1;
+                if (curPage > maxPage)
+                    curPage = maxPage;
+                const start = (curPage - 1) * itemsPerPage;
+                const end = curPage * itemsPerPage;
                 return res.render('updateMovie_list', {
                     title: "Movie list",
                     loggedIn: true,
@@ -189,6 +193,93 @@ class movieC {
         }
         catch (error) {
             next(error);
+        }
+    };
+    
+    async deleteMovie_listPage(req, res, next) {
+        try {
+            if (req.session.username && req.session.isAdmin) {
+                const allMovies = await movieM.all();
+                const itemsPerPage = 10;
+                const nMovies = allMovies.length;
+                const maxPage = Math.ceil(nMovies / itemsPerPage);
+                var curPage = parseInt(req.params.page);
+                if (curPage < 1)
+                    curPage = 1;
+                if (curPage > maxPage)
+                    curPage = maxPage;
+                const start = (curPage - 1) * itemsPerPage;
+                const end = curPage * itemsPerPage;                
+                return res.render('deleteMovie_list', {
+                    title: "Movie list",
+                    loggedIn: true,
+                    isAdmin: req.session.isAdmin,
+                    data: allMovies.slice(start, end),
+                    page: curPage,
+                    maxPage: maxPage
+                });
+            }
+            return res.redirect('/home');
+        }
+        catch (error) {
+            next(error);
+        }
+    };
+    
+    async deleteMovie(req, res, next) {
+        try {
+            if (req.session.username && req.session.isAdmin) {
+                const id = req.params.id;
+                const del = await movieM.delByID(id);
+                
+                const allMovies = await movieM.all();
+                const itemsPerPage = 10;
+                const nMovies = allMovies.length;
+                const maxPage = Math.ceil(nMovies / itemsPerPage);
+                var curPage = parseInt(req.params.page);
+                if (curPage < 1)
+                    curPage = 1;
+                if (curPage > maxPage)
+                    curPage = maxPage;
+                const start = (curPage - 1) * itemsPerPage;
+                const end = curPage * itemsPerPage;
+                
+                return res.render('deleteMovie_list', {
+                    title: "Movie list",
+                    loggedIn: true,
+                    isAdmin: req.session.isAdmin,
+                    data: allMovies.slice(start, end),
+                    page: curPage,
+                    maxPage: maxPage,
+                    notification: "Xóa phim thành công!"
+                });
+            }
+            return res.redirect('/home');
+        }
+        catch (error) {
+            console.log(error);
+            
+            const allMovies = await movieM.all();
+            const itemsPerPage = 10;
+            const nMovies = allMovies.length;
+            const maxPage = Math.ceil(nMovies / itemsPerPage);
+            var curPage = parseInt(req.params.page);
+            if (curPage < 1)
+                curPage = 1;
+            if (curPage > maxPage)
+                curPage = maxPage;
+            const start = (curPage - 1) * itemsPerPage;
+            const end = curPage * itemsPerPage;
+
+            return res.render('deleteMovie_list', {
+                title: "Movie list",
+                loggedIn: true,
+                isAdmin: req.session.isAdmin,
+                data: allMovies.slice(start, end),
+                page: curPage,
+                maxPage: maxPage,
+                notification: "Xóa phim thất bại!"
+            });
         }
     };
 }
