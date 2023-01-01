@@ -282,6 +282,117 @@ class movieC {
             });
         }
     };
+
+    async search(req, res, next) {
+        try {
+            var input = req.body.input;
+            var rsYear = [];
+            if(parseInt(input)>1900 && parseInt(input)<2024){
+                rsYear = await movieM.findByYear(parseInt(input));
+                
+            }
+            var rsStr = await movieM.searchMovie(input);
+            
+            var rs = [...rsYear, ...rsStr];
+            console.log("rs ==================================", rs);
+            var info ='';
+            if(rs.length==0){
+                
+                info = "Không tìm thấy thông tin phim trùng khớp";
+                
+            }
+            
+            
+            const PER_PAGE = 9;
+            
+            var page = rs.slice(0, 9);
+            console.log("========================= page = ", page );
+            var list = [];
+            for (let i = 0; i < page.length; i+=3) {
+                var row = [];
+                row = page.slice(i, i+3);
+                list.push(row);
+            }
+            
+            var nPage =  Math.ceil(rs.length/PER_PAGE);
+        
+            var count = [];
+            for (let i = 1; i < nPage; i++) {
+                count.push(i+1);
+                
+            }
+            if (req.session.username) {
+                return res.render('listMovie', {
+                    input: input,
+                    info: info,
+                    total: rs.length,
+
+                    nPage: count,
+                    category: "result search",
+                    listMovie: list,
+                    loggedIn: true,
+                    isAdmin: req.session.isAdmin
+
+                })
+            }
+            return res.render('listMovie', {
+                input: input,
+                info: info,
+                total: rs.length,
+
+                nPage: count,
+                category: "result search",
+                listMovie: list,
+                loggedIn: false
+               
+            })
+
+            
+        }
+        catch (error) {
+            next(error);
+        }
+    };
+    async searchPage(req, res, next) {
+        try {
+            console.log("searchPage");
+            var curPage = req.query.page;
+            var input = req.body.input;
+            console.log(req.body);
+            var rsYear = [];
+            if(parseInt(input)>1900 && parseInt(input)<2024){
+                rsYear = await movieM.findByYear(parseInt(input));
+                
+            }
+            var rsStr = await movieM.searchMovie(input);
+            
+            var rs = [...rsYear, ...rsStr];
+            console.log("rs ==================================", rs);
+            
+            
+            
+            const PER_PAGE = 9;
+            
+            var page = rs.slice(0, 9);
+            console.log("========================= page = ", page );
+            
+            
+        
+           
+            var listMovie = rs.slice((curPage-1)*PER_PAGE, curPage*PER_PAGE);
+            res.send({
+                total: rs.length,
+                curPage: curPage,
+                category: "result search",
+                listMovie: listMovie
+            })
+
+            
+        }
+        catch (error) {
+            next(error);
+        }
+    };
 }
 
 module.exports = new movieC();

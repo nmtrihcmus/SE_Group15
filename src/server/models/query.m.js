@@ -24,21 +24,21 @@ module.exports = {
     },
     one: async (tableName, fieldName, fieldVal)=>{
         const table = new pgp.helpers.TableName({table: tableName, schema: schema});
-        const query = pgp.as.format('SELECT * FROM $1   WHERE $2:alias = $3 ',[ table, fieldName, fieldVal]);
+        const query = pgp.as.format('SELECT * FROM $1   WHERE "$2:alias" = $3 ',[ table, fieldName, fieldVal]);
         const rs = await db.one(query);
         return rs;
         
     },
     any: async (tableName, fieldName, fieldVal)=>{
         const table = new pgp.helpers.TableName({table: tableName, schema: schema});
-        const query = pgp.as.format('SELECT * FROM $1   WHERE $2:alias = $3 ',[ table, fieldName, fieldVal]);
+        const query = pgp.as.format('SELECT * FROM $1   WHERE "$2:alias" = $3 ',[ table, fieldName, fieldVal]);
         const rs = await db.any(query);
         return rs;
         
     },
     del:  async (tableName, fieldName, fieldVal)=>{
         const table = new pgp.helpers.TableName({table: tableName, schema: schema});
-        const query = pgp.as.format('DELETE FROM $1 WHERE $2:alias = $3 ',[ table, fieldName, fieldVal]);
+        const query = pgp.as.format('DELETE FROM $1 WHERE "$2:alias" = $3 ',[ table, fieldName, fieldVal]);
         const rs = await db.result(query);
         return rs;
         
@@ -56,6 +56,15 @@ module.exports = {
         const query = pgp.helpers.update(  newFieldVal , fieldName , table) + condition;
         
         const rs = await db.result(query);
+        return rs;
+        
+    },
+    search: async (tableName, fieldName, fieldVal)=>{
+        fieldVal= '%'+ fieldVal+'%'; 
+        const table = new pgp.helpers.TableName({table: tableName, schema: schema});
+        const query = pgp.as.format('SELECT * FROM $1   WHERE "$2:alias" LIKE $3 ',[ table, fieldName, fieldVal]);
+        console.log(query);
+        const rs = await db.any(query);
         return rs;
         
     },
