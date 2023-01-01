@@ -171,3 +171,11 @@ async function loadPage( page = 1){
     }
 }
 
+
+function addOne(event, index){
+    console.log("index = ", index);
+    console.log(event.target);
+    
+    return;
+
+}

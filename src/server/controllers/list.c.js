@@ -9,7 +9,7 @@ class listC {
             const genres = await movieM.distinct('genres');
             
             const listAll = await movieM.all();
-            
+            var favMovie = listAll.sort((a, b)=>{return b.favCount-a.favCount}).slice(0,6);
             const PER_PAGE = 9; //Số phim mỗi trang
             
             var page = listAll.slice(0, 9);
@@ -38,7 +38,8 @@ class listC {
                     loggedIn: true,
                     isAdmin: req.session.isAdmin,
                     country: country,
-                    genres: genres
+                    genres: genres,
+                    favMovie: favMovie
 
                 })
             }
@@ -49,7 +50,8 @@ class listC {
                 listMovie: list,
                 loggedIn: false,
                 country: country,
-                genres: genres
+                genres: genres,
+                favMovie: favMovie
                
 
             })
@@ -77,6 +79,7 @@ class listC {
                 curPage: curPage,
                 category: "allMovie",
                 listMovie: listMovie
+
             })
 
             
@@ -115,7 +118,10 @@ class listC {
             const genres = await movieM.distinct('genres');
             
             const listAll = await movieM.all();
+            var favMovie = listAll.sort((a, b)=>{return b.favCount-a.favCount}).slice(0,6);
             var topRating = listAll.sort((a, b)=>{return b.rating-a.rating});
+
+            
             const PER_PAGE = 9; //Số phim mỗi trang
             
             var page = topRating.slice(0, 9);
@@ -144,7 +150,8 @@ class listC {
                     loggedIn: true,
                     isAdmin: req.session.isAdmin,
                     country: country,
-                    genres: genres
+                    genres: genres,
+                    favMovie: favMovie
 
                 })
             }
@@ -155,7 +162,8 @@ class listC {
                 listMovie: list,
                 loggedIn: false,
                 country: country,
-                genres: genres
+                genres: genres,
+                favMovie: favMovie
                
 
             })
@@ -175,6 +183,7 @@ class listC {
             var curPage = req.query.page;
             
             const listAll = await movieM.all();
+
             var newMovie = listAll.sort((a, b)=>{return b.insertDate.getTime()-a.insertDate.getTime()});
             const PER_PAGE = 9;
             var listMovie = newMovie.slice((curPage-1)*PER_PAGE, curPage*PER_PAGE);
@@ -199,7 +208,9 @@ class listC {
             
             const listAll = await movieM.all();
             //Sắp xếp theo thời gian gần nhất
+            var favMovie = listAll.sort((a, b)=>{return b.favCount-a.favCount}).slice(0,6);
             var newMovie = listAll.sort((a, b)=>{return b.insertDate.getTime()-a.insertDate.getTime()});
+            
             const PER_PAGE = 9;
             
             var page = newMovie.slice(0, 9);
@@ -228,7 +239,8 @@ class listC {
                     loggedIn: true,
                     isAdmin: req.session.isAdmin,
                     country: country,
-                    genres: genres
+                    genres: genres,
+                    favMovie: favMovie
 
                 })
             }
@@ -239,7 +251,8 @@ class listC {
                 listMovie: list,
                 loggedIn: false,
                 country: country,
-                genres: genres
+                genres: genres,
+                favMovie: favMovie
                
 
             })
@@ -258,7 +271,9 @@ class listC {
         try {
             const country = await movieM.distinct('country');
             const genres = await movieM.distinct('genres');
-            
+            const listAll = await movieM.all();
+            var favMovie = listAll.sort((a, b)=>{return b.favCount-a.favCount}).slice(0,6);
+
             var curGenre = req.query.genre;
             curGenre = curGenre.replace(/%20/g, " ");
             var curPage = req.query.page;
@@ -295,8 +310,8 @@ class listC {
                     isAdmin: req.session.isAdmin,
                     country: country,
                     genres: genres,
-                    curGenre: curGenre //Giá trị Genre trả về lại cho Client để tiếp tục gọi AJAX theo trang
-
+                    curGenre: curGenre ,//Giá trị Genre trả về lại cho Client để tiếp tục gọi AJAX theo trang
+                    favMovie: favMovie
                 })
             }
             return res.render('listMovieNav', {
@@ -307,7 +322,8 @@ class listC {
                 loggedIn: false,
                 country: country,
                 genres: genres,
-                curGenre: curGenre //Giá trị Genre trả về lại cho Client để tiếp tục gọi AJAX theo trang
+                curGenre: curGenre, //Giá trị Genre trả về lại cho Client để tiếp tục gọi AJAX theo trang
+                favMovie: favMovie
             })
         }
         catch (error) {
@@ -320,7 +336,8 @@ class listC {
         try {
             const country = await movieM.distinct('country');
             const genres = await movieM.distinct('genres');
-            
+            const listAll = await movieM.all();
+            var favMovie = listAll.sort((a, b)=>{return b.favCount-a.favCount}).slice(0,6);
             var curGenre = req.query.country;
             curGenre = curGenre.replace(/%20/g, " ");//Thay %20 = khoảng trắng
             var curPage = req.query.page;
@@ -357,8 +374,8 @@ class listC {
                     isAdmin: req.session.isAdmin,
                     country: country,
                     genres: genres,
-                    curGenre: curGenre //Giá trị Genre trả về lại cho Client để tiếp tục gọi AJAX theo trang
-
+                    curGenre: curGenre, //Giá trị Genre trả về lại cho Client để tiếp tục gọi AJAX theo trang
+                    favMovie: favMovie
                 })
             }
             return res.render('listMovieNav', {
@@ -369,7 +386,8 @@ class listC {
                 loggedIn: false,
                 country: country,
                 genres: genres,
-                curGenre: curGenre //Giá trị Genre trả về lại cho Client để tiếp tục gọi AJAX theo trang
+                curGenre: curGenre, //Giá trị Genre trả về lại cho Client để tiếp tục gọi AJAX theo trang
+                favMovie: favMovie
             })
         }
         catch (error) {

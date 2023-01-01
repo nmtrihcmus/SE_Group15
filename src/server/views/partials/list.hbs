@@ -79,34 +79,15 @@
         </div>
         <div class="bxh col-3" style="background-color:#D9D9D9;">
             <div class="fs-1 m-3" style="color: red;">Bảng xếp hạng</div>
+            {{#each favMovie}}
             <div class="bxh-list m-3 d-flex">
-                <h4 class="m-3" style="padding-top: 50px ">123</h4>
-                <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" alt="poster"
+                <h4 class="m-3" style="padding-top: 50px ">{{@index}}</h4>
+                <img src="{{this.img}}" alt="{{this.id}}"
                     style="width: 10rem">
-                <h5 class="m-3">Tên phim</h5>
-                <div class="m-3" style="padding-top: 90px ">❤Tim </div>
+                <h5 class="m-3">{{this.title}}</h5>
+                <div class="m-3" style="padding-top: 90px ">❤{{this.favCount}}</div>
             </div>
-            <div class="bxh-list m-3 d-flex">
-                <h4 class="m-3" style="padding-top: 50px ">123</h4>
-                <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" alt="poster"
-                    style="width: 10rem">
-                <h5 class="m-3">Tên phim</h5>
-                <div class="m-3" style="padding-top: 90px ">❤Tim </div>
-            </div>
-            <div class="bxh-list m-3 d-flex">
-                <h4 class="m-3" style="padding-top: 50px ">123</h4>
-                <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" alt="poster"
-                    style="width: 10rem">
-                <h5 class="m-3">Tên phim</h5>
-                <div class="m-3" style="padding-top: 90px ">❤Tim </div>
-            </div>
-            <div class="bxh-list m-3 d-flex">
-                <h4 class="m-3" style="padding-top: 50px ">123</h4>
-                <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" alt="poster"
-                    style="width: 10rem">
-                <h5 class="m-3">Tên phim</h5>
-                <div class="m-3" style="padding-top: 90px ">❤Tim </div>
-            </div>
+            {{/each}}
 
         </div>
     </div>

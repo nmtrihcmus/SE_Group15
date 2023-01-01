@@ -7,17 +7,25 @@ class homeC {
             
             //Danh sách toàn bộ movie
             const listAll = await movieM.all();
+            
             //Danh sách top rating
-            var topRating = listAll.sort((a, b)=>{return b.rating-a.rating});
+            var newMovie = listAll.sort((a, b)=>{return b.insertDate.getTime()-a.insertDate.getTime()});
+            var firstNew = newMovie.slice(0,3);
+            var secondNew = newMovie.slice(3,6);
+            
+            var topRating = listAll.sort((a, b)=>{return b.rating-a.rating;});
             
             var firstRow = topRating.slice(0,3);
             var secondRow = topRating.slice(3,6);
 
             //Danh sách phim mới 
-            var newMovie = listAll.sort((a, b)=>{return b.insertDate.getTime()-a.insertDate.getTime()});
+            
+
+            var favMovie  = listAll.sort((a, b)=>{return b.favCount-a.favCount;}).slice(0,6);
+          
+            
+            
            
-            var firstNew = newMovie.slice(0,3);
-            var secondNew = newMovie.slice(3,6);
             if (req.session.username) {
                 return res.render('home', {
                     title: "Home",
@@ -28,7 +36,9 @@ class homeC {
                     loggedIn: true,
                     isAdmin: req.session.isAdmin,
                     country: country,
-                    genres: genres
+                    genres: genres,
+                    favMovie: favMovie,
+        
                 });
             }
             return res.render('home', {
@@ -39,7 +49,9 @@ class homeC {
                 secondNew: secondNew,
                 loggedIn: false,
                 country: country,
-                genres: genres
+                genres: genres,
+                favMovie: favMovie
+
             });
         }
         catch (error) {
