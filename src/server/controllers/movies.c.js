@@ -225,7 +225,6 @@ class movieC {
             next(error);
         }
     };
-<<<<<<< HEAD
     async search(req, res, next) {
         try {
             var input = req.body.input;
@@ -334,8 +333,8 @@ class movieC {
         }
         catch (error) {
             next(error);
-=======
-    
+        }
+    };
     async deleteMovie(req, res, next) {
         try {
             if (req.session.username && req.session.isAdmin) {
@@ -390,7 +389,6 @@ class movieC {
                 maxPage: maxPage,
                 notification: "Xóa phim thất bại!"
             });
->>>>>>> master
         }
     };
 }
