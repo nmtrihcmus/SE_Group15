@@ -13,9 +13,13 @@ route.get('/updateMovie/:page/:id', movieC.updateMoviePage);
 route.post('/updateMovie/:page/:id', movieC.updateMovie);
 route.get('/deleteMovie/:page', movieC.deleteMovie_listPage);
 route.post('/deleteMovie/:page/:id', movieC.deleteMovie);
+
 route.get('/topRating', listC.topRatingPage);
 route.get('/topRating/page', listC.topRatingPageQuery);
 route.get('/newMovie', listC.newMoviePage);
 route.get('/newMovie/page', listC.newMoviePageQuery);
+route.get('/genre', listC.listMovieByGenre);
+
+route.get('/country', listC.listMovieByCountry);
 
 module.exports = route;

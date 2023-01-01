@@ -4,6 +4,7 @@ class homeC {
         try {
             const country = await movieM.distinct('country');//Danh sách quốc gia trong thẻ navbar
             const genres = await movieM.distinct('genres');//Danh sách thể loại trong thẻ navbar
+            
             //Danh sách toàn bộ movie
             const listAll = await movieM.all();
             //Danh sách top rating

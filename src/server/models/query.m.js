@@ -63,7 +63,7 @@ module.exports = {
         fieldVal= '%'+ fieldVal+'%'; 
         const table = new pgp.helpers.TableName({table: tableName, schema: schema});
         const query = pgp.as.format('SELECT * FROM $1   WHERE "$2:alias" LIKE $3 ',[ table, fieldName, fieldVal]);
-        console.log(query);
+       
         const rs = await db.any(query);
         return rs;
         

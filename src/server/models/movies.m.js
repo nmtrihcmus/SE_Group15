@@ -78,8 +78,13 @@ module.exports = {
         var rs = [...setArr];
         return rs;
     },
+    searchCol: async (col, input) => {
+        const rs = await query.search(tb, col, input);
+        return rs;
+    },
     distinct: async (col) => {
-        const rs = await query.distinct(tb, col)
+        const rs = await query.distinct(tb, col);
+        return rs;
     },
     maxID: async () => {
         const rs = await query.max(tb, 'id');

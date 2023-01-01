@@ -11,7 +11,7 @@
                 <ul class="dropdown-menu" style="position: absolute; z-index: 2;">
                     
                     {{#each genres}}
-                    <li><a class="dropdown-item" href="/genres/?genres= {{this.genres}}">{{this.genres}}</a></li>
+                    <li><a class="dropdown-item" href="/genre?genre={{this.genres}}&page=1" >{{this.genres}}</a></li>
 
                     {{/each}}
                 </ul>
@@ -24,7 +24,7 @@
                 <ul class="dropdown-menu" style="position: absolute; z-index: 2;">
                     
                     {{#each country}}
-                    <li><a class="dropdown-item" href="/country/?country= {{this.country}}">{{this.country}}</a></li>
+                    <li><a class="dropdown-item" href="/country?country={{this.country}}&page=1">{{this.country}}</a></li>
 
                     {{/each}}
                 </ul>
