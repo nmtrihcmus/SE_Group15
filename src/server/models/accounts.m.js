@@ -34,7 +34,22 @@ module.exports = {
         return count;
     },
 
-    update: async (user) => {
+    filterByName: async (username) => {
+        let user = await query.all(tb);
+        let us = user.filter((user) => user.username.includes(username))
+        return us;
+    },
 
-    }
+    update: async (username, newInfo) => {
+        try {
+            let q1 = await db.none('UPDATE "Accounts" SET "password" = $1 WHERE "username" = $2', [newInfo.password, username])
+            let q2 = await db.none('UPDATE "Accounts" SET "fullname" = $1 WHERE "username" = $2', [newInfo.fullname, username])
+            let q3 = await db.none('UPDATE "Accounts" SET "email" = $1 WHERE "username" = $2', [newInfo.email, username])
+            let q4 = await db.none('UPDATE "Accounts" SET "username" = $1 WHERE "username" = $2', [newInfo.username, username])
+            return true;
+        }
+        catch {
+            return false;
+        }
+    },
 };
