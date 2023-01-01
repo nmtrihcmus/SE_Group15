@@ -108,10 +108,19 @@ async function list(){
     }
 
 };
+var curPage = 1;
 
-async function loadPage(page){
+async function loadPage(page = 1){
+    var url = location.href;
+    console.log(url);
+    var pag = document.getElementsByClassName('page-item')[curPage-1];
+    console.log(pag);
+    pag.classList.remove('active');
+    curPage = page;
+    var newPage = document.getElementsByClassName('page-item')[curPage-1];
+    newPage.classList.add('active');
     
-    const res = await fetch(`/topRating/page/?page=${page}`);
+    const res = await fetch(`${url}/page/?page=${page}`);
     const data = await res.json();
     console.log(data.total);
    
@@ -120,6 +129,7 @@ async function loadPage(page){
     });
     var listMovies = document.getElementsByClassName('cur-page')[0];
     listMovies.innerHTML='';
+   
 
     var card = `<div class="card position-relative" style="width: 18rem">
     <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" class="card-img-top" alt="poster">

@@ -11,4 +11,6 @@ route.get('/updateMovie/:id', movieC.updateMoviePage);
 route.post('/updateMovie/:id', movieC.updateMovie);
 route.get('/topRating',listC.topRatingPage);
 route.get('/topRating/page',listC.topRatingPageQuery);
-module.exports = route;
+route.get('/newMovie',listC.newMoviePage);
+route.get('/newMovie/page',listC.newMoviePageQuery);
+module.exports = route; 
