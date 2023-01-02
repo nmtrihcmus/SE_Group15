@@ -263,9 +263,20 @@ class movieC {
             });
         }
     };
-
+    //Render kết quả tìm kiếm phim
     async search(req, res, next) {
         try {
+            const country = await movieM.distinct('country');
+            const genres = await movieM.distinct('genres');
+            
+            const listAll = await movieM.all();
+            var favMovie = listAll.sort((a, b)=>{return b.favCount-a.favCount}).slice(0,6);
+            for (let i = 0; i < 6; i++) {
+                var e = favMovie[i];
+                e['stt']=i+1;
+
+            }
+
             var input = req.body.input;//Từ khóa tìm kiếm
             var rsYear = [];
             //Tìm kiếm theo năm
@@ -312,7 +323,10 @@ class movieC {
                     category: "result search",
                     listMovie: list,
                     loggedIn: true,
-                    isAdmin: req.session.isAdmin
+                    isAdmin: req.session.isAdmin,
+                    favMovie: favMovie,
+                    genres: genres,
+                    country: country
 
                 })
             }
@@ -323,7 +337,10 @@ class movieC {
                 nPage: count,
                 category: "result search",
                 listMovie: list,
-                loggedIn: false
+                loggedIn: false,
+                favMovie: favMovie,
+                genres: genres,
+                country: country
                
             })
 

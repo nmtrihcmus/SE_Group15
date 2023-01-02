@@ -22,7 +22,12 @@ class homeC {
             
 
             var favMovie  = listAll.sort((a, b)=>{return b.favCount-a.favCount;}).slice(0,6);
-          
+            for (let i = 0; i < 6; i++) {
+                var e = favMovie[i];
+                e['stt']=i+1;
+
+            }
+            
             
             
            
