@@ -1,23 +1,11 @@
 <div class="list-movies-update">
     {{#each data}}
-    {{!-- <div class="movie">
-        <a href="#">
-            <div class="card position-relative">
-                <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" class="card-img-top"
-                    alt="poster">
-                <div class="episode">
-                    99+
-                </div>
-            </div>
-        </a>
-        <h5 class="">Title</h5>
-    </div> --}}
     <div class="movie">
         <a href="/updateMovie/{{../page}}/{{id}}">
             <div class="card position-relative">
                 <img src={{img}} class="card-img-top" alt="poster">
                 <div class="episode">
-                    99+
+                    {{id}}
                 </div>
             </div>
             <h5 class="">{{title}}</h5>
