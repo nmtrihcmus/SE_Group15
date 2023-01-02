@@ -38,7 +38,25 @@
     <div class="d-flex">
 
         <div class="list-movies col-9  " id="list">
-            
+            {{#if input}}
+            <form action="/filter?input={{input}}" method="post" class="filter-search-movie d-flex justify-content-around">
+                <select class="select-genres" name="genre">
+                    <option disabled selected>Thể loại</option>
+                    
+                    {{#each genres}}
+                        <option value="{{this.genres}}">{{this.genres}}</option>
+                    {{/each}}
+                </select>
+                <select class="select-country" name="country" >
+                    <option disabled selected>Quốc gia</option>
+                    {{#each country}}
+                        <option value="{{this.country}}">{{this.country}}</option>
+                    {{/each}}
+                </select>
+                <input type="number" max = '2024'  min = '1900' name="year" placeholder="Năm">
+                <button type="submit">Lọc phim</button>
+            </form>
+            {{/if}}
             
             <div >{{info}}</div>
            
@@ -129,6 +147,18 @@
         font-size: 2em;
         margin: 3px;
 
+    }
+    .filter-search-movie{
+        background: #D9D9D9;
+        border-radius: 3px;
+        width: 60%;
+        margin: auto;
+        padding: 10px 20px;
+    }
+    .filter-search-movie > button {
+        background-color: #EEE744;
+        border: none;
+        padding: 5px;
     }
 </style>
 

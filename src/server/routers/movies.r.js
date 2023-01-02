@@ -6,6 +6,9 @@ const listC = require('../controllers/list.c');
 
 route.post('/search', movieC.search);
 route.post('/search/page', movieC.searchPage);
+route.post('/filter', movieC.filterSearchMovie);
+route.post('/filter/page', movieC.filterSearch);
+
 route.get('/addMovie', movieC.addMoviePage);
 route.post('/addMovie', movieC.addMovie);
 route.get('/updateMovie/:page', movieC.updateMovie_listPage);

@@ -278,14 +278,18 @@ class movieC {
             }
 
             var input = req.body.input;//Từ khóa tìm kiếm
+            
             var rsYear = [];
-            //Tìm kiếm theo năm
-            if(parseInt(input)>1900 && parseInt(input)<2024){
-                rsYear = await movieM.findByYear(parseInt(input));
-                
+            var rsStr = [];
+            if(input){
+                //Tìm kiếm theo năm
+                if(parseInt(input)>1900 && parseInt(input)<2024){
+                    rsYear = await movieM.findByYear(parseInt(input));
+                    
+                }
+                //Tìm kiếm theo chuỗi
+                rsStr = await movieM.searchMovie(input);
             }
-            //Tìm kiếm theo chuỗi
-            var rsStr = await movieM.searchMovie(input);
             //Danh sách phim theo kết quả tìm kiếm
             var rs = [...rsYear, ...rsStr];
             
@@ -318,6 +322,7 @@ class movieC {
                 return res.render('listMovie', {
                     input: input, //Từ khóa tìm kiếm
                     info: info,
+                    curPage: 1,
                     total: rs.length,
                     nPage: count,
                     category: "result search",
@@ -333,6 +338,7 @@ class movieC {
             return res.render('listMovie', {
                 input: input,//Từ khóa tìm kiếm
                 info: info,
+                curPage: 1,
                 total: rs.length,
                 nPage: count,
                 category: "result search",
@@ -383,6 +389,183 @@ class movieC {
             next(error);
         }
     };
+    //Lọc phim sau khi tìm kiếm
+    async filterSearchMovie(req, res, next) {
+        try {
+
+            const country = await movieM.distinct('country');
+            const genres = await movieM.distinct('genres');
+            
+            const listAll = await movieM.all();
+            var favMovie = listAll.sort((a, b)=>{return b.favCount-a.favCount}).slice(0,6);
+            for (let i = 0; i < 6; i++) {
+                var e = favMovie[i];
+                e['stt']=i+1;
+
+            }
+            console.log("============ filter   searchPage");
+            console.log("req.body: ", req.body);
+            var input = req.query.input;//Từ khóa tìm kiếm
+            
+            var rsYear = [];
+            //Tìm kiếm theo năm
+            if(parseInt(input)>1900 && parseInt(input)<2024){
+                rsYear = await movieM.findByYear(parseInt(input));
+                
+            }
+            //Tìm kiếm theo chuỗi
+            var rsStr = await movieM.searchMovie(input);
+            //Kết quả sau khi tìm kiếm
+            var rs = [...rsYear, ...rsStr];
+            //Lọc phim
+            var yearInput = "";
+            if(req.body.year){
+               yearInput =  req.body.year
+            }
+            var genreInput = "";
+            if(req.body.genre){
+                genreInput =  req.body.genre
+            }
+            var countryInput = "";
+            if(req.body.country){
+                countryInput =  req.body.country
+             }
+            console.log(yearInput);
+            console.log(genreInput);
+            console.log(countryInput);
+
+            const PER_PAGE = 9;
+            //Danh sách phim theo trang
+            var listMovie = rs;
+            if(yearInput){
+                listMovie = listMovie.filter(item => item.year == yearInput );
+            }
+            if(genreInput){
+                listMovie = listMovie.filter(item => item.genres == genreInput );
+            }
+            if(countryInput){
+                listMovie = listMovie.filter(item => item.country == countryInput );
+            }
+
+            console.log("listMovie, : ", listMovie);
+
+            var info ='';
+            if(listMovie.length==0){
+                info = "Không tìm thấy thông tin phim trùng khớp";
+                
+            }
+            
+            var page = listMovie.slice(0, 9);
+            
+            var list = [];
+            for (let i = 0; i < page.length; i+=3) {
+                var row = [];
+                row = page.slice(i, i+3);
+                list.push(row);
+            }
+            //Số lượng trang 
+            var nPage =  Math.ceil(listMovie.length/PER_PAGE);
+        
+            var count = []; //Danh sách phân trang (mặc định có trang = 1, nên bắt đầu thêm từ 2)
+            for (let i = 1; i < nPage; i++) {
+                count.push(i+1);
+                
+            }
+            var inputArr = input +','+yearInput +','+  genreInput +','+countryInput;
+            console.log(inputArr);
+            if (req.session.username) {
+                return res.render('listMovie', {
+                    input: inputArr, //Từ khóa tìm kiếm
+                    info: info,
+                    curPage: 1,
+                    total: listMovie.length,
+                    nPage: count,
+                    category: "result filter search",
+                    listMovie: list,
+                    loggedIn: true,
+                    isAdmin: req.session.isAdmin,
+                    favMovie: favMovie,
+                    genres: genres,
+                    country: country
+
+                })
+            }
+            return res.render('listMovie', {
+                input: inputArr,//Từ khóa tìm kiếm
+                info: info,
+                curPage: 1,
+                total: rs.length,
+                nPage: count,
+                category: "result filter search",
+                listMovie: list,
+                loggedIn: false,
+                favMovie: favMovie,
+                genres: genres,
+                country: country
+               
+            })
+
+            
+        }
+        catch (error) {
+            next(error);
+        }
+    };
+    //API trả về dữ liệu cho client thông tin filter movie theo trang
+    async filterSearch(req, res, next) {
+        try {
+           
+          
+            var curPage = req.query.page;
+            var input = req.body.input;//Chuỗi Từ khóa tìm kiếm
+            var arr = input.split(",");//Trong đó : 0: từ khóa input, 1:year, 2:genre, 3:country
+
+            
+            var rsYear = [];
+            //Tìm kiếm theo năm
+            if(parseInt(arr[0])>1900 && parseInt(arr[0])<2024){
+                rsYear = await movieM.findByYear(parseInt(arr[0]));
+                
+            }
+            //Tìm kiếm theo chuỗi
+            var rsStr = await movieM.searchMovie(arr[0]);
+            //Kết quả sau khi tìm kiếm
+            var rs = [...rsYear, ...rsStr];
+            //Lọc phim
+            var yearInput = arr[1];
+            var genreInput = arr[2];
+            var countryInput = arr[3];
+          
+
+            const PER_PAGE = 9;
+            //Danh sách phim theo trang
+            var listMovie = rs;
+            if(yearInput){
+                listMovie = listMovie.filter(item => item.year == yearInput );
+            }
+            if(genreInput){
+                listMovie = listMovie.filter(item => item.genres == genreInput );
+            }
+            if(countryInput){
+                listMovie = listMovie.filter(item => item.country == countryInput );
+            }
+            var pageList= listMovie.slice((curPage-1)*PER_PAGE, curPage*PER_PAGE);
+
+            res.send({
+                total: listMovie.length,
+                curPage: curPage,
+                category: "result filter search",
+                listMovie: pageList
+            })
+        
+            
+            
+        }
+        catch (error) {
+            next(error);
+        }
+    };
+
     async deleteMovie(req, res, next) {
         try {
             if (req.session.username && req.session.isAdmin) {

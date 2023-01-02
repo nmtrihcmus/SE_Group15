@@ -121,14 +121,28 @@ async function loadPage( page = 1){
     var options = '';
     var data = '';
     if(input.textContent){
-        options = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({input: input.textContent, page: page})
-        };
+        if(location.pathname =='/filter'){
+            console.log("vao filter");
+            options = {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({input: input.textContent, page: page})
+            };
+            
+            const res = await fetch(`/filter/page/?page=${page}`, options);
+            data = await res.json();
+        }else{
+            options = {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({input: input.textContent, page: page})
+            };
+            
+            const res = await fetch(`${url}/page/?page=${page}`, options);
+            data = await res.json();
+        }
         
-        const res = await fetch(`${url}/page/?page=${page}`, options);
-        data = await res.json();
+        
     }else{
         const res = await fetch(`${url}/page/?page=${page}`);
         data = await res.json();
@@ -171,11 +185,68 @@ async function loadPage( page = 1){
     }
 }
 
-
-function addOne(event, index){
-    console.log("index = ", index);
-    console.log(event.target);
+function loadPageFilter(event){
+    event.preventDefalut();
+    var input = document.getElementById('detail-input-search');
+    console.log("input.textContent: = ", input.textContent);
+    
+    var year = document.getElementsByName('year')[0];
+    var genre = document.getElementsByName('genre')[0];
+    var country = document.getElementsByName('country')[0];
+    var url = location.href;
+    console.log("path = ", location.pathname);
+    console.log("url = ", url);
+    console.log(year, " ; ", genre.options[genre.selectedIndex].text, " ; ",country.options[country.selectedIndex].text , " ; ", );
+    // curPage = page;
     
     return;
+    // var options = '';
+    // var data = '';
 
+    // if(input.textContent  ){
+    //     options = {
+    //         method: 'POST',
+    //         headers: {'Content-Type': 'application/json'},
+    //         body: JSON.stringify({input: input.textContent, page: page})
+    //     };
+        
+    //     const res = await fetch(`/filter/input=${input}&page=${page}`, options);
+    //     data = await res.json();
+    // }
+    // console.log(data);
+
+    // console.log(data.total);
+   
+    // data.listMovie.forEach(e => {
+    //     console.log("id = ", e.id);
+    // });
+    // var listMovies = document.getElementsByClassName('cur-page')[0];
+    // listMovies.innerHTML='';
+   
+   
+    
+    // for (let i = 0; i < data.listMovie.length ; i+=3) {
+    //     var row = document.createElement('div');
+    //     row.classList.add('d-flex');
+    //     row.classList.add('flex-row');
+    //     row.classList.add('justify-content-around');
+    //     listMovies.appendChild(row);
+    //     var r = listMovies.childNodes[1];
+       
+    //     for (let index = 0; index < 3; index++) {
+    //         var j = i + index;
+    //         if( j >= data.listMovie.length){
+    //             break;
+    //         }
+    //         var newcard = `<div class="card position-relative" style="width: 18rem">
+    //         <img src="${data.listMovie[j].img}" class="card-img-top" alt="${data.listMovie[j].id}"> <div class="episode"> ${data.listMovie[j].id}</div> </div>
+    //         <h5 class=""> ${data.listMovie[j].title}</h5>`;
+    //         var item = document.createElement('div');
+    //         item.innerHTML = newcard;
+    //         row.appendChild(item);
+
+    //     }
+    // }
 }
+
+
