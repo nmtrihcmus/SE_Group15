@@ -79,14 +79,14 @@ class movieC {
     };
     
     async updateMovie(req, res, next) {
+        const id = req.params.id;
         try {
-            const id = req.params.id;
-            const allMovies = await movieM.all();
-            const nMovie = allMovies.length;
+            // const allMovies = await movieM.all();
+            // const nMovie = allMovies.length;
             // console.log(nMovie);
-
+            const movie0 = await movieM.findByID(id);
             var m = {
-                insertDate: new Date(),
+                insertDate: movie0.insertDate,
                 id: id,
                 img: req.body.img,
                 source: req.body.source,
@@ -108,20 +108,22 @@ class movieC {
             } catch (error) {
                 console.log(error);
             }
+            const movie = await movieM.findByID(id);
             return res.render('updateMovie', {
                 title: "Form update movie",
                 notification: "Đã cập nhật phim thành công!",
-                id: req.params.id,
+                movie: movie,
                 loggedIn: true,
                 isAdmin: req.session.isAdmin
             });
         }
         catch (error) {
             console.log(error);
+            const movie = await movieM.findByID(id);
             return res.render('updateMovie', {
                 title: "Form update movie",
                 notification: "Đã cập nhật phim thất bại!",
-                id: req.params.id,
+                movie: movie,
                 loggedIn: true,
                 isAdmin: req.session.isAdmin
             });
@@ -148,14 +150,244 @@ class movieC {
     async updateMoviePage(req, res, next) {
         try {
             if (req.session.username && req.session.isAdmin) {
+                const movie = await movieM.findByID(req.params.id);
                 return res.render('updateMovie', {
                     title: "Form update movie",
-                    id: req.params.id,
+                    movie: movie,
                     loggedIn: true,
-                    isAdmin: req.session.isAdmin
+                    isAdmin: req.session.isAdmin,
+                    page: req.params.page
                 });
             }
             return res.redirect('/home');
+        }
+        catch (error) {
+            next(error);
+        }
+    };
+    
+    async updateMovie_listPage(req, res, next) {
+        try {
+            if (req.session.username && req.session.isAdmin) {
+                const allMovies = await movieM.all();
+                const itemsPerPage = 10;
+                const nMovies = allMovies.length;
+                const maxPage = Math.ceil(nMovies / itemsPerPage);
+                var curPage = parseInt(req.params.page);
+                if (curPage < 1)
+                    curPage = 1;
+                if (curPage > maxPage)
+                    curPage = maxPage;
+                const start = (curPage - 1) * itemsPerPage;
+                const end = curPage * itemsPerPage;
+                return res.render('updateMovie_list', {
+                    title: "Movie list",
+                    loggedIn: true,
+                    isAdmin: req.session.isAdmin,
+                    data: allMovies.slice(start, end),
+                    page: curPage,
+                    maxPage: maxPage
+                });
+            }
+            return res.redirect('/home');
+        }
+        catch (error) {
+            next(error);
+        }
+    };
+    
+    async deleteMovie_listPage(req, res, next) {
+        try {
+            if (req.session.username && req.session.isAdmin) {
+                const allMovies = await movieM.all();
+                const itemsPerPage = 10;
+                const nMovies = allMovies.length;
+                const maxPage = Math.ceil(nMovies / itemsPerPage);
+                var curPage = parseInt(req.params.page);
+                if (curPage < 1)
+                    curPage = 1;
+                if (curPage > maxPage)
+                    curPage = maxPage;
+                const start = (curPage - 1) * itemsPerPage;
+                const end = curPage * itemsPerPage;                
+                return res.render('deleteMovie_list', {
+                    title: "Movie list",
+                    loggedIn: true,
+                    isAdmin: req.session.isAdmin,
+                    data: allMovies.slice(start, end),
+                    page: curPage,
+                    maxPage: maxPage
+                });
+            }
+            return res.redirect('/home');
+        }
+        catch (error) {
+            next(error);
+        }
+    };
+    
+    async deleteMovie(req, res, next) {
+        try {
+            if (req.session.username && req.session.isAdmin) {
+                const id = req.params.id;
+                const del = await movieM.delByID(id);
+                
+                const allMovies = await movieM.all();
+                const itemsPerPage = 10;
+                const nMovies = allMovies.length;
+                const maxPage = Math.ceil(nMovies / itemsPerPage);
+                var curPage = parseInt(req.params.page);
+                if (curPage < 1)
+                    curPage = 1;
+                if (curPage > maxPage)
+                    curPage = maxPage;
+                const start = (curPage - 1) * itemsPerPage;
+                const end = curPage * itemsPerPage;
+                
+                return res.render('deleteMovie_list', {
+                    title: "Movie list",
+                    loggedIn: true,
+                    isAdmin: req.session.isAdmin,
+                    data: allMovies.slice(start, end),
+                    page: curPage,
+                    maxPage: maxPage,
+                    notification: "Xóa phim thành công!"
+                });
+            }
+            return res.redirect('/home');
+        }
+        catch (error) {
+            console.log(error);
+            
+            const allMovies = await movieM.all();
+            const itemsPerPage = 10;
+            const nMovies = allMovies.length;
+            const maxPage = Math.ceil(nMovies / itemsPerPage);
+            var curPage = parseInt(req.params.page);
+            if (curPage < 1)
+                curPage = 1;
+            if (curPage > maxPage)
+                curPage = maxPage;
+            const start = (curPage - 1) * itemsPerPage;
+            const end = curPage * itemsPerPage;
+
+            return res.render('deleteMovie_list', {
+                title: "Movie list",
+                loggedIn: true,
+                isAdmin: req.session.isAdmin,
+                data: allMovies.slice(start, end),
+                page: curPage,
+                maxPage: maxPage,
+                notification: "Xóa phim thất bại!"
+            });
+        }
+    };
+
+    async search(req, res, next) {
+        try {
+            var input = req.body.input;
+            var rsYear = [];
+            if(parseInt(input)>1900 && parseInt(input)<2024){
+                rsYear = await movieM.findByYear(parseInt(input));
+                
+            }
+            var rsStr = await movieM.searchMovie(input);
+            
+            var rs = [...rsYear, ...rsStr];
+            console.log("rs ==================================", rs);
+            var info ='';
+            if(rs.length==0){
+                
+                info = "Không tìm thấy thông tin phim trùng khớp";
+                
+            }
+            
+            
+            const PER_PAGE = 9;
+            
+            var page = rs.slice(0, 9);
+            console.log("========================= page = ", page );
+            var list = [];
+            for (let i = 0; i < page.length; i+=3) {
+                var row = [];
+                row = page.slice(i, i+3);
+                list.push(row);
+            }
+            
+            var nPage =  Math.ceil(rs.length/PER_PAGE);
+        
+            var count = [];
+            for (let i = 1; i < nPage; i++) {
+                count.push(i+1);
+                
+            }
+            if (req.session.username) {
+                return res.render('listMovie', {
+                    input: input,
+                    info: info,
+                    total: rs.length,
+
+                    nPage: count,
+                    category: "result search",
+                    listMovie: list,
+                    loggedIn: true,
+                    isAdmin: req.session.isAdmin
+
+                })
+            }
+            return res.render('listMovie', {
+                input: input,
+                info: info,
+                total: rs.length,
+
+                nPage: count,
+                category: "result search",
+                listMovie: list,
+                loggedIn: false
+               
+            })
+
+            
+        }
+        catch (error) {
+            next(error);
+        }
+    };
+    async searchPage(req, res, next) {
+        try {
+            console.log("searchPage");
+            var curPage = req.query.page;
+            var input = req.body.input;
+            console.log(req.body);
+            var rsYear = [];
+            if(parseInt(input)>1900 && parseInt(input)<2024){
+                rsYear = await movieM.findByYear(parseInt(input));
+                
+            }
+            var rsStr = await movieM.searchMovie(input);
+            
+            var rs = [...rsYear, ...rsStr];
+            console.log("rs ==================================", rs);
+            
+            
+            
+            const PER_PAGE = 9;
+            
+            var page = rs.slice(0, 9);
+            console.log("========================= page = ", page );
+            
+            
+        
+           
+            var listMovie = rs.slice((curPage-1)*PER_PAGE, curPage*PER_PAGE);
+            res.send({
+                total: rs.length,
+                curPage: curPage,
+                category: "result search",
+                listMovie: listMovie
+            })
+
+            
         }
         catch (error) {
             next(error);

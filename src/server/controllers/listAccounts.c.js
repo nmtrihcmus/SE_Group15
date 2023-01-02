@@ -14,7 +14,7 @@ class listAccounts {
                     isAdmin: req.session.isAdmin
                 });
             }
-            res.redirect('/login');
+            res.redirect('/home');
         }
         catch (error) {
             next(error);
@@ -42,7 +42,7 @@ class listAccounts {
                 }
 
             }
-            res.redirect('/login');
+            res.redirect('/home');
         }
         catch (error) {
             next(error);
@@ -64,7 +64,7 @@ class listAccounts {
                         isAdmin: req.session.isAdmin
                     })
             }
-            res.redirect('/login');
+            res.redirect('/home');
         }
         catch (error) {
             next(error);
