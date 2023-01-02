@@ -93,5 +93,10 @@ module.exports = {
     maxDate: async () => {
         const rs = await query.max(tb, 'insertDate');
         return rs;
+    },
+    //test
+    findByIDtest: async (id) => { 
+        const rs = await query.any(tb, 'id', id)
+        return rs;
     }
 };

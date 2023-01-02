@@ -1,0 +1,186 @@
+<style>
+    h3 {
+        color: #fff;
+    }
+
+    .btn {
+        color: #fff;
+        font-size: 24px;
+    }
+
+    .btn:focus {
+        background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;
+    }
+
+    .btn:hover {
+        color: blueviolet;
+    }
+
+    img {
+        width: 3em;
+    }
+
+    h4 {
+        margin: 0;
+        color: #fff;
+    }
+
+    h4 img {
+        width: 1.5em;
+    }
+
+    form {
+        text-align: center;
+        margin-bottom: 2em;
+    }
+
+    label {
+        font-size: 1.5em;
+    }
+
+    input {
+        margin-bottom: 1em;
+        font-size: 2em;
+        text-align: center;
+        border-radius: 5px;
+        border: none;
+    }
+
+    .episode {
+        background-color: #D12D2D;
+        color: #fff;
+        position: absolute;
+        width: 60px;
+        border-radius: 3px;
+        padding: 2px 0px 2px 4px;
+        top: 5px;
+        left: 10px;
+    }
+</style>
+
+<div class="d-flex flex-row mb-3 h-100 ">
+    <div class="card col-3 bg-dark">
+        <div class="card-body">
+            <div class="d-flex flex-row">
+                <img src="/img/user.svg" alt="">
+                <button class="w-100 btn" onclick="loadProfile()">Profile</button>
+            </div>
+            <div class="d-flex flex-row">
+                <img src="/img/Favorite_fill.svg" alt="">
+                <button class="w-100 btn" onclick="loadFavorite()">My Favorites</button>
+            </div>
+            <div class="d-flex flex-row">
+                <img src="/img/Sertificate.svg" alt="">
+                <button class="w-100 btn" onclick="loadFormUpdate()">Update Profile</button>
+            </div>
+        </div>
+    </div>
+    <div class="card col-9 bg-secondary type-section">
+        {{#if update}}
+        <h4>
+            <img src="/img/Sertificate.svg" alt="">
+            Update Profile
+        </h4>
+        <div class="card-body">
+            <form action="/profile" method="post">
+                <label for="fullname">Họ và tên: </label>
+                <div>
+                    <input name="fullname" id="fullname" type="text" required value="{{user.fullname}}">
+                </div>
+                <label for="email">Email: </label>
+                <div>
+                    <input name="email" id="email" type="email" required value="{{user.email}}">
+                </div>
+                <label for="pw">Mật khẩu: </label>
+                <div>
+                    <input name="pw" id="pw" required type="password">
+                </div>
+                <label for="pwconfirm">Xác nhận mật khẩu: </label>
+                <div>
+                    <input name="pwconfirm" id="pwconfirm" required type="password">
+                </div>
+
+                <p style="color: red; display: block; margin: 0 0 2em 0;"> {{notification}} </p>
+                <button type="submit" class="btn btn-primary">Cập nhật</button>
+            </form>
+        </div>
+        {{/if}}
+    </div>
+
+</div>
+
+<script>
+    loadProfile();
+    function loadProfile() {
+        $('.type-section').html('');
+        var item = `<h4>
+                <img src="/img/user.svg" alt="">
+            Profile
+            </h4>
+        <div class="card-body">
+            <h3>Full name: {{user.fullname}}</h3>
+            <hr>
+            <h3>Username: {{user.username}}</h3>
+            <hr>
+            <h3>Email: {{user.email}}</h3>
+        </div>`
+        $('.type-section').html(item);
+    }
+
+    function loadFavorite() {
+        $('.type-section').html('');
+        var item = `
+            <h4>
+                <img src="/img/Favorite_fill.svg" alt="">
+            My Favorites
+            </h4>
+            
+            <div class="d-flex flex-row flex-wrap justify-content-evenly mt-4">
+                    {{#each favoriteMovies}}
+                    <div>
+                        <div class="card position-relative mt-4" style="width: 24rem" id="{{id}}">
+                            <img src="{{img}}" class="card-img-top" alt="{{id}}">
+                            <div class="episode">
+                                {{id}}
+                            </div>
+                        </div>
+                        <h5 style="color: #fff">{{title}}</h5>
+                    </div>
+                    {{/each}}
+            </div>`
+        
+        $('.type-section').html(item);
+    }
+
+    function loadFormUpdate() {
+        $('.type-section').html('');
+        var item = `<h4>
+            <img src="/img/Sertificate.svg" alt="">
+            Update Profile
+        </h4>
+        <div class="card-body">
+            <form action="/profile" method="post">
+                <label for="fullname">Họ và tên: </label>
+                <div>
+                    <input name="fullname" id="fullname" type="text"  required value="{{user.fullname}}">
+                </div>
+                <label for="email">Email: </label>
+                <div>
+                    <input name="email" id="email" type="email"  required value="{{user.email}}">
+                </div>
+                <label for="pw">Mật khẩu: </label>
+                <div>
+                    <input name="pw" id="pw" required type="password">
+                </div>
+                <label for="pwconfirm">Xác nhận mật khẩu: </label>
+                <div>
+                    <input name="pwconfirm" id="pwconfirm" required type="password">
+                </div>
+
+                <p style="color: red; display: block; margin: 0 0 2em 0;"> {{notification}} </p>
+                <button type="submit" class="btn btn-primary">Cập nhật</button>
+            </form>
+        </div>`
+        $('.type-section').html(item);
+    }
+</script>

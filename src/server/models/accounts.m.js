@@ -3,6 +3,7 @@ const pgp = require('pg-promise')(initOptions);
 
 const cn = require('../configs/cnStr');
 const query = require('./query.m');
+const movieM = require('./movies.m');
 const db = pgp(cn);
 const tb = 'Accounts'
 
@@ -52,4 +53,22 @@ module.exports = {
             return false;
         }
     },
+
+    getFavoriteMovies: async (username) => {
+        const movies = await query.any('favoriteMovies', 'username', username);
+        let Ids = [];
+        for (let element of movies)
+            Ids.push(element.movieId)
+        let favoriteMovies = []
+        for (let Id of Ids) {
+            try {
+                let infoMovie = await movieM.findByID(Id);
+                favoriteMovies.push(infoMovie);
+            }
+            catch {
+                console.log("Khong tim thay", Id);
+            }
+        }
+        return favoriteMovies;
+    }
 };
