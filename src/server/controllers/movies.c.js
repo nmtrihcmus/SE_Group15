@@ -1,3 +1,4 @@
+const accountsM = require('../models/accounts.m');
 const movieM = require('../models/movies.m');
 
 class movieC {
@@ -78,9 +79,9 @@ class movieC {
                 country: req.body.country,
                 year: req.body.year,
                 synopsis: req.body.synopsis,
-                rating: 0,
-                ratingCount: 0,
-                favCount: 0
+                rating: movie0.rating,
+                ratingCount: movie0.ratingCount,
+                favCount: movie0.favCount
             }
             
             try {
@@ -637,7 +638,24 @@ class movieC {
                 e['stt'] = i + 1;
             }
             
+            const allComment = await movieM.getComment(id);
+
+            let comment = [];
+            for (let element of allComment) {
+                var author = await accountsM.byName(element.username);
+                var x = {
+                    author: author.fullname,
+                    content: element.comment
+                }
+                comment.push(x);
+            }
+
+            
             if (req.session.username) {
+                const ratingInfo = await movieM.getRatingInfo(req.session.username, id);
+                const rating = ratingInfo.length ? ratingInfo[0].rating : 0;
+                const isFav = await movieM.checkFavMovie(req.session.username, id);
+                const us = await accountsM.byName(req.session.username);
                 return res.render('detailMovie', {
                     title: `Phim: ${movie.title}`,
                     loggedIn: true,
@@ -646,7 +664,10 @@ class movieC {
                     country: country,
                     genres: genres,
                     movie: movie,
-                    rating: 5
+                    rating: rating,
+                    isFav: isFav,
+                    curUser: us.fullname,
+                    comment: comment
                 })
             }
             return res.render('detailMovie', {
@@ -656,13 +677,392 @@ class movieC {
                 country: country,
                 genres: genres,
                 movie: movie,
-                rating: 5
+                comment: comment
             })
         }
         catch (err) {
             next(err);
         }
-    }
+    };
+    
+    async ratingMovie(req, res, next) {
+        try {
+            const id = req.params.id;
+            
+            let movie = await movieM.findByID(id);
+            var m = {
+                insertDate: movie.insertDate,
+                id: id,
+                img: movie.img,
+                source: movie.source,
+                title: movie.title,
+                director: movie.director,
+                cast: movie.cast,
+                genres: movie.genres,
+                country: movie.country,
+                year: movie.year,
+                synopsis: movie.synopsis,
+                rating: movie.rating,
+                ratingCount: movie.ratingCount,
+                favCount: movie.favCount
+            }
+        
+            const ratingInfo = await movieM.getRatingInfo(req.session.username, id);
+            if (ratingInfo.length == 0) {
+                const data = {
+                    username: req.session.username,
+                    movieId: req.params.id,
+                    rating: req.body.ratingPoint
+                }
+                const addRating = accountsM.addRatingInfo(data);
+                m.rating = (parseFloat(m.rating) * parseInt(m.ratingCount) + parseInt(req.body.ratingPoint)) / parseInt((m.ratingCount + 1));
+                if (m.rating > 10)
+                    m.rating = 10;
+                m.rating = Math.round(m.rating * 100) / 100;
+                m.ratingCount = parseInt(m.ratingCount) + 1;
+            }
+            else { 
+                const updateRating = accountsM.updateRatingInfo(req.session.username, id, req.body.ratingPoint);
+                m.rating = ((parseFloat(m.rating) * parseInt(m.ratingCount)) - parseInt(ratingInfo[0].rating) + parseInt(req.body.ratingPoint)) / parseInt(m.ratingCount);
+                if (m.rating > 10)
+                    m.rating = 10;
+                m.rating = Math.round(m.rating * 100) / 100;
+            }
+            
+            try {
+                const curMovie = await movieM.updateMovie(m, id)
+
+            } catch (error) {
+                console.log(error);
+            }
+            
+            movie = await movieM.findByID(id);
+            const country = await movieM.distinct('country');
+            const genres = await movieM.distinct('genres');
+            const listAll = await movieM.all();
+            var favMovie = listAll.sort((a, b) => { return b.favCount - a.favCount }).slice(0, 6);
+            for (let i = 0; i < 6; i++) {
+                var e = favMovie[i];
+                e['stt'] = i + 1;
+            }
+            
+            const isFav = await movieM.checkFavMovie(req.session.username, id);
+            const us = await accountsM.byName(req.session.username);
+            
+            const allComment = await movieM.getComment(id);
+
+            let comment = [];
+            for (let element of allComment) {
+                var author = await accountsM.byName(element.username);
+                var x = {
+                    author: author.fullname,
+                    content: element.comment
+                }
+                comment.push(x);
+            }
+
+            return res.render('detailMovie', {
+                title: `Phim: ${movie.title}`,
+                loggedIn: true,
+                isAdmin: req.session.isAdmin,
+                favMovie: favMovie,
+                country: country,
+                genres: genres,
+                movie: movie,
+                rating: req.body.ratingPoint,
+                isFav: isFav,
+                curUser: us.fullname,
+                comment: comment
+            })
+        }
+        catch (err) {
+            next(err);
+        }
+    };
+    
+    async addToFavMovie(req, res, next) {
+        try {
+            const id = req.params.id;
+
+            const favInfo = {
+                username: req.session.username,
+                movieId: id
+            };
+            const addFav = await accountsM.addToFavMovie(favInfo);
+            
+            let movie = await movieM.findByID(id);
+            var m = {
+                insertDate: movie.insertDate,
+                id: id,
+                img: movie.img,
+                source: movie.source,
+                title: movie.title,
+                director: movie.director,
+                cast: movie.cast,
+                genres: movie.genres,
+                country: movie.country,
+                year: movie.year,
+                synopsis: movie.synopsis,
+                rating: movie.rating,
+                ratingCount: movie.ratingCount,
+                favCount: parseInt(movie.favCount)+1
+            }
+            try {
+                const curMovie = await movieM.updateMovie(m, id)
+
+            } catch (error) {
+                console.log(error);
+            }
+
+            movie = await movieM.findByID(id);
+
+            const country = await movieM.distinct('country');
+            const genres = await movieM.distinct('genres');
+            const listAll = await movieM.all();
+            var favMovie = listAll.sort((a, b) => { return b.favCount - a.favCount }).slice(0, 6);
+            for (let i = 0; i < 6; i++) {
+                var e = favMovie[i];
+                e['stt'] = i + 1;
+            }
+            
+            const ratingInfo = await movieM.getRatingInfo(req.session.username, id);
+            const rating = ratingInfo.length ? ratingInfo[0].rating : 0;
+            const us = await accountsM.byName(req.session.username);
+            
+            const allComment = await movieM.getComment(id);
+
+            let comment = [];
+            for (let element of allComment) {
+                var author = await accountsM.byName(element.username);
+                var x = {
+                    author: author.fullname,
+                    content: element.comment
+                }
+                comment.push(x);
+            }
+
+            
+            return res.render('detailMovie', {
+                title: `Phim: ${movie.title}`,
+                loggedIn: true,
+                isAdmin: req.session.isAdmin,
+                favMovie: favMovie,
+                country: country,
+                genres: genres,
+                movie: movie,
+                rating: rating,
+                isFav: true,
+                curUser: us.fullname,
+                comment: comment
+            })
+        }
+        catch (err) {
+            next(err);
+        }
+    };
+    
+    async deleteFromFavMovie(req, res, next) {
+        try {
+            const id = req.params.id;
+
+            const deleteFav = await accountsM.deleteFromFavMovie(req.session.username, id);
+            
+            let movie = await movieM.findByID(id);
+
+            var m = {
+                insertDate: movie.insertDate,
+                id: id,
+                img: movie.img,
+                source: movie.source,
+                title: movie.title,
+                director: movie.director,
+                cast: movie.cast,
+                genres: movie.genres,
+                country: movie.country,
+                year: movie.year,
+                synopsis: movie.synopsis,
+                rating: movie.rating,
+                ratingCount: movie.ratingCount,
+                favCount: parseInt(movie.favCount)-1
+            }
+
+            try {
+                const curMovie = await movieM.updateMovie(m, id)
+
+            } catch (error) {
+                console.log(error);
+            }
+
+            movie = await movieM.findByID(id);
+
+            const country = await movieM.distinct('country');
+            const genres = await movieM.distinct('genres');
+            const listAll = await movieM.all();
+            var favMovie = listAll.sort((a, b) => { return b.favCount - a.favCount }).slice(0, 6);
+            for (let i = 0; i < 6; i++) {
+                var e = favMovie[i];
+                e['stt'] = i + 1;
+            }
+            
+            const ratingInfo = await movieM.getRatingInfo(req.session.username, id);
+            const rating = ratingInfo.length ? ratingInfo[0].rating : 0;
+            const us = await accountsM.byName(req.session.username);
+            
+            const allComment = await movieM.getComment(id);
+
+            let comment = [];
+            for (let element of allComment) {
+                var author = await accountsM.byName(element.username);
+                var x = {
+                    author: author.fullname,
+                    content: element.comment
+                }
+                comment.push(x);
+            }
+
+
+            return res.render('detailMovie', {
+                title: `Phim: ${movie.title}`,
+                loggedIn: true,
+                isAdmin: req.session.isAdmin,
+                favMovie: favMovie,
+                country: country,
+                genres: genres,
+                movie: movie,
+                rating: rating,
+                isFav: false,
+                curUser: us.fullname,
+                comment: comment
+            })
+        }
+        catch (err) {
+            next(err);
+        }
+    };
+    
+    async streamingMovie(req, res, next){
+        try {
+            const id = req.params.id;
+            const movie = await movieM.findByID(id);
+
+            const country = await movieM.distinct('country');
+            const genres = await movieM.distinct('genres');
+            const listAll = await movieM.all();
+            var favMovie = listAll.sort((a, b) => { return b.favCount - a.favCount }).slice(0, 6);
+            for (let i = 0; i < 6; i++) {
+                var e = favMovie[i];
+                e['stt'] = i + 1;
+            }
+            
+            const allComment = await movieM.getComment(id);
+            
+            let comment = [];
+            for (let element of allComment) {
+                var author = await accountsM.byName(element.username);
+                var x = {
+                    author: author.fullname,
+                    content: element.comment
+                }
+                comment.push(x);
+            }
+
+            if (req.session.username) {
+                const ratingInfo = await movieM.getRatingInfo(req.session.username, id);
+                const rating = ratingInfo.length ? ratingInfo[0].rating : 0;
+                const isFav = await movieM.checkFavMovie(req.session.username, id);
+                const us = await accountsM.byName(req.session.username);
+                return res.render('streamMovie', {
+                    title: `Phim: ${movie.title}`,
+                    loggedIn: true,
+                    isAdmin: req.session.isAdmin,
+                    favMovie: favMovie,
+                    country: country,
+                    genres: genres,
+                    movie: movie,
+                    rating: rating,
+                    isFav: isFav,
+                    curUser: us.fullname,
+                    comment: comment
+                })
+            }
+            return res.render('streamMovie', {
+                title: `Phim: ${movie.title}`,
+                loggedIn: false,
+                favMovie: favMovie,
+                country: country,
+                genres: genres,
+                movie: movie,
+                comment: comment
+            })
+        }
+        catch (err) {
+            next(err);
+        }
+    };
+    
+    async commentMovie(req, res, next) {
+        try {
+            const id = req.params.id;
+            const movie = await movieM.findByID(id);
+
+            const country = await movieM.distinct('country');
+            const genres = await movieM.distinct('genres');
+            const listAll = await movieM.all();
+            var favMovie = listAll.sort((a, b) => { return b.favCount - a.favCount }).slice(0, 6);
+            for (let i = 0; i < 6; i++) {
+                var e = favMovie[i];
+                e['stt'] = i + 1;
+            }
+            
+            const curUserComment = req.body.curUserComment;
+            
+            const commentInfo = {
+                time: new Date(),
+                username: req.session.username,
+                movieId: id,
+                comment: curUserComment
+            }
+            
+            const addComment = await movieM.addCommentInfo(commentInfo);
+
+            const allComment = await movieM.getComment(id);
+
+            let comment = [];
+            for (let element of allComment) {
+                var author = await accountsM.byName(element.username);
+                var x = {
+                    author: author.fullname,
+                    content: element.comment
+                }
+                comment.push(x);
+            }
+
+            const ratingInfo = await movieM.getRatingInfo(req.session.username, id);
+            const rating = ratingInfo.length ? ratingInfo[0].rating : 0;
+            const isFav = await movieM.checkFavMovie(req.session.username, id);
+            const us = await accountsM.byName(req.session.username);
+            
+            var layout = 'streamMovie';
+            if (req.url === `/detail/${id}`)
+                layout = 'detailMovie';
+            return res.render(layout, {
+                title: `Phim: ${movie.title}`,
+                loggedIn: true,
+                isAdmin: req.session.isAdmin,
+                favMovie: favMovie,
+                country: country,
+                genres: genres,
+                movie: movie,
+                rating: rating,
+                isFav: isFav,
+                curUser: us.fullname,
+                comment: comment
+            })
+        }
+        catch (err) {
+            next(err);
+        }
+    };
 }
 
 module.exports = new movieC();

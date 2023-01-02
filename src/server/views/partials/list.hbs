@@ -66,7 +66,7 @@
                     <div class="d-flex flex-row justify-content-around">
                         
                        {{#each this}}
-                         <div>
+                         <div onclick="window.location.href='/detail/{{id}}'">
                             <div class="card position-relative " style="width: 18rem" id="{{id}}" onclick="select({{id}})">
                                 <img src="{{img}}" class="card-img-top" alt="{{id}}">
                                 <div class="episode">
@@ -97,7 +97,7 @@
         <div class="bxh col-3" style="background-color:#D9D9D9;">
             <div class="fs-1 m-3" style="color: red;">Bảng xếp hạng</div>
             {{#each favMovie}}
-            <div class="bxh-list m-3 d-flex">
+            <div class="bxh-list m-3 d-flex" onclick="window.location.href='/detail/{{this.id}}'">
                 <h4 class="m-3" style="padding-top: 50px ">{{this.stt}}</h4>
                 <img src="{{this.img}}" alt="{{this.id}}"
                     style="width: 10rem">

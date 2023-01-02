@@ -47,28 +47,52 @@
                     <h4>Quốc gia: {{movie.country}}</h4>
                     <h4>Năm sản xuất: {{movie.year}}</h4>
                     <h4>Rating: {{movie.rating}}/10</h4>
+                    {{#if loggedIn}}
                     <div class="ratingStar">
-                        <img src="" alt="" id="star-1" onmouseover="colorChange(1)" onclick="Rating(1)" onmouseout="resetColor()">
-                        <img src="" alt="" id="star-2" onmouseover="colorChange(2)" onclick="Rating(2)" onmouseout="resetColor()">
-                        <img src="" alt="" id="star-3" onmouseover="colorChange(3)" onclick="Rating(3)" onmouseout="resetColor()">
-                        <img src="" alt="" id="star-4" onmouseover="colorChange(4)" onclick="Rating(4)" onmouseout="resetColor()">
-                        <img src="" alt="" id="star-5" onmouseover="colorChange(5)" onclick="Rating(5)" onmouseout="resetColor()">
-                        <img src="" alt="" id="star-6" onmouseover="colorChange(6)" onclick="Rating(6)" onmouseout="resetColor()">
-                        <img src="" alt="" id="star-7" onmouseover="colorChange(7)" onclick="Rating(7)" onmouseout="resetColor()">
-                        <img src="" alt="" id="star-8" onmouseover="colorChange(8)" onclick="Rating(8)" onmouseout="resetColor()">
-                        <img src="" alt="" id="star-9" onmouseover="colorChange(9)" onclick="Rating(9)" onmouseout="resetColor()">
-                        <img src="" alt="" id="star-10" onmouseover="colorChange(10)" onclick="Rating(10)" onmouseout="resetColor()">
+                        <form action="/rating/{{movie.id}}" method="post">
+                            <input type="hidden" value="0" name="ratingPoint" id="ratingPoint">
+                            <input type="image" src="" id="star-1" onmouseover="colorChange(1)" onclick="Rating(1)" onmouseout="resetColor()"
+                                type="submit" value="1" />
+                            <input type="image" src="" id="star-2" onmouseover="colorChange(2)" onclick="Rating(2)" onmouseout="resetColor()"
+                                type="submit" value="2" />
+                            <input type="image" src="" id="star-3" onmouseover="colorChange(3)" onclick="Rating(3)" onmouseout="resetColor()"
+                                type="submit" value="3" />
+                            <input type="image" src="" id="star-4" onmouseover="colorChange(4)" onclick="Rating(4)" onmouseout="resetColor()"
+                                type="submit" value="4" />
+                            <input type="image" src="" id="star-5" onmouseover="colorChange(5)" onclick="Rating(5)" onmouseout="resetColor()"
+                                type="submit" value="5" />
+                            <input type="image" src="" id="star-6" onmouseover="colorChange(6)" onclick="Rating(6)" onmouseout="resetColor()"
+                                type="submit" value="6" />
+                            <input type="image" src="" id="star-7" onmouseover="colorChange(7)" onclick="Rating(7)" onmouseout="resetColor()"
+                                type="submit" value="7" />
+                            <input type="image" src="" id="star-8" onmouseover="colorChange(8)" onclick="Rating(8)" onmouseout="resetColor()"
+                                type="submit" value="8" />
+                            <input type="image" src="" id="star-9" onmouseover="colorChange(9)" onclick="Rating(9)" onmouseout="resetColor()"
+                                type="submit" value="9" />
+                            <input type="image" src="" id="star-10" onmouseover="colorChange(10)" onclick="Rating(10)" onmouseout="resetColor()"
+                                type="submit" value="10" />
+                        </form>
                     </div>
+                    {{/if}}
                     <h4>Số lượt yêu thích: {{movie.favCount}}</h4>
-                    <button class="favBtn">
-                        Thêm vào danh sách yêu thích
-                    </button>
-                    {{!-- <button class="favBtn">
-                        Xóa khỏi danh sách yêu thích
-                    </button> --}}
+                    {{#if loggedIn}}
+                    {{#if isFav}}
+                    <form action="/deleteFromFavMovie/{{movie.id}}" method="post">
+                        <button class="delFavBtn" type="submit">
+                            Xóa khỏi danh sách yêu thích
+                        </button>
+                    </form>
+                    {{else}}
+                    <form action="/addToFavMovie/{{movie.id}}" method="post">
+                        <button class="favBtn" type="submit">
+                            Thêm vào danh sách yêu thích
+                        </button>
+                    </form>
+                    {{/if}}
+                    {{/if}}
                 </div>                
             </div>
-            <button class="xemBtn">
+            <button class="xemBtn" onclick="window.location.href='/streaming/{{movie.id}}'">
                 Xem phim
             </button>
             <div class="movieSynopsis">
@@ -79,14 +103,52 @@
                     </p>
                 </div>
             </div>   
+            
             <div class="commentSession">
-                <div class="fb-comments" data-href="http://localhost:3000" data-width="100%" data-numposts="3"></div>
-            </div>  
+                {{#if loggedIn}}
+                <div class="user-comment">
+                    <form action="/detail/{{movie.id}}" method="post" class="d-flex align-items-center justify-content-between">
+                        <div class="avt d-flex flex-column align-items-center" style="flex-basis: 15%;">
+                            <img src='/img/User_cicrle_duotone.svg' alt="" width="50%">
+                            <div class="text-center">
+                                <h5>{{curUser}}</h5>
+                            </div>
+            
+                        </div>
+                        <div class="form-group px-4" style="flex-basis: 75%;">
+                            <label for="inputlg">Để lại bình luận</label>
+                            <input class="form-control input-lg " id="inputlg" name="curUserComment" type="text"
+                                placeholder="Nhập bình luận ở đây">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="flex-basis: 10%; height: 100%">Đăng</button>
+                    </form>
+                </div>
+                {{/if}}
+                <div class="comment-display">
+                    {{#each comment}}
+                    <div class="d-flex align-items-center justify-content-between comment">
+                        <div class="avt d-flex flex-column align-items-center" style="flex-basis: 15%;">
+                            <img src='/img/User_cicrle_duotone.svg' alt="" width="50%">
+                            <div class="text-center">
+                                <h5>{{author}}</h5>
+                            </div>
+                        </div>
+                        <div class="px-4" style="flex-basis: 85%;">
+                            <p>
+                                {{content}}
+                            </p>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            
+            </div>
+            
         </div>
         <div class="bxh col-3" style="background-color:#D9D9D9;">
             <div class="fs-1 m-3" style="color: red;">Bảng xếp hạng</div>
             {{#each favMovie}}
-            <div class="bxh-list m-3 d-flex">
+            <div class="bxh-list m-3 d-flex" onclick="window.location.href='/detail/{{this.id}}'">
                 <h4 class="m-3" style="padding-top: 50px ">{{this.stt}}</h4>
                 <img src="{{this.img}}" alt="{{this.id}}"
                     style="width: 10rem">
@@ -179,6 +241,15 @@
         border: none;
     }
     
+    .delFavBtn{
+        border-radius: 10px;
+        max-width: 220px;
+        min-height: 40px;
+        background-color: #3E63E8;
+        color: #fff;
+        border: none;
+    }
+    
     .xemBtn{
         border-radius: 10px;
         background-color: #FAFF17;
@@ -201,11 +272,44 @@
         margin-right: 30px;
         text-align:justify;
     }
+    
+    .commentSession {
+        width: 95%;
+        border: 2px dotted black;
+        border-radius: 10px;
+        box-sizing: border-box;
+        padding: 20px;
+    }
+    
+    .comment-display{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 20px;
+    }
+    
+    .user-comment{
+        width: 100%;
+        padding-bottom: 20px;
+        border-bottom: 1.5px solid black;
+    }
+    
+    .avt{
+        padding-right: 10px;
+    }
+    
+    .comment{
+        margin-bottom: 20px;
+        text-align:justify;
+        border: 1px dotted black;
+        border-radius: 10px;
+        box-sizing: border-box;
+        padding: 10px;
+    }
 </style>
 
 <script>
     var rating=`{{rating}}`;
-    if(rating){
+    if(rating || rating==0){
        initColor(rating);
     }
     
@@ -235,6 +339,7 @@
     }
     
     function Rating(starId){
+        document.getElementById("ratingPoint").value = starId;
         rating=starId;
         initColor(rating);
     }

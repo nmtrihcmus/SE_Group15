@@ -141,7 +141,7 @@
             
             <div class="d-flex flex-row flex-wrap justify-content-evenly mt-4">
                     {{#each favoriteMovies}}
-                    <div>
+                    <div onclick="window.location.href='/detail/{{id}}'">
                         <div class="card position-relative mt-4" style="width: 24rem" id="{{id}}">
                             <img src="{{img}}" class="card-img-top" alt="{{id}}">
                             <div class="episode">

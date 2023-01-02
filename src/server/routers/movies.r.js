@@ -26,5 +26,11 @@ route.get('/genre', listC.listMovieByGenre);
 route.get('/country', listC.listMovieByCountry);
 
 route.get('/detail/:id', movieC.detailMoviePage);
+route.post('/detail/:id', movieC.commentMovie);
+route.post('/rating/:id', movieC.ratingMovie);
+route.post('/addToFavMovie/:id', movieC.addToFavMovie);
+route.post('/deleteFromFavMovie/:id', movieC.deleteFromFavMovie);
+route.get('/streaming/:id', movieC.streamingMovie);
+route.post('/streaming/:id', movieC.commentMovie);
 
 module.exports = route;

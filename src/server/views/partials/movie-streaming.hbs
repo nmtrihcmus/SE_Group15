@@ -1,0 +1,178 @@
+<div class="homepage">
+    <nav class="navbar mx-auto ">
+
+        <div class="navbar-nav d-flex flex-row justify-content-center align-items-center">
+            <a class="nav-link" href="/list" style="text-decoration: none;">Phim lẻ</a>
+
+            <div class="dropdown nav-link ">
+                <h5 class="dropdown-toggle" data-bs-toggle="dropdown">
+                    Thể loại
+                </h5>
+                <ul class="dropdown-menu" style="position: absolute; z-index: 2;">
+
+                    {{#each genres}}
+                    <li><a class="dropdown-item" href="/genre?genre={{this.genres}}&page=1">{{this.genres}}</a></li>
+
+                    {{/each}}
+                </ul>
+            </div>
+
+            <div class=" dropdown nav-link ">
+                <h5 class="dropdown-toggle" data-bs-toggle="dropdown">
+                    Quốc gia
+                </h5>
+                <ul class="dropdown-menu" style="position: absolute; z-index: 2;">
+
+                    {{#each country}}
+                    <li><a class="dropdown-item" href="/country?country={{this.country}}&page=1">{{this.country}}</a>
+                    </li>
+
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+
+    <div class="d-flex">
+        <div class="col-9">
+            <div class="movieStream">
+                <iframe src="{{movie.source}}" title="{{movie.title}}" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen class="video"></iframe>
+                <h1>{{movie.title}}</h1>
+            </div>
+            <div class="commentSession">
+                {{#if loggedIn}}
+                <div class="user-comment">
+                    <form action="/streaming/{{movie.id}}" method="post" class="d-flex align-items-center justify-content-between">
+                        <div class="avt d-flex flex-column align-items-center" style="flex-basis: 15%;">
+                            <img src='/img/User_cicrle_duotone.svg' alt="" width="50%">
+                            <div class="text-center">
+                                <h5>{{curUser}}</h5>
+                            </div>
+                            
+                        </div>
+                        <div class="form-group px-4" style="flex-basis: 75%;">
+                            <label for="inputlg">Để lại bình luận</label>
+                            <input class="form-control input-lg " id="inputlg" name="curUserComment" type="text" placeholder="Nhập bình luận ở đây">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="flex-basis: 10%; height: 100%">Đăng</button>
+                    </form>
+                </div>
+                {{/if}}
+                <div class="comment-display">
+                    {{#each comment}}
+                    <div class="d-flex align-items-center justify-content-between comment">
+                        <div class="avt d-flex flex-column align-items-center" style="flex-basis: 15%;">
+                            <img src='/img/User_cicrle_duotone.svg' alt="" width="50%">
+                            <div class="text-center">
+                                <h5>{{author}}</h5>
+                            </div>
+                        </div>
+                        <div class="px-4" style="flex-basis: 85%;">
+                            <p >
+                                {{content}}
+                            </p>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+
+            </div>
+        </div>
+        <div class="bxh col-3" style="background-color:#D9D9D9;">
+            <div class="fs-1 m-3" style="color: red;">Bảng xếp hạng</div>
+            {{#each favMovie}}
+            <div class="bxh-list m-3 d-flex" onclick="window.location.href='/detail/{{this.id}}'">
+                <h4 class="m-3" style="padding-top: 50px ">{{this.stt}}</h4>
+                <img src="{{this.img}}" alt="{{this.id}}" style="width: 10rem">
+                <h5 class="m-3">{{this.title}}</h5>
+                <div class="m-3" style="padding-top: 90px ">❤{{this.favCount}}</div>
+            </div>
+            {{/each}}
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .homepage {
+        padding: 0px 20px;
+    }
+
+    .nav-link {
+        padding: 0px 20px;
+
+        color: #fff;
+    }
+
+    .navbar {
+        width: 40%;
+        background-color: #3E63E8;
+    }
+
+    .filter-search-movie {
+        background: #D9D9D9;
+        border-radius: 3px;
+        width: 60%;
+        margin: auto;
+        padding: 10px 20px;
+    }
+
+    .filter-search-movie>button {
+        background-color: #EEE744;
+        border: none;
+        padding: 5px;
+    }
+
+    .movieStream {
+        width: 100%;
+        padding-right: 40px;
+        padding-bottom: 50px;
+    }
+
+    .video {
+        aspect-ratio: 16 / 9;
+        width: 100%;
+        height: auto;
+    }
+
+    .commentSession {
+        width: 95%;
+        border: 2px dotted black;
+        border-radius: 10px;
+        box-sizing: border-box;
+        padding: 20px;
+    }
+    
+    .comment-display{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 20px;
+    }
+    
+    .user-comment{
+        width: 100%;
+        padding-bottom: 20px;
+        border-bottom: 1.5px solid black;
+    }
+    
+    .avt{
+        padding-right: 10px;
+    }
+    
+    .comment{
+        margin-bottom: 20px;
+        text-align:justify;
+        border: 1px dotted black;
+        border-radius: 10px;
+        box-sizing: border-box;
+        padding: 10px;
+    }
+    
+</style>
+
+<script>
+
+</script>

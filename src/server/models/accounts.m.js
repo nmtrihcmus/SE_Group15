@@ -15,7 +15,6 @@ module.exports = {
 
     addAccount: async (user) => {
         const rs = await query.insert(tb, user);
-
         return rs;
 
     },
@@ -70,5 +69,35 @@ module.exports = {
             }
         }
         return favoriteMovies;
+    },
+    
+    addRatingInfo: async (ratingInfo) => {
+        const rs = await query.insert("ratingInfo", ratingInfo);
+        return rs;
+    },
+    
+    updateRatingInfo: async (username, movieId, rating) => {
+        try {
+            const rs = await db.none('UPDATE "ratingInfo" SET "rating" = $1 WHERE "username" = $2 AND "movieId" = $3', [rating, username, movieId]);
+            return true;
+        }
+        catch {
+            return false;
+        }
+    },
+    
+    addToFavMovie: async (favMovie) => {
+        const rs = await query.insert("favoriteMovies", favMovie);
+        return rs;
+    },
+    
+    deleteFromFavMovie: async (username, movieId) => {
+        try {
+            const rs = await db.none('DELETE FROM "favoriteMovies" WHERE "username" = $1 AND "movieId" = $2', [username, movieId]);
+            return true;
+        }
+        catch {
+            return false;
+        }
     }
 };
