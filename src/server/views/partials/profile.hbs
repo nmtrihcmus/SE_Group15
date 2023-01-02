@@ -110,7 +110,11 @@
 </div>
 
 <script>
-    loadProfile();
+    
+    var check= `{{ notification }}`;
+    if (!check)
+       loadProfile();
+       
     function loadProfile() {
         $('.type-section').html('');
         var item = `<h4>
