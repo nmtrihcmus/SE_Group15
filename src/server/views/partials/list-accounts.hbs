@@ -1,0 +1,133 @@
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+<style>
+    .m-2 {
+        background-color: #9FA5D9;
+        padding: 2em;
+    }
+
+
+
+    .title {
+        text-align: center;
+        font-size: 36px;
+        font-weight: 700;
+    }
+
+    .center {
+        margin: auto;
+    }
+
+    .search-box1 {
+        display: inline-block;
+        position: relative;
+    }
+
+    .search-box1 input[type="text"] {
+        border: none;
+        border-radius: 20px;
+        padding: 4px 20px;
+        width: 280px;
+        height: 40px;
+    }
+
+    .search-box1 input[type="text"]:hover {
+        border: 1px solid #000;
+    }
+
+    .search-btn1 {
+        position: absolute;
+        right: 4px;
+        top: 18px;
+        color: #aaa;
+        border-radius: 30px;
+        font-size: 18px;
+        padding: 5px 10px 1px;
+        -webkit-transition: all 200ms ease-in-out;
+        -moz-transition: all 200ms ease-in-out;
+        transition: all 200ms ease-in-out;
+
+    }
+
+    .search-box1 .search-btn1:hover {
+        color: #fff;
+        background-color: #3C4BD1;
+    }
+
+    hr {
+        margin: 28px 0;
+        border: 1px solid #000;
+    }
+
+    .btn-update {}
+
+    .btn-del {
+        margin-left: 24px;
+    }
+
+    thead {
+        background-color: #5675E2;
+        height: 2em;
+        line-height: 2em;
+    }
+
+    tbody {
+        overflow-y: scroll;
+        height: 40px;
+    }
+
+    th, td {
+        vertical-align:  middle !important;
+    }
+</style>
+<div class="d-flex flex-row">
+    <div class="center">
+        <h3 class="title">Danh sách tài khoản</h3>
+    </div>
+    <div class="d-flex search-box1 align-items-center">
+        <form action="/listAccounts/filter" method="post">
+            <input type="text" name="username" placeholder="Nhập tên đăng nhập">
+            <button class='btn btn-link search-btn1'>
+                <i class='glyphicon glyphicon-search'></i>
+            </button>
+        </form>
+    </div>
+
+</div>
+<hr>
+<div class="col-10 offset-1">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Tên đăng nhập</th>
+                <th scope="col">Họ và tên</th>
+                <th scope="col">Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each user}}
+            <tr>
+                <th>{{username}}</th>
+                <td>{{fullname}}</td>
+                <td>{{email}}</td>
+                <td width="20%">
+                    <div class="d-flex d-row">
+                        <form action="/updateAccounts/update" method="post">
+                            <input type="hidden" name="username" value="{{username}}">
+                            <button class="btn btn-light btn-update" type="submit">Cập nhật</button>
+                        </form>
+                        <form action="/listAccounts/del" method="post">
+                            <input type="hidden" name="username" value="{{username}}">
+                            <button class="btn btn-light btn-del" type="submit">Xoá</button>
+                            <small style="color: red">{{notification}}</small>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {{else}}
+            {{/each}}
+
+
+        </tbody>
+    </table>
+</div>

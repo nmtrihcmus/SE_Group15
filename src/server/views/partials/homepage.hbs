@@ -2,11 +2,33 @@
     <nav class="navbar mx-auto ">
 
         <div class="navbar-nav d-flex flex-row  justify-content-center">
-            <a class="nav-link" href="#" >Phim lẻ</a>
-            <a class="nav-link" href="#">Phim bộ</a>
-            <a class="nav-link" href="#">Thể loại</a>
-            <a class="nav-link">Quốc gia</a>
-            <a class="nav-link" href="#">Năm</a>
+            <a class="nav-link" href="/list" >Phim lẻ</a>
+            
+            <div class="dropdown nav-link ">
+                <h5 class="dropdown-toggle" data-bs-toggle="dropdown">
+                    Thể loại
+                </h5>
+                <ul class="dropdown-menu" style="position: absolute; z-index: 2;">
+                    
+                    {{#each genres}}
+                    <li><a class="dropdown-item" href="/genre?genre={{this.genres}}&page=1" >{{this.genres}}</a></li>
+
+                    {{/each}}
+                </ul>
+            </div>
+            
+            <div class=" dropdown nav-link ">
+                <h5 class="dropdown-toggle" data-bs-toggle="dropdown" >
+                    Quốc gia
+                </h5>
+                <ul class="dropdown-menu" style="position: absolute; z-index: 2;">
+                    
+                    {{#each country}}
+                    <li><a class="dropdown-item" href="/country?country={{this.country}}&page=1">{{this.country}}</a></li>
+
+                    {{/each}}
+                </ul>
+            </div>
         </div>
 
 
@@ -38,7 +60,7 @@
                             <div class="card position-relative " style="width: 18rem" id="{{this.id}}" onclick="select({{this.id}})">
                                 <img src="{{this.img}}" class="card-img-top" alt="{{this.id}}">
                                 <div class="episode">
-                                    1
+                                    {{this.id}}
                                 </div>
                             </div>
                             <h5 class="">{{this.title}}</h5>
@@ -57,7 +79,7 @@
                             <div class="card position-relative " style="width: 18rem" id="{{this.id}}" onclick="select({{this.id}})">
                                 <img src="{{this.img}}" class="card-img-top" alt="{{this.id}}">
                                 <div class="episode">
-                                    1
+                                    {{this.id}}
                                 </div>
                             </div>
                             <h5 class="">{{this.title}}</h5>
@@ -70,7 +92,7 @@
                             <div class="card position-relative " style="width: 18rem" id="{{this.id}}" onclick="select({{this.id}})">
                                 <img src="{{this.img}}" class="card-img-top" alt="{{this.id}}">
                                 <div class="episode">
-                                    1
+                                    {{this.id}}
                                 </div>
                             </div>
                             <h5 class="">{{this.title}}</h5>
@@ -82,34 +104,21 @@
         </div>
         <div class="bxh col-3" style="background-color:#D9D9D9;">
             <div class="fs-1 m-3" style="color: red;">Bảng xếp hạng</div>
-            <div class="bxh-list m-3 d-flex">
-                <h4 class="m-3" style="padding-top: 50px ">123</h4>
-                <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" alt="poster"
+            {{#each favMovie }}
+            <div class="bxh-list m-3 d-flex " >
+                <h4 class="m-3" style="padding-top: 50px "  >
+                   {{this.stt}}
+                    
+                </h4>
+                <img src="{{this.img}}" alt="{{this.id}}"
                     style="width: 10rem">
-                <h5 class="m-3">Tên phim</h5>
-                <div class="m-3" style="padding-top: 90px ">❤Tim </div>
+                <h5 class="m-3">{{this.title}}</h5>
+                <div class="m-3" style="padding-top: 90px ">❤{{this.favCount}}</div>
             </div>
-            <div class="bxh-list m-3 d-flex">
-                <h4 class="m-3" style="padding-top: 50px ">123</h4>
-                <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" alt="poster"
-                    style="width: 10rem">
-                <h5 class="m-3">Tên phim</h5>
-                <div class="m-3" style="padding-top: 90px ">❤Tim </div>
-            </div>
-            <div class="bxh-list m-3 d-flex">
-                <h4 class="m-3" style="padding-top: 50px ">123</h4>
-                <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" alt="poster"
-                    style="width: 10rem">
-                <h5 class="m-3">Tên phim</h5>
-                <div class="m-3" style="padding-top: 90px ">❤Tim </div>
-            </div>
-            <div class="bxh-list m-3 d-flex">
-                <h4 class="m-3" style="padding-top: 50px ">123</h4>
-                <img src="https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg" alt="poster"
-                    style="width: 10rem">
-                <h5 class="m-3">Tên phim</h5>
-                <div class="m-3" style="padding-top: 90px ">❤Tim </div>
-            </div>
+            {{/each}}
+            
+            
+            
 
         </div>
     </div>
