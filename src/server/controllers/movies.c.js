@@ -622,6 +622,47 @@ class movieC {
             });
         }
     };
+    
+    async detailMoviePage(req, res, next) {
+        try {
+            const id = req.params.id;
+            const movie = await movieM.findByID(id);            
+            
+            const country = await movieM.distinct('country');
+            const genres = await movieM.distinct('genres');
+            const listAll = await movieM.all();
+            var favMovie = listAll.sort((a, b) => { return b.favCount - a.favCount }).slice(0, 6);
+            for (let i = 0; i < 6; i++) {
+                var e = favMovie[i];
+                e['stt'] = i + 1;
+            }
+            
+            if (req.session.username) {
+                return res.render('detailMovie', {
+                    title: `Phim: ${movie.title}`,
+                    loggedIn: true,
+                    isAdmin: req.session.isAdmin,
+                    favMovie: favMovie,
+                    country: country,
+                    genres: genres,
+                    movie: movie,
+                    rating: 5
+                })
+            }
+            return res.render('detailMovie', {
+                title: `Phim: ${movie.title}`,
+                loggedIn: false,
+                favMovie: favMovie,
+                country: country,
+                genres: genres,
+                movie: movie,
+                rating: 5
+            })
+        }
+        catch (err) {
+            next(err);
+        }
+    }
 }
 
 module.exports = new movieC();

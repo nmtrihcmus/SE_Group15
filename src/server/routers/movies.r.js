@@ -25,4 +25,6 @@ route.get('/genre', listC.listMovieByGenre);
 
 route.get('/country', listC.listMovieByCountry);
 
+route.get('/detail/:id', movieC.detailMoviePage);
+
 module.exports = route;

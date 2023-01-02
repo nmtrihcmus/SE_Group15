@@ -1,0 +1,243 @@
+<div class="homepage">
+    <nav class="navbar mx-auto ">
+
+        <div class="navbar-nav d-flex flex-row justify-content-center align-items-center">
+            <a class="nav-link" href="/list" style="text-decoration: none;">Phim lẻ</a>
+                
+            <div class="dropdown nav-link ">
+                <h5 class="dropdown-toggle" data-bs-toggle="dropdown">
+                    Thể loại
+                </h5>
+                <ul class="dropdown-menu" style="position: absolute; z-index: 2;">
+                    
+                    {{#each genres}}
+                    <li><a class="dropdown-item" href="/genre?genre={{this.genres}}&page=1">{{this.genres}}</a></li>
+
+                    {{/each}}
+                </ul>
+            </div>
+            
+            <div class=" dropdown nav-link ">
+                <h5 class="dropdown-toggle" data-bs-toggle="dropdown" >
+                    Quốc gia
+                </h5>
+                <ul class="dropdown-menu" style="position: absolute; z-index: 2;">
+                    
+                    {{#each country}}
+                    <li><a class="dropdown-item" href="/country?country={{this.country}}&page=1">{{this.country}}</a></li>
+
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        
+    </nav>
+
+    <div class="d-flex">
+        <div class="col-9">            
+            <div class="wrapper d-flex rounded">
+                <div class="movie-poster">
+                    <img src={{movie.img}}  alt="">
+                </div>
+                <div class="movie-info d-flex flex-column">
+                    <h1 class="display-3">{{movie.title}}</h1>
+                    <h4>Đạo diễn: {{movie.director}}</h4>
+                    <h4>Diễn viên: {{movie.cast}}</h4>
+                    <h4>Thể loại: {{movie.genres}}</h4>
+                    <h4>Quốc gia: {{movie.country}}</h4>
+                    <h4>Năm sản xuất: {{movie.year}}</h4>
+                    <h4>Rating: {{movie.rating}}/10</h4>
+                    <div class="ratingStar">
+                        <img src="" alt="" id="star-1" onmouseover="colorChange(1)" onclick="Rating(1)" onmouseout="resetColor()">
+                        <img src="" alt="" id="star-2" onmouseover="colorChange(2)" onclick="Rating(2)" onmouseout="resetColor()">
+                        <img src="" alt="" id="star-3" onmouseover="colorChange(3)" onclick="Rating(3)" onmouseout="resetColor()">
+                        <img src="" alt="" id="star-4" onmouseover="colorChange(4)" onclick="Rating(4)" onmouseout="resetColor()">
+                        <img src="" alt="" id="star-5" onmouseover="colorChange(5)" onclick="Rating(5)" onmouseout="resetColor()">
+                        <img src="" alt="" id="star-6" onmouseover="colorChange(6)" onclick="Rating(6)" onmouseout="resetColor()">
+                        <img src="" alt="" id="star-7" onmouseover="colorChange(7)" onclick="Rating(7)" onmouseout="resetColor()">
+                        <img src="" alt="" id="star-8" onmouseover="colorChange(8)" onclick="Rating(8)" onmouseout="resetColor()">
+                        <img src="" alt="" id="star-9" onmouseover="colorChange(9)" onclick="Rating(9)" onmouseout="resetColor()">
+                        <img src="" alt="" id="star-10" onmouseover="colorChange(10)" onclick="Rating(10)" onmouseout="resetColor()">
+                    </div>
+                    <h4>Số lượt yêu thích: {{movie.favCount}}</h4>
+                    <button class="favBtn">
+                        Thêm vào danh sách yêu thích
+                    </button>
+                    {{!-- <button class="favBtn">
+                        Xóa khỏi danh sách yêu thích
+                    </button> --}}
+                </div>                
+            </div>
+            <button class="xemBtn">
+                Xem phim
+            </button>
+            <div class="movieSynopsis">
+                <h3 class="noidungphim">Nội dung phim</h3>
+                <div class="synopsis">
+                    <p>
+                        {{movie.synopsis}}
+                    </p>
+                </div>
+            </div>   
+            <div class="commentSession">
+                <div class="fb-comments" data-href="http://localhost:3000" data-width="100%" data-numposts="3"></div>
+            </div>  
+        </div>
+        <div class="bxh col-3" style="background-color:#D9D9D9;">
+            <div class="fs-1 m-3" style="color: red;">Bảng xếp hạng</div>
+            {{#each favMovie}}
+            <div class="bxh-list m-3 d-flex">
+                <h4 class="m-3" style="padding-top: 50px ">{{this.stt}}</h4>
+                <img src="{{this.img}}" alt="{{this.id}}"
+                    style="width: 10rem">
+                <h5 class="m-3">{{this.title}}</h5>
+                <div class="m-3" style="padding-top: 90px ">❤{{this.favCount}}</div>
+            </div>
+            {{/each}}
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .homepage {
+        padding: 0px 20px;
+    }
+
+    .nav-link {
+        padding: 0px 20px;
+
+        color: #fff;
+    }
+
+    .navbar {
+        width: 40%;
+        background-color: #3E63E8;
+    }
+
+    .episode {
+        background-color: #D12D2D;
+        color: #fff;
+        position: absolute;
+        width: 60px;
+        border-radius: 3px;
+        padding: 2px 0px 2px 4px;
+        top: 5px;
+        left: 10px;
+    }
+
+    .list-name {
+        color: #3E63E8;
+        font-size: 2em;
+        margin: 3px;
+
+    }
+    .filter-search-movie{
+        background: #D9D9D9;
+        border-radius: 3px;
+        width: 60%;
+        margin: auto;
+        padding: 10px 20px;
+    }
+    .filter-search-movie > button {
+        background-color: #EEE744;
+        border: none;
+        padding: 5px;
+    }
+    
+    .wrapper {
+        margin-right: 30px;
+        background-color: #D9D9D9;
+        margin-bottom: 20px;
+    }
+    
+    .movie-poster{
+        flex-basis: 40%;
+    }
+    
+    .movie-info{
+        flex-basis: 60%;
+    }
+
+    .movie-poster img {
+        max-width: 100%;
+        height: auto;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    a:link {
+        text-decoration: none;
+    }
+    
+    .favBtn{
+        border-radius: 10px;
+        max-width: 220px;
+        min-height: 40px;
+        background-color: #FF005C;
+        color: #fff;
+        border: none;
+    }
+    
+    .xemBtn{
+        border-radius: 10px;
+        background-color: #FAFF17;
+        min-height: 50px;
+        color: black;
+        border: none;
+        font-size: 20px;
+        margin-left: 100px;
+    }
+    
+    .noidungphim{
+        font-weight: bold;
+        text-shadow: 1px 1px 2px gray;
+        padding-top: 20px;
+        padding-bottom: 10px;
+    }
+    
+    .movieSynopsis{
+        margin-bottom: 50px;
+        margin-right: 30px;
+        text-align:justify;
+    }
+</style>
+
+<script>
+    var rating=`{{rating}}`;
+    if(rating){
+       initColor(rating);
+    }
+    
+    function initColor(rating){
+         for (var i = 1; i <= parseInt(rating); i++) {
+            var id = `star-${i}`;
+            const star = document.getElementById(id);
+            star.src = '/img/material-symbols_star.svg';
+        }
+        for (var i = parseInt(rating) + 1; i < 11; i++) {
+            var id = `star-${i}`;
+            const star = document.getElementById(id);
+            star.src = '/img/material-symbols_star_black.svg';
+        }
+    }
+    
+    function colorChange(starId){
+        for(var i=1;i<=parseInt(starId);i++){
+            var id = `star-${i}`;
+            const star=document.getElementById(id);
+            star.src='/img/material-symbols_star.svg';
+        }
+    }
+    
+    function resetColor(){
+        initColor(rating);
+    }
+    
+    function Rating(starId){
+        rating=starId;
+        initColor(rating);
+    }
+    
+</script>
+
