@@ -46,7 +46,7 @@
                     <h4>Thể loại: {{movie.genres}}</h4>
                     <h4>Quốc gia: {{movie.country}}</h4>
                     <h4>Năm sản xuất: {{movie.year}}</h4>
-                    <h4>Rating: {{movie.rating}}/10</h4>
+                    <h4>Rating: {{movie.rating}}/10 ({{movie.ratingCount}} lượt)</h4>
                     {{#if loggedIn}}
                     <div class="ratingStar">
                         <form action="/rating/{{movie.id}}" method="post">
