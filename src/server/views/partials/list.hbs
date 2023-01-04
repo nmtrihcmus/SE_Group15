@@ -68,12 +68,12 @@
                        {{#each this}}
                          <div onclick="window.location.href='/detail/{{id}}'">
                             <div class="card position-relative " style="width: 18rem" id="{{id}}" onclick="select({{id}})">
-                                <img src="{{img}}" class="card-img-top" alt="{{id}}">
+                                <img src="{{img}}" class="card-img-top" style="height: 27rem;" alt="{{id}}">
                                 <div class="episode">
                                     {{id}}
                                 </div>
+                                <h5 class="">{{title}}</h5>
                             </div>
-                            <h5 class="">{{title}}</h5>
                         </div>
 
                        {{/each}}

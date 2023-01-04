@@ -174,9 +174,11 @@ async function loadPage( page = 1){
             if( j >= data.listMovie.length){
                 break;
             }
-            var newcard = `<div class="card position-relative" style="width: 18rem">
-            <img src="${data.listMovie[j].img}" class="card-img-top" alt="${data.listMovie[j].id}"> <div class="episode"> ${data.listMovie[j].id}</div> </div>
-            <h5 class=""> ${data.listMovie[j].title}</h5>`;
+            var newcard = `<div class="card position-relative" style="width: 18rem" onclick="window.location.href='/detail/${data.listMovie[j].id}'">
+            <img src="${data.listMovie[j].img}" class="card-img-top" style="height: 27rem;" alt="${data.listMovie[j].id}"> <div class="episode"> ${data.listMovie[j].id}</div> 
+            <h5 class=""> ${data.listMovie[j].title}</h5>
+            </div>`;
+            
             var item = document.createElement('div');
             item.innerHTML = newcard;
             row.appendChild(item);

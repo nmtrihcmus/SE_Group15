@@ -44,13 +44,13 @@
                 <div class="d-flex flex-row justify-content-around">
                         {{#each firstNew}}
                         <div onclick="window.location.href='/detail/{{this.id}}'">
-                            <div class="card position-relative " style="width: 18rem" id="{{this.id}}" onclick="select({{this.id}})">
-                                <img src="{{this.img}}" class="card-img-top" alt="{{this.id}}">
+                            <div class="card position-relative " style="width: 18rem;" id="{{this.id}}" onclick="select({{this.id}})">
+                                <img src="{{this.img}}" class="card-img-top" style="height: 27rem;" alt="{{this.id}}">
                                 <div class="episode">
                                     {{this.id}}
                                 </div>
+                                <h5 class="">{{this.title}}</h5>
                             </div>
-                            <h5 class="">{{this.title}}</h5>
                         </div>
                         {{/each}}
                     </div>
@@ -58,12 +58,12 @@
                         {{#each secondNew}}
                         <div onclick="window.location.href='/detail/{{this.id}}'">
                             <div class="card position-relative " style="width: 18rem" id="{{this.id}}" onclick="select({{this.id}})">
-                                <img src="{{this.img}}" class="card-img-top" alt="{{this.id}}">
+                                <img src="{{this.img}}" class="card-img-top" style="height: 27rem;" alt="{{this.id}}">
                                 <div class="episode">
                                     {{this.id}}
                                 </div>
+                                <h5 class="">{{this.title}}</h5>
                             </div>
-                            <h5 class="">{{this.title}}</h5>
                         </div>
                         {{/each}}
                     </div>
@@ -77,12 +77,12 @@
                         {{#each firstRow}}
                         <div onclick="window.location.href='/detail/{{this.id}}'">
                             <div class="card position-relative " style="width: 18rem" id="{{this.id}}" onclick="select({{this.id}})">
-                                <img src="{{this.img}}" class="card-img-top" alt="{{this.id}}">
+                                <img src="{{this.img}}" class="card-img-top" style="height: 27rem;" alt="{{this.id}}">
                                 <div class="episode">
                                     {{this.id}}
                                 </div>
+                                <h5 class="">{{this.title}}</h5>
                             </div>
-                            <h5 class="">{{this.title}}</h5>
                         </div>
                         {{/each}}
                     </div>
@@ -90,12 +90,12 @@
                         {{#each secondRow}}
                         <div onclick="window.location.href='/detail/{{this.id}}'">
                             <div class="card position-relative " style="width: 18rem" id="{{this.id}}" onclick="select({{this.id}})">
-                                <img src="{{this.img}}" class="card-img-top" alt="{{this.id}}">
+                                <img src="{{this.img}}" class="card-img-top" style="height: 27rem;" alt="{{this.id}}">
                                 <div class="episode">
                                     {{this.id}}
                                 </div>
-                            </div>
-                            <h5 class="">{{this.title}}</h5>
+                                <h5 class="">{{this.title}}</h5>
+                            </div>           
                         </div>
                         {{/each}}
                     </div>
