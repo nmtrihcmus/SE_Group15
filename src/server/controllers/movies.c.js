@@ -311,7 +311,6 @@ class movieC {
                 
             }
             
-           
     
             var info ='';
             if(rs.length==0){
@@ -379,7 +378,7 @@ class movieC {
     //API danh sách phim tìm kiếm theo trang
     async searchPage(req, res, next) {
         try {
-            console.log("searchPage");
+            
             var curPage = req.query.page; //Số trang hiện tại
             var input = req.body.input;//Từ khóa tìm kiếm
             
@@ -392,7 +391,23 @@ class movieC {
             //Tìm kiếm theo chuỗi
             var rsStr = await movieM.searchMovie(input);
             //Kết quả sau khi tìm kiếm
-            var rs = [...rsYear, ...rsStr];
+            var oldArr = [...rsYear, ...rsStr];
+            
+            var rs = [];
+         
+            for (let i = 0; i < oldArr.length; i++) {
+                var repeat = false;
+                for (let j = 0; j < rs.length; j++) {
+                    if(rs[j].id == oldArr[i].id){
+                        repeat = true;break;
+                    }
+                    
+                }
+                if (!repeat) {
+                    rs.push(oldArr[i]);
+                }
+                
+            }
             const PER_PAGE = 9;
             //Danh sách phim theo trang
             var listMovie = rs.slice((curPage-1)*PER_PAGE, curPage*PER_PAGE);
@@ -423,8 +438,7 @@ class movieC {
                 e['stt']=i+1;
 
             }
-            console.log("============ filter   searchPage");
-            console.log("req.body: ", req.body);
+            
             var input = req.query.input;//Từ khóa tìm kiếm
             
             var rsYear = [];
@@ -436,7 +450,23 @@ class movieC {
             //Tìm kiếm theo chuỗi
             var rsStr = await movieM.searchMovie(input);
             //Kết quả sau khi tìm kiếm
-            var rs = [...rsYear, ...rsStr];
+            var oldArr = [...rsYear, ...rsStr];
+            
+            var rs = [];
+         
+            for (let i = 0; i < oldArr.length; i++) {
+                var repeat = false;
+                for (let j = 0; j < rs.length; j++) {
+                    if(rs[j].id == oldArr[i].id){
+                        repeat = true;break;
+                    }
+                    
+                }
+                if (!repeat) {
+                    rs.push(oldArr[i]);
+                }
+                
+            }
             //Lọc phim
             var yearInput = "";
             if(req.body.year){
@@ -450,9 +480,7 @@ class movieC {
             if(req.body.country){
                 countryInput =  req.body.country
              }
-            console.log(yearInput);
-            console.log(genreInput);
-            console.log(countryInput);
+            
 
             const PER_PAGE = 9;
             //Danh sách phim theo trang
@@ -467,7 +495,7 @@ class movieC {
                 listMovie = listMovie.filter(item => item.country == countryInput );
             }
 
-            console.log("listMovie, : ", listMovie);
+            
 
             var info ='';
             if(listMovie.length==0){
@@ -492,7 +520,7 @@ class movieC {
                 
             }
             var inputArr = input +','+yearInput +','+  genreInput +','+countryInput;
-            console.log(inputArr);
+            
             if (req.session.username) {
                 return res.render('listMovie', {
                     input: inputArr, //Từ khóa tìm kiếm
@@ -550,7 +578,23 @@ class movieC {
             //Tìm kiếm theo chuỗi
             var rsStr = await movieM.searchMovie(arr[0]);
             //Kết quả sau khi tìm kiếm
-            var rs = [...rsYear, ...rsStr];
+            var oldArr = [...rsYear, ...rsStr];
+            
+            var rs = [];
+         
+            for (let i = 0; i < oldArr.length; i++) {
+                var repeat = false;
+                for (let j = 0; j < rs.length; j++) {
+                    if(rs[j].id == oldArr[i].id){
+                        repeat = true;break;
+                    }
+                    
+                }
+                if (!repeat) {
+                    rs.push(oldArr[i]);
+                }
+                
+            }
             //Lọc phim
             var yearInput = arr[1];
             var genreInput = arr[2];
