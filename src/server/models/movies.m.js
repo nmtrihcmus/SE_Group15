@@ -77,8 +77,11 @@ module.exports = {
         const rs5 = await query.search(tb, 'genres', input);
         const rs4 = await query.search(tb, 'cast', input);
         var result = [...rs1,...rs2,...rs3,...rs4,...rs5 ];
+        
+        
         var setArr = new Set(result);
         var rs = [...setArr];
+       
         return rs;
     },
     

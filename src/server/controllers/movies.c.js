@@ -286,14 +286,33 @@ class movieC {
                 //Tìm kiếm theo năm
                 if(parseInt(input)>1900 && parseInt(input)<2024){
                     rsYear = await movieM.findByYear(parseInt(input));
-                    
+                   
                 }
                 //Tìm kiếm theo chuỗi
                 rsStr = await movieM.searchMovie(input);
+                
             }
-            //Danh sách phim theo kết quả tìm kiếm
-            var rs = [...rsYear, ...rsStr];
+            //Danh sách phim theo kết quả tìm kiếm và xóa đi các phần tử trùng
+            var oldArr = [...rsYear, ...rsStr];
             
+            var rs = [];
+         
+            for (let i = 0; i < oldArr.length; i++) {
+                var repeat = false;
+                for (let j = 0; j < rs.length; j++) {
+                    if(rs[j].id == oldArr[i].id){
+                        repeat = true;break;
+                    }
+                    
+                }
+                if (!repeat) {
+                    rs.push(oldArr[i]);
+                }
+                
+            }
+            
+           
+    
             var info ='';
             if(rs.length==0){
                 info = "Không tìm thấy thông tin phim trùng khớp";
