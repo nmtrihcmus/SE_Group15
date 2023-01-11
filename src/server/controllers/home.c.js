@@ -7,7 +7,6 @@ class homeC {
             
             //Danh sách toàn bộ movie
             const listAll = await movieM.all();
-            
             //Danh sách top rating
             var newMovie = listAll.sort((a, b)=>{return b.insertDate.getTime()-a.insertDate.getTime()});
             var firstNew = newMovie.slice(0,3);
