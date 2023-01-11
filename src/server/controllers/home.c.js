@@ -61,6 +61,17 @@ class homeC {
         catch (error) {
             next(error);
         }
+    };
+    
+    async forgetPassPage(req, res, next) {
+        try {
+            return res.render('forgetPass', {
+                title: "Forget password",
+            });
+        }
+        catch (error) {
+            next(error);
+        }
     }
 }
 

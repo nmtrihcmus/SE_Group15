@@ -7,8 +7,8 @@ const updateAccountR = require('./updateAccount.r')
 const listAccountR = require('./listAccounts.r')
 const accountR = require('./accounts.r');
 const movieR = require('./movies.r');
-const listR = require('./list.r')
-const profileR = require('./profile.r')
+const listR = require('./list.r');
+const profileR = require('./profile.r');
 
 function route(app) {
     app.use('/home', homeR);

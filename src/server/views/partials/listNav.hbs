@@ -51,12 +51,12 @@
                         <div onclick="window.location.href='/detail/{{id}}'">
                             <div class="card position-relative " style="width: 18rem" id="{{id}}"
                                 onclick="select({{id}})">
-                                <img src="{{img}}" class="card-img-top" alt="{{id}}">
+                                <img src="{{img}}" class="card-img-top" style="height: 27rem;" alt="{{id}}">
                                 <div class="episode">
                                     {{id}}
                                 </div>
-                            </div>
-                            <h5 class="">{{title}}</h5>
+                                <h5 class="">{{title}}</h5>
+                            </div>   
                         </div>
 
                         {{/each}}
@@ -89,7 +89,7 @@
                 <h4 class="m-3" style="padding-top: 50px ">{{this.stt}}</h4>
                 <img src="{{this.img}}" alt="{{this.id}}" style="width: 10rem">
                 <h5 class="m-3">{{this.title}}</h5>
-                <div class="m-3" style="padding-top: 90px ">❤{{this.favCount}}</div>
+                <div class="m-3" style="padding-top: 90px; color:red; ">❤{{this.favCount}}</div>
             </div>
             {{/each}}
         
