@@ -165,7 +165,6 @@ async function loadPage( page = 1){
         var row = document.createElement('div');
         row.classList.add('d-flex');
         row.classList.add('flex-row');
-        row.classList.add('justify-content-around');
         listMovies.appendChild(row);
         var r = listMovies.childNodes[1];
        
@@ -175,12 +174,13 @@ async function loadPage( page = 1){
                 break;
             }
             var newcard = `<div class="card position-relative" style="width: 18rem" onclick="window.location.href='/detail/${data.listMovie[j].id}'">
-            <img src="${data.listMovie[j].img}" class="card-img-top" style="height: 27rem;" alt="${data.listMovie[j].id}"> <div class="episode"> ${data.listMovie[j].id}</div> 
+            <img src="${data.listMovie[j].img}" class="card-img-top" style="height: 27rem;" alt="${data.listMovie[j].id}">
             <h5 class=""> ${data.listMovie[j].title}</h5>
             </div>`;
             
             var item = document.createElement('div');
             item.innerHTML = newcard;
+            item.style.flexBasis = "33.33%";
             row.appendChild(item);
 
         }

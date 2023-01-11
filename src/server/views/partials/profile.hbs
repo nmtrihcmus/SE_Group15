@@ -65,7 +65,7 @@
             </div>
         </div>
     </div>
-    <div class="card col-9 bg-secondary type-section">
+    <div class="card col-9 bg-secondary type-section px-5">
         {{#if update}}
         <h4>
             <img src="/img/Sertificate.svg" alt="">
@@ -129,9 +129,9 @@
             My Favorites
             </h4>
             
-            <div class="d-flex flex-row flex-wrap justify-content-evenly mt-4">
+            <div class="d-flex flex-row flex-wrap mt-4">
                     {{#each favoriteMovies}}
-                    <div onclick="window.location.href='/detail/{{id}}'">
+                    <div onclick="window.location.href='/detail/{{id}}'" style="flex-basis: 33.33%;">
                         <div class="card position-relative mt-4" style="width: 24rem" id="{{id}}">
                             <img src="{{img}}" class="card-img-top" alt="{{id}}" style="height: 36rem;">
                         </div>

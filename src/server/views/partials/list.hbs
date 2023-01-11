@@ -63,10 +63,10 @@
             <div class="page-list-movie">
                     <div class="cur-page">
                         {{#each listMovie}}
-                    <div class="d-flex flex-row justify-content-around">
+                    <div class="d-flex flex-row">
                         
                        {{#each this}}
-                         <div onclick="window.location.href='/detail/{{id}}'">
+                         <div onclick="window.location.href='/detail/{{id}}'" style="flex-basis: 33.33%;">
                             <div class="card position-relative " style="width: 18rem" id="{{id}}" onclick="select({{id}})">
                                 <img src="{{img}}" class="card-img-top" style="height: 27rem;" alt="{{id}}">
                                 <h5 class="">{{title}}</h5>
