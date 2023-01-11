@@ -46,16 +46,6 @@
         border: none;
     }
 
-    .episode {
-        background-color: #D12D2D;
-        color: #fff;
-        position: absolute;
-        width: 60px;
-        border-radius: 3px;
-        padding: 2px 0px 2px 4px;
-        top: 5px;
-        left: 10px;
-    }
 </style>
 
 <div class="d-flex flex-row mb-3 h-100 ">
@@ -144,9 +134,6 @@
                     <div onclick="window.location.href='/detail/{{id}}'">
                         <div class="card position-relative mt-4" style="width: 24rem" id="{{id}}">
                             <img src="{{img}}" class="card-img-top" alt="{{id}}" style="height: 36rem;">
-                            <div class="episode">
-                                {{id}}
-                            </div>
                         </div>
                         <h5 style="color: #fff">{{title}}</h5>
                     </div>

@@ -1,15 +1,3 @@
-/*  ===================   Poster Movie   ===================    */
-.episode {
-    background-color:#D12D2D;
-    color: #fff;
-    position: absolute;
-    width: 60px;
-    border-radius: 3px;
-    padding: 2px 0px 2px 4px;
-    top: 5px;
-    left: 10px;
-}
-
 /* =================  Forgot Password * =================   */
 
 .forgot-pass-box {
@@ -161,34 +149,4 @@
     background-color: #E4E846;
     text-align: center;
     color: black;
-}
-
-.forgot-pass-box {
-    background-color: #D9D9D9;
-    border-radius: 30px;
-    width: 50%;
-    height: 30%;
-    margin: 30px;
-    padding: 50px;
-}
-
-#forgot-pass-btn {
-    background-color: #9671FF;
-    border: none;
-    border-radius: 20px;
-    width: 70%;
-    color: #fff;
-    margin: 10px 50px 10px 50px;
-    padding: 10px;
-
-}
-
-#forgot-pass-email {
-
-    border-radius: 20px;
-    border: none;
-    width: 90%;
-    margin: 10px 30px 10px 30px;
-    padding: 10px;
-
 }
