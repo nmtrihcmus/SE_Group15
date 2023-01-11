@@ -7,26 +7,26 @@ class homeC {
             
             //Danh sách toàn bộ movie
             const listAll = await movieM.all();
-            
-            //Danh sách top rating
-            var newMovie = listAll.sort((a, b)=>{return b.insertDate.getTime()-a.insertDate.getTime()});
-            var firstNew = newMovie.slice(0,3);
-            var secondNew = newMovie.slice(3,6);
-            
-            var topRating = listAll.sort((a, b)=>{return b.rating-a.rating;});
-            
-            var firstRow = topRating.slice(0,3);
-            var secondRow = topRating.slice(3,6);
-
-            //Danh sách phim mới 
-            
-
+            //Bảng xếp hạng
             var favMovie  = listAll.sort((a, b)=>{return b.favCount-a.favCount;}).slice(0,6);
             for (let i = 0; i < 6; i++) {
                 var e = favMovie[i];
                 e['stt']=i+1;
 
             }
+            //Danh sách phim mới 
+            var newMovie = listAll.sort((a, b)=>{return b.insertDate.getTime()-a.insertDate.getTime()});
+            var firstNew = newMovie.slice(0,3);
+            var secondNew = newMovie.slice(3,6);
+            //Danh sách top rating
+            var topRating = listAll.sort((a, b)=>{return b.rating-a.rating;});
+            
+            var firstRow = topRating.slice(0,3);
+            var secondRow = topRating.slice(3,6);
+
+            
+            
+            
             
             
             
