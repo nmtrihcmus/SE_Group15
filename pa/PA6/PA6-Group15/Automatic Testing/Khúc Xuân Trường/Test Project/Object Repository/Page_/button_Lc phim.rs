@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>button_Lc phim</name>
+   <tag></tag>
+   <elementGuidId>0579348d-b30c-4aed-881d-446ef6178541</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>form.filter-search-movie.d-flex.justify-content-around > button[type=&quot;submit&quot;]</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>(//button[@type='submit'])[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>button</value>
+      <webElementGuid>a4dccda6-5837-43b8-b697-6d1f5b306e97</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>type</name>
+      <type>Main</type>
+      <value>submit</value>
+      <webElementGuid>f61faac2-862a-45f0-9e42-b24c1aae01a9</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>Lọc phim</value>
+      <webElementGuid>2a311996-5eb2-4dc8-b229-9e542c37bb2b</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;list&quot;)/form[@class=&quot;filter-search-movie d-flex justify-content-around&quot;]/button[1]</value>
+      <webElementGuid>f49f2dbf-8e02-46a0-8912-5601c789cca4</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <type>Main</type>
+      <value>(//button[@type='submit'])[2]</value>
+      <webElementGuid>b2ea9dd0-28be-4c74-a0a9-b0e56a1847d0</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:idRelative</name>
+      <type>Main</type>
+      <value>//div[@id='list']/form/button</value>
+      <webElementGuid>ada47eb0-e31b-4cd0-8d60-2f31256a1770</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Việt Nam'])[1]/following::button[1]</value>
+      <webElementGuid>8f019b84-10ac-4391-b988-0ccdf9ab2c72</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Anh'])[1]/following::button[1]</value>
+      <webElementGuid>2f991f7e-a8f1-44cc-865e-d33e36eef81a</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='h'])[1]/preceding::button[1]</value>
+      <webElementGuid>8cab05ff-3d96-4751-84dc-6f35cd2a6b98</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='p1'])[1]/preceding::button[1]</value>
+      <webElementGuid>2faf017d-0f54-4e00-a4de-84becada2149</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>//*/text()[normalize-space(.)='Lọc phim']/parent::*</value>
+      <webElementGuid>c9193e9b-052e-4518-8418-ff300699c791</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//div/div/div/form/button</value>
+      <webElementGuid>8ec077f9-0ed7-40ff-8a84-97cd51213daf</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//button[@type = 'submit' and (text() = 'Lọc phim' or . = 'Lọc phim')]</value>
+      <webElementGuid>bd52cb09-6104-46bd-b5c6-afd96a134526</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

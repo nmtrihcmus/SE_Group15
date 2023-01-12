@@ -1,0 +1,88 @@
+{
+  "id": "6ad96faf-c775-423a-ab11-b0cbafdd237d",
+  "version": "2.0",
+  "name": "Xoá tài khoản",
+  "url": "http://localhost:3000/home",
+  "tests": [{
+    "id": "3322bee5-0402-4594-b047-ba1932ab66c5",
+    "name": "Xoá tài khoản",
+    "commands": [{
+      "id": "6e9a55f2-4e85-41f6-9c7e-44c902b472db",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/home",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "35746c83-6f49-425f-afa5-401829b710db",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "798x422",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9922ec95-924b-4c6b-ba3b-3c71fc8e7c97",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//div[2]/h5",
+      "targets": [
+        ["css=.show:nth-child(1)", "css:finder"],
+        ["xpath=//div[2]/h5", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9352d4ab-d7f5-4be4-ba7e-773e9f5d7c9d",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Xóa tài khoản",
+      "targets": [
+        ["linkText=Xóa tài khoản", "linkText"],
+        ["css=.show > li:nth-child(2) > .dropdown-item", "css:finder"],
+        ["xpath=//a[contains(text(),'Xóa tài khoản')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/listAccounts')]", "xpath:href"],
+        ["xpath=//div[2]/ul/li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Xóa tài khoản')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "67a50f90-cc6b-4e89-86c9-51883e310f5b",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(5) .btn-del",
+      "targets": [
+        ["css=tr:nth-child(5) .btn-del", "css:finder"],
+        ["xpath=(//button[@type='submit'])[11]", "xpath:attributes"],
+        ["xpath=//tr[5]/td[3]/div/form[2]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4ceb528c-e433-4a47-b790-c682615417cc",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(4) .btn-del",
+      "targets": [
+        ["css=tr:nth-child(4) .btn-del", "css:finder"],
+        ["xpath=(//button[@type='submit'])[9]", "xpath:attributes"],
+        ["xpath=//tr[4]/td[3]/div/form[2]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "015aef6f-91c8-4235-87c6-cf703992e0ab",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "18a677b0-bcf8-41ed-a13d-004f22dde83c",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["3322bee5-0402-4594-b047-ba1932ab66c5"]
+  }],
+  "urls": ["http://localhost:3000/home"],
+  "plugins": []
+}

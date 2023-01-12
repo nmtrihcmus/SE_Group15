@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>button_My Favorites</name>
+   <tag></tag>
+   <elementGuidId>9ca254fc-b360-4dae-8036-14cb724c0488</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value></value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//button[@onclick='loadFavorite()']</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>button</value>
+      <webElementGuid>a62fd197-c687-4476-88cb-97eae0ec24e6</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>w-100 btn</value>
+      <webElementGuid>830a70c0-26e3-41a5-b63d-7388a4aa3866</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>onclick</name>
+      <type>Main</type>
+      <value>loadFavorite()</value>
+      <webElementGuid>9ee86186-10bf-43ba-a7af-fd5864d88233</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>My Favorites</value>
+      <webElementGuid>44676139-4091-4c3e-80a5-763a99b23f52</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html[1]/body[1]/div[@class=&quot;container&quot;]/div[@class=&quot;m-2&quot;]/div[@class=&quot;d-flex flex-row mb-3 h-100&quot;]/div[@class=&quot;card col-3 bg-dark&quot;]/div[@class=&quot;card-body&quot;]/div[@class=&quot;d-flex flex-row&quot;]/button[@class=&quot;w-100 btn&quot;]</value>
+      <webElementGuid>481f7923-c054-438a-a106-56112c01233e</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:attributes</name>
+      <type>Main</type>
+      <value>//button[@onclick='loadFavorite()']</value>
+      <webElementGuid>8876be98-5243-4efb-8bb2-a2968607d07f</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Profile'])[2]/following::button[1]</value>
+      <webElementGuid>2230614e-ce74-438e-b95f-bc8e8ec3f8d5</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Đăng xuất'])[1]/following::button[2]</value>
+      <webElementGuid>f9c88f5b-eb56-414f-8870-e13ca620d121</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Update Profile'])[1]/preceding::button[1]</value>
+      <webElementGuid>964f33c0-c631-4018-9ec0-4cc95c00ab30</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>//*/text()[normalize-space(.)='My Favorites']/parent::*</value>
+      <webElementGuid>6e621cb4-56c0-49bf-85e9-6e3067083cf6</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//div[2]/button</value>
+      <webElementGuid>f228b1d7-539f-4ea8-8932-6a9fc6f58be1</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//button[(text() = 'My Favorites' or . = 'My Favorites')]</value>
+      <webElementGuid>bfa2afb3-1632-4071-a224-6a92994ecee2</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

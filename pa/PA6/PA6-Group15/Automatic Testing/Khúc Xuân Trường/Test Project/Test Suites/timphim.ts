@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestSuiteEntity>
+   <description></description>
+   <name>timphim</name>
+   <tag></tag>
+   <isRerun>false</isRerun>
+   <mailRecipient></mailRecipient>
+   <numberOfRerun>3</numberOfRerun>
+   <pageLoadTimeout>30</pageLoadTimeout>
+   <pageLoadTimeoutDefault>true</pageLoadTimeoutDefault>
+   <rerunFailedTestCasesOnly>false</rerunFailedTestCasesOnly>
+   <rerunImmediately>true</rerunImmediately>
+   <testSuiteGuid>70ddfa42-4947-4110-8f71-4e555d52afaa</testSuiteGuid>
+   <testCaseLink>
+      <guid>37d6e65f-3b09-4b17-b559-43cfe47ad9d1</guid>
+      <isReuseDriver>false</isReuseDriver>
+      <isRun>true</isRun>
+      <testCaseId>Test Cases/test_timphim</testCaseId>
+      <testDataLink>
+         <combinationType>ONE</combinationType>
+         <id>dbfcc14f-8c9a-4a3b-94df-77b668b7df26</id>
+         <iterationEntity>
+            <iterationType>ALL</iterationType>
+            <value></value>
+         </iterationEntity>
+         <testDataId>Data Files/data_timphim</testDataId>
+      </testDataLink>
+      <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
+      <variableLink>
+         <testDataLinkId>dbfcc14f-8c9a-4a3b-94df-77b668b7df26</testDataLinkId>
+         <type>DATA_COLUMN</type>
+         <value>tenphim</value>
+         <variableId>55ecc2f6-04de-4224-9b6c-4b69d239ed8e</variableId>
+      </variableLink>
+      <variableLink>
+         <testDataLinkId>dbfcc14f-8c9a-4a3b-94df-77b668b7df26</testDataLinkId>
+         <type>DATA_COLUMN</type>
+         <value>kiemtra</value>
+         <variableId>5be5ec94-0567-4b61-aeb7-18ce76abbcd7</variableId>
+      </variableLink>
+   </testCaseLink>
+</TestSuiteEntity>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>i_ng nhp_glyphicon glyphicon-search</name>
+   <tag></tag>
+   <elementGuidId>25297990-6186-45d4-8a11-8efba7b6635c</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>i.glyphicon.glyphicon-search</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//i</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>i</value>
+      <webElementGuid>240c752f-dd86-4cd9-9ddd-0a15c934bf29</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>glyphicon glyphicon-search</value>
+      <webElementGuid>c66503d1-546a-4945-a9e9-1ba22cfa41d6</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html[1]/body[1]/div[@class=&quot;container&quot;]/header[1]/div[@class=&quot;header d-flex justify-content-between rounded&quot;]/div[@class=&quot;search-box&quot;]/form[@class=&quot;search-form&quot;]/button[@class=&quot;btn btn-link search-btn&quot;]/i[@class=&quot;glyphicon glyphicon-search&quot;]</value>
+      <webElementGuid>25292dc2-af4a-4d3b-b679-fe9cac53829c</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//i</value>
+      <webElementGuid>d6b810d4-5c8f-44c2-8dca-6a39d1977e2e</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>

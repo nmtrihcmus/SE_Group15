@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>a_Thng tin c nhn_navbar-brand text-white dr_a9712f</name>
+   <tag></tag>
+   <elementGuidId>e133dcf2-3766-46c1-b5d4-7b38b1a49946</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>CSS</key>
+         <value>a.navbar-brand.text-white.dropdown-toggle.show</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>(.//*[normalize-space(text()) and normalize-space(.)='Thông tin cá nhân'])[1]/preceding::a[1]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>a</value>
+      <webElementGuid>34f7799f-a8fc-425c-be0a-d7cda1f28893</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>navbar-brand text-white dropdown-toggle show</value>
+      <webElementGuid>6ffe6ce0-f635-4f1e-a3eb-1b3fa30344c1</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>data-bs-toggle</name>
+      <type>Main</type>
+      <value>dropdown</value>
+      <webElementGuid>b6d7c492-52bb-45bf-90a7-cacf8904e4a4</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>href</name>
+      <type>Main</type>
+      <value>/home</value>
+      <webElementGuid>5c34bc40-8bb7-483e-809c-428265f7502b</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>aria-expanded</name>
+      <type>Main</type>
+      <value>true</value>
+      <webElementGuid>a0fbf565-8592-49d4-9dfc-016193ad9049</webElementGuid>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html[1]/body[1]/div[@class=&quot;container&quot;]/header[1]/div[@class=&quot;header d-flex justify-content-between rounded&quot;]/div[@class=&quot;dropdown&quot;]/a[@class=&quot;navbar-brand text-white dropdown-toggle show&quot;]</value>
+      <webElementGuid>325bf030-ad64-4ed4-9ae0-7c616f7f118d</webElementGuid>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Thông tin cá nhân'])[1]/preceding::a[1]</value>
+      <webElementGuid>d9ac1552-1fd1-4633-b53b-7d0f9dc159d9</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:neighbor</name>
+      <type>Main</type>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Đăng xuất'])[1]/preceding::a[2]</value>
+      <webElementGuid>804ea247-7004-4710-86df-fd6320f7c334</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:href</name>
+      <type>Main</type>
+      <value>(//a[contains(@href, '/home')])[2]</value>
+      <webElementGuid>12d41abc-7fad-4e91-8f44-d42a1b8b68d2</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:position</name>
+      <type>Main</type>
+      <value>//div[2]/a</value>
+      <webElementGuid>6a6da4a0-feee-4936-9fe4-2d926fb8c3cb</webElementGuid>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath:customAttributes</name>
+      <type>Main</type>
+      <value>//a[@href = '/home']</value>
+      <webElementGuid>b0b9ef8e-5154-40bd-946f-68cafb041b90</webElementGuid>
+   </webElementXpaths>
+</WebElementEntity>
