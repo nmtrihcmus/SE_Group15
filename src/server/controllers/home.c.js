@@ -24,12 +24,6 @@ class homeC {
             var firstRow = topRating.slice(0,3);
             var secondRow = topRating.slice(3,6);
 
-            
-            
-            
-            
-            
-            
            
             if (req.session.username) {
                 return res.render('home', {
